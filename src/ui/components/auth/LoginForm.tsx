@@ -75,9 +75,9 @@ export default function LoginForm({ onSubmit, onSuccess, onError, isLoading }: P
         </ButtonWithSpinner>
       </Box>
 
-      <SignUpContainer>
+      {/* <SignUpContainer>
           New around here? <ButtonLink to="/register">Sign Up</ButtonLink>
-      </SignUpContainer>
+      </SignUpContainer> */}
     </form>
   );
 }
