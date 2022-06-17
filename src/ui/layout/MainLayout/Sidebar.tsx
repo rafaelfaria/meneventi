@@ -214,7 +214,7 @@ type SiteNameProps = {
 };
 
 const SiteName = styled(Typography, { shouldForwardProp: prop => prop !== 'isDrawerOpen'})<SiteNameProps>(({ theme, isDrawerOpen }) => ({
-  fontSize: 24,
+  fontSize: 30,
   transition: theme.transitions.create('opacity', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
