@@ -7,14 +7,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const MENU_OPTIONS = [
   {
-    label: 'Minha conta',
+    label: 'My account',
     icon: <SettingsIcon sx={{ color: '#797979' }} />,
-    linkTo: '/minha-conta'
+    linkTo: '/my-account'
   },
   {
-    label: 'Deslogar',
+    label: 'Logout',
     icon: <LogoutIcon sx={{ color: '#797979' }} />,
-    linkTo: '/deslogar'
+    linkTo: '/logout'
   }
 ];
 
