@@ -10,6 +10,7 @@ type User @model(subscriptions: null)
   username: String! @primaryKey
   email: String!
   name: String!
+  initials: String
   photo: String
 }
 

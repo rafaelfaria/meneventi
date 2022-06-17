@@ -1,7 +1,13 @@
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 
+import { AuthRepositoryInterface } from "../auth/types";
+import { UsersRepositoryInterface } from "../users/types";
+
 export type App = {
+  authRepository: AuthRepositoryInterface;
+  usersRepository: UsersRepositoryInterface
 }
+
 
 export type ListParams = {
   limit?: number
