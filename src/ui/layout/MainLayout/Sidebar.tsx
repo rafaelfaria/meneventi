@@ -22,7 +22,7 @@ import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import AppConfig, { menuItems } from '../../../config';
 
 // components
-import LogoSmall from '../../../assets/tokenzeiro.png'
+import LogoSmall from '../../../assets/logo-chip.png'
 
 type Props = {
   isDrawerOpen: boolean;
@@ -61,9 +61,8 @@ export default function Sidebar({ isDrawerOpen, handleOnCloseDrawer, matchUpMd }
       ModalProps={{ keepMounted: true }}
     >
       <Branding onClick={() => navigate('/')}>
-        <img src={LogoSmall} width={40} alt="Tokenzeiro" />
-        <SiteName isDrawerOpen={isDrawerOpen} className="branding-name">CryptoToken</SiteName>
-        <Typography component="span" sx={{ background: '#d2e3fc', color: '#1a73e8', fontSize: 10, borderRadius: 1, padding: '1px 10px', ml: 1, fontWeight: 'bold' }}>BETA</Typography>
+        <img src={LogoSmall} width={40} alt="Meneventi" />
+        <SiteName isDrawerOpen={isDrawerOpen} className="branding-name">Meneventi</SiteName>
       </Branding>
       <MenuList>
         <List>

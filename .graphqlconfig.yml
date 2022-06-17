@@ -1,0 +1,16 @@
+projects:
+  MeneventiAPI:
+    schemaPath: amplify/backend/api/MeneventiAPI/build/schema.graphql
+    includes:
+      - src/lib/amplify/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/lib/amplify/API.ts
+        docsFilePath: src/lib/amplify/graphql
+        maxDepth: 6
+extensions:
+  amplify:
+    version: 3

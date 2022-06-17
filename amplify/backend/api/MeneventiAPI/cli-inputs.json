@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "MeneventiAPI",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/rcardoso/Sites/raf/meneventi/amplify/backend/api/MeneventiAPI/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authMeneventiAuth"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
+  }
+}

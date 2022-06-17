@@ -1,0 +1,54 @@
+type User @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "username" }
+      { allow: private, operations: [read, update], provider: iam },
+      { allow: groups, groups: ["Admin"] }
+    ]
+  )
+{
+  username: String! @primaryKey
+  email: String!
+  name: String!
+  photo: String
+}
+
+type Team @model
+  @auth(
+    rules: [
+      { allow: owner },
+      { allow: private, operations: [read, update], provider: iam },
+      { allow: groups, groups: ["Admin"] }
+    ]
+  )
+{
+  id: ID!
+  name: String!
+  users: [User] @hasMany
+  tournament: [Tournament] @hasMany(indexName: "byTournament", fields: ["id"])
+}
+
+type Tournament @model
+  @auth(
+    rules: [
+      { allow: owner },
+      { allow: private, operations: [read, update], provider: iam },
+      { allow: groups, groups: ["Admin"] }
+    ]
+  )
+{
+  id: ID!
+  name: String
+  date: AWSDate!
+  totalPrize: Float
+  leaderboard: [TornamentLeaderboard]
+
+  teamID: ID! @index(name: "byTournament")
+  team: Team @belongsTo(fields: ["teamID"])
+}
+
+type TornamentLeaderboard {
+  place: Int!
+  userID: String!
+  prize: Float
+}

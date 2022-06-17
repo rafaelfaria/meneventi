@@ -1,8 +1,9 @@
 {
-  "name": "cryptoken",
+  "name": "meneventi",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^2.20.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@loadable/component": "^5.15.2",
@@ -11,6 +12,8 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "aws-amplify": "^4.3.25",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -40,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.182"
   }
 }

@@ -9,7 +9,23 @@
       "UnauthRoleName": "amplify-meneventi-prod-102802-unauthRole",
       "StackName": "amplify-meneventi-prod-102802",
       "StackId": "arn:aws:cloudformation:us-east-1:352582185083:stack/amplify-meneventi-prod-102802/5bc416f0-edd4-11ec-8265-0ae8ea5f4003",
-      "AmplifyAppId": "d3gcthwiwtnjpb"
+      "AmplifyAppId": "d3gcthwiwtnjpb",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-meneventi-prod-102802-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "MeneventiAuth": {}
+      },
+      "function": {
+        "MeneventiAuthCustomMessage": {
+          "deploymentBucketName": "amplify-meneventi-prod-102802-deployment",
+          "s3Key": "amplify-builds/MeneventiAuthCustomMessage-57665a634e3442684a2b-build.zip"
+        },
+        "AdminQueries73809dec": {
+          "deploymentBucketName": "amplify-meneventi-prod-102802-deployment",
+          "s3Key": "amplify-builds/AdminQueries73809dec-385736346b4e4a646259-build.zip"
+        }
+      }
     }
   }
 }
