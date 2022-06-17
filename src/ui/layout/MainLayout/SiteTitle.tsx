@@ -27,12 +27,11 @@ export default function SiteTitle() {
 /*********************************************************************************
  * Branding
  ********************************************************************************/
-const Branding = styled(Box)(({ theme }) => ({
+const Branding = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   position: 'fixed',
   width: 'inherit',
-  boxShadow: `0 1px 2px ${theme.palette.mode === 'dark' ? '-1px' : '1px'} rgb(209 206 206 / 20%)`,
   padding: '22px 12px 22px 10px',
   overflow: 'hidden',
   cursor: 'pointer'

@@ -1,7 +1,9 @@
+import Page from "./Page";
+
 export default function Home() {
   return (
-    <div className="Home">
-      Home
-    </div>
+    <Page title="Torneios">
+      Tournaments
+    </Page>
   );
 }

@@ -1,18 +1,14 @@
-import { IconButton, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '@mui/material/styles';
 import ColorMode from './ColorMode';
 import AccountPopover from './AccountPopover';
 import Decoration from './Decoration';
+import SiteTitle from './SiteTitle';
 
-type Props = {
-  toggleDrawer: () => void;
-}
-
-const Header = ({ toggleDrawer }: Props) => {
+const Header = () => {
   const theme = useTheme();
 
   return (
@@ -36,16 +32,7 @@ const Header = ({ toggleDrawer }: Props) => {
           ]}
         >
         <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1 }}>
-            <IconButton
-              size="large"
-              onClick={toggleDrawer}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-
+          <SiteTitle />
           <Box sx={{ flexGrow: 1 }} />
           <Stack sx={{ flexGrow: 0 }} flexDirection="row" alignItems="center">
             <ColorMode />

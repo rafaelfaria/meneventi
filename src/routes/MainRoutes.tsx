@@ -6,8 +6,7 @@ import Loadable from '../ui/components/Loadable';
 
 // pages
 const Home = Loadable(lazy(() => import('../ui/pages/Home')));
-const Events = Loadable(lazy(() => import('../ui/pages/Events')));
-const Signals = Loadable(lazy(() => import('../ui/pages/Signals')));
+const Tournament = Loadable(lazy(() => import('../ui/pages/Tournament')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 const MainRoutes = {
@@ -19,12 +18,8 @@ const MainRoutes = {
             element: <Home />
         },
         {
-            path: '/eventos',
-            element: <Events />
-        },
-        {
-            path: '/sinais',
-            element: <Signals />
+            path: '/tournament/:id',
+            element: <Tournament />
         }
     ]
 };
