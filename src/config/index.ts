@@ -1,6 +1,3 @@
-export { default as menuItems } from './menuItems';
-export { default as menuItemsAdmin } from './menuItemsAdmin';
-
 const AppConfig:any = {
   site: {
     name: 'Meneventi',

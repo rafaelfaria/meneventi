@@ -12,6 +12,7 @@ export const onCreateTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -39,6 +40,7 @@ export const onCreateTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -85,6 +87,7 @@ export const onUpdateTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -112,6 +115,7 @@ export const onUpdateTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -158,6 +162,7 @@ export const onDeleteTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -185,6 +190,7 @@ export const onDeleteTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -242,6 +248,7 @@ export const onCreateTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
@@ -311,6 +318,7 @@ export const onUpdateTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
@@ -380,6 +388,7 @@ export const onDeleteTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt

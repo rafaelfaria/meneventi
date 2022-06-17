@@ -8,6 +8,7 @@ export const getUser = /* GraphQL */ `
       username
       email
       name
+      initials
       photo
       createdAt
       updatedAt
@@ -34,6 +35,7 @@ export const listUsers = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         createdAt
         updatedAt
@@ -53,6 +55,7 @@ export const getTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -80,6 +83,7 @@ export const getTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -131,6 +135,7 @@ export const listTeams = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
@@ -198,6 +203,7 @@ export const getTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
@@ -272,6 +278,7 @@ export const listTournaments = /* GraphQL */ `
               username
               email
               name
+              initials
               photo
               createdAt
               updatedAt

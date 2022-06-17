@@ -5,10 +5,6 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-
-// Config
-import AppConfig from '../../../config';
-
 // components
 import LogoSmall from '../../../assets/logo-chip.png'
 

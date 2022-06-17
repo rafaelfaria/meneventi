@@ -4,8 +4,6 @@ import { Avatar, Box, Divider, IconButton, MenuItem, Typography } from '@mui/mat
 import MenuPopover from '../../components/MenuPopover';
 import { Link } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { styled } from '@mui/material/styles';
-// ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
   {
@@ -81,32 +79,3 @@ export default function AccountPopover() {
     </>
   );
 }
-
-/*********************************************************************************
- * This styles are used to show the progress of the plan
- ********************************************************************************/
-
-type PlanProgressProps = {
-  progress?: number;
-};
-const PlanProgress = styled(Box)<PlanProgressProps>(({ theme, progress }) => ({
-  position: 'relative',
-  width: '100%',
-  borderRadius: '8px',
-  border: '1px solid #88baec',
-  borderColor: theme.palette.mode === 'dark' ? '#b7b7b7' : '#88baec',
-  color: theme.palette.mode === 'dark' ? '#FFFFFF' : '#1d6ac7',
-  padding: '2px',
-  textAlign: 'center',
-  ':before': {
-    content: '""',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    zIndex: 1,
-    background: theme.palette.mode === 'dark' ? '#242637' : '#e3f6ff',
-    width: `${progress}%`,
-    height: '100%',
-    borderRadius: '8px',
-  }
-}));

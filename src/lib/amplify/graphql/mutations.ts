@@ -11,6 +11,7 @@ export const createUser = /* GraphQL */ `
       username
       email
       name
+      initials
       photo
       createdAt
       updatedAt
@@ -27,6 +28,7 @@ export const deleteUser = /* GraphQL */ `
       username
       email
       name
+      initials
       photo
       createdAt
       updatedAt
@@ -47,6 +49,7 @@ export const createTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -74,6 +77,7 @@ export const createTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -123,6 +127,7 @@ export const deleteTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -150,6 +155,7 @@ export const deleteTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -210,6 +216,7 @@ export const createTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
@@ -282,6 +289,7 @@ export const deleteTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
@@ -339,6 +347,7 @@ export const updateUser = /* GraphQL */ `
       username
       email
       name
+      initials
       photo
       createdAt
       updatedAt
@@ -359,6 +368,7 @@ export const updateTeam = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           createdAt
           updatedAt
@@ -386,6 +396,7 @@ export const updateTeam = /* GraphQL */ `
                 username
                 email
                 name
+                initials
                 photo
                 createdAt
                 updatedAt
@@ -446,6 +457,7 @@ export const updateTournament = /* GraphQL */ `
             username
             email
             name
+            initials
             photo
             createdAt
             updatedAt
