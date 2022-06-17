@@ -69,7 +69,7 @@ export default function Login() {
 	 */
   const showChangeTempPassword = (user: CognitoUserInterface) => {
     setTempUser(user);
-    setTitle('Mudar Senha');
+    setTitle('Change Password');
     setNextStep('temporary');
     setAuthError('');
     setLoading(false);

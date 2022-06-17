@@ -16,7 +16,7 @@ export default function Register() {
   const [ userEmail, setUserEmail ] = useState<string>('');
   const [ obfuscatedEmail, setObfuscatedEmail ] = useState<string>('');
   const [ step, setNextStep ] = useState<string>('register');
-  const [ title, setTitle ] = useState<string>('Cadastro');
+  const [ title, setTitle ] = useState<string>('Sign Up');
 
 	/**
 	 * General function for all the forms to be called after being submited
@@ -42,7 +42,7 @@ export default function Register() {
    * go to the next step which is to confirm the code, and clean up
 	 */
 	const handleRegistrationOrResendSuccess = useCallback((email: string, authEmail: string) => {
-    setTitle('Confirmar Cadastro');
+    setTitle('Confirm Sign Up');
     setUserEmail(email);
     setObfuscatedEmail(authEmail); // this will be obfuscated.  Ex: r***@g***.com
     setNextStep('confirm');
@@ -54,7 +54,7 @@ export default function Register() {
 	 * This method is called after the confirmation of the verification code is successful.
 	 */
 	const handleConfirmationSuccess = useCallback(() => {
-    setTitle('Sucesso');
+    setTitle('Success');
     setNextStep('confirmed');
     setAuthError('');
     setLoading(false);
@@ -66,7 +66,7 @@ export default function Register() {
    * to the resend verification page
 	 */
   const resendCode = useCallback(() => {
-    setTitle('Re-Enviar Código');
+    setTitle('Resend Code');
     setNextStep('resend');
     setAuthError('');
   }, [setTitle, setNextStep]);

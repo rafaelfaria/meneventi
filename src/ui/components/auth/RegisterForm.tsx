@@ -1,13 +1,9 @@
-import { Button, FormGroup, Grid, InputAdornment, Link, Modal, Paper, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import useApp from "../../../hooks/useApp";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import ButtonWithSpinner from '../ButtonWithSpinner';
-import CheckBox from "../forms/CheckBox";
 import TextField from '../forms/TextField';
-import { styled } from '@mui/material/styles';
-import { useState } from "react";
-import TermsAndConditions from "./TermsAndConditions";
 
 type FormData = {
   email: string;
@@ -29,19 +25,18 @@ type Props = {
 
 export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode, isLoading }: Props) {
 
-  const [ openModal, setOpenModal ] = useState<boolean>(false);
   const [ , setRememberEmail ] = useLocalStorage('rememberEmail', '');
   const { authRepository } = useApp();
   const formActions = useForm<FormData>();
   const { errors } = formActions.formState; // Needs to do this in order to trigger the errors 🤷
 
   const handleSubmitForm = async (data: FormData) => {
-    const { email, password, name, telegram, phoneNumber } = data;
+    const { email, password, name } = data;
 
     // Stringify the information that will be used afterwards during the login and creation of the user settings
     const zoneinfo = JSON.stringify({
-      phoneNumber,
-      telegram: (telegram || '').replace('@', '')
+      // phoneNumber,
+      // telegram: (telegram || '').replace('@', '')
     });
 
     try {
@@ -55,10 +50,6 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
     }
   }
 
-  const openTermsAndConditions = (e: any) => {
-    e.preventDefault();
-    setOpenModal(true);
-  }
 
   return (
     <>
@@ -99,28 +90,6 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
     <Typography color="#FFFFFF" sx={{ textAlign: 'center', mt: 2 }}>
       ou <Button color="primary" onClick={() => { resendCode()}}>Resend confirmation code</Button>
     </Typography>
-      <Modal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-      >
-        <FloatBox>
-          <TermsAndConditions />
-        </FloatBox>
-      </Modal>
-
     </>
   );
 }
-
-
-const FloatBox = styled(Paper)(() => ({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '80%',
-  padding: '15px',
-  maxHeight: '480px',
-  overflowY: 'auto'
-}));
-

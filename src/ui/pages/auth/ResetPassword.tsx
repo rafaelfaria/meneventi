@@ -38,7 +38,7 @@ export default function ResetPassword() {
    *
 	 */
 	const handleResetSuccess = useCallback((email: string, obfuscatedEmail: string) => {
-    setTitle('Criar Nova Senha');
+    setTitle('Create New Password');
     setUserEmail(email);
     setObfuscatedEmail(obfuscatedEmail); // this will be obfuscated.  Ex: r***@g***.com
     setNextStep('new');
@@ -50,7 +50,7 @@ export default function ResetPassword() {
 	 *
 	 */
 	const handleNewPasswordSuccess = useCallback(() => {
-    setTitle('Sucesso');
+    setTitle('Success');
     setNextStep('success');
     setAuthError('');
     setLoading(false);
