@@ -35,7 +35,7 @@ export default function RegisterResendCodeForm({ onSubmit, onSuccess, onError, i
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)}>
-      <Typography variant="subtitle2">Re-enviar código de verificação</Typography>
+      <Typography variant="subtitle2">Resend verification code</Typography>
 
       <TextField type="email" label="Email" placeholder={"your@email.com"}
         {...formActions.register("email", { required: true })}
@@ -44,11 +44,11 @@ export default function RegisterResendCodeForm({ onSubmit, onSuccess, onError, i
       />
 
       <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-          Re-enviar código
+          Resend code
       </ButtonWithSpinner>
 
       <Typography sx={{ textAlign: 'center' }}>
-        ou <ButtonLink to="/login">Logar</ButtonLink>
+        or <ButtonLink to="/login">Login</ButtonLink>
       </Typography>
     </form>
   );

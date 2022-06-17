@@ -64,19 +64,19 @@ export default function LoginForm({ onSubmit, onSuccess, onError, isLoading }: P
         sx={{ mb: 2 }}
       />
       <Box sx={{ display: "flex", justifyContent: "end" }}>
-        <ButtonLink to="/esqueci-minha-senha">Esqueceu sua senha?</ButtonLink>
+        <ButtonLink to="/esqueci-minha-senha">Forgot password?</ButtonLink>
       </Box>
       <br/>
 
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-            Logar
+            Login
         </ButtonWithSpinner>
       </Box>
 
       <SignUpContainer>
-          Novo por aqui? <ButtonLink to="/cadastro">Cadastre-se</ButtonLink>
+          New around here? <ButtonLink to="/register">Sign Up</ButtonLink>
       </SignUpContainer>
     </form>
   );

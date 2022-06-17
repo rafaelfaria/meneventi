@@ -10,6 +10,8 @@ import { CssBaseline, PaletteMode, StyledEngineProvider } from '@mui/material';
 // defaultTheme
 import themes from './ui/themes';
 import useColorMode from "./hooks/useColorMode";
+import AuthProvider from "./context/AuthProvider";
+import ConfirmProvider from './context/ConfirmProvider';
 
 export default function App() {
 
@@ -17,12 +19,16 @@ export default function App() {
 
   return (
     <StyledEngineProvider injectFirst>
-      <AppProvider>
-        <ThemeProvider theme={themes({ mode: mode as PaletteMode })}>
-          <CssBaseline />
-          <Routes />
-        </ThemeProvider>
-      </AppProvider>
+      <ConfirmProvider>
+        <AuthProvider>
+          <AppProvider>
+            <ThemeProvider theme={themes({ mode: mode as PaletteMode })}>
+              <CssBaseline />
+              <Routes />
+            </ThemeProvider>
+          </AppProvider>
+        </AuthProvider>
+      </ConfirmProvider>
     </StyledEngineProvider>
   );
 }

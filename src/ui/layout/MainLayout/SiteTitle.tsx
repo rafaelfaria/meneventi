@@ -11,7 +11,6 @@ import LogoSmall from '../../../assets/logo-chip.png'
 export default function SiteTitle() {
 
   const navigate = useNavigate();
-
   return (
     <Branding onClick={() => navigate('/')}>
       <img src={LogoSmall} width={40} alt="Meneventi" />
@@ -26,7 +25,6 @@ export default function SiteTitle() {
 const Branding = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
-  position: 'fixed',
   width: 'inherit',
   padding: '22px 12px 22px 10px',
   overflow: 'hidden',

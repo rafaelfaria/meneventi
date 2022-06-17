@@ -19,14 +19,14 @@ export default function Login() {
   const [ , setRememberEmail ] = useLocalStorage('login:rememberEmail', '');
   const [ isLoading, setLoading ] = useState<boolean>(false); // The isLoading status will be used for logging or saving the new password
   const [ step, setNextStep ] = useState<string>('login');
-  const [ title, setTitle ] = useState<string>('Logar');
+  const [ title, setTitle ] = useState<string>('Login');
 
   const { authUser, setAuthUser } = useAuth();
   const [ authError, setAuthError ] = useState<string>();
   const [ tempUser, setTempUser ] = useState<CognitoUserInterface>();
 
   /**
-   * This useEffect will try to identify if the user is successfuly logged in and then redirect to the right page
+   * This useEffect will try to identify if the user is successfully logged in and then redirect to the right page
    */
   useEffect(() => {
     (async () => {

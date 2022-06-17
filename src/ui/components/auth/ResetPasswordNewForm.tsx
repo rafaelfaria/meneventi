@@ -35,26 +35,29 @@ export default function ResetPasswordNewForm({ onSubmit, onSuccess, onError, isL
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)}>
-      <Typography variant="subtitle2">Nós enviamos um código de confirmação para o seu email {obfuscatedEmail}. Entre o código e a nova senha abaixo</Typography>
+      <Typography variant="subtitle2">
+        We sent a confirmation code to your email {obfuscatedEmail}.
+        Enter the code and your new password below
+      </Typography>
 
-      <TextField type="text" label="Código"
+      <TextField type="text" label="Code"
         {...formActions.register("code", { required: true })}
         fullWidth
         sx={{ mt: 2, mb: 2 }}
       />
 
-      <TextField type="password" label="Nova Senha"
+      <TextField type="password" label="New Password"
         {...formActions.register("password", { required: true })}
         fullWidth
         sx={{ mb: 2 }}
       />
 
       <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-        Salvar nova senha
+        Save New Password
       </ButtonWithSpinner>
 
       <Typography sx={{ textAlign: 'center' }}>
-        ou <ButtonLink to="/login">Logar</ButtonLink>
+        or <ButtonLink to="/login">Login</ButtonLink>
       </Typography>
     </form>
   );

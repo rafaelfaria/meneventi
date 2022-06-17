@@ -9,7 +9,7 @@ import RequireAuth from './RequireAuth';
 
 // login pages
 import Login from '../ui/pages/auth/Login';
-// import Register from '../ui/pages/auth/Register';
+import Register from '../ui/pages/auth/Register';
 import ResetPassword from '../ui/pages/auth/ResetPassword';
 import Logout from '../ui/pages/auth/Logout';
 
@@ -41,9 +41,9 @@ export default function ThemeRoutes() {
       children: [
         { path: '/', element: <Navigate to="/" /> },
         { path: 'login', element: <Login /> },
-        { path: 'esqueci-minha-senha', element: <ResetPassword /> },
-        { path: 'deslogar', element: <Logout /> },
-        // { path: 'cadastro', element: <Register /> },
+        { path: 'forgot-password', element: <ResetPassword /> },
+        { path: 'logout', element: <Logout /> },
+        { path: 'register', element: <Register /> },
       ]
     },
     { path: '*', element: <FourOFour /> }

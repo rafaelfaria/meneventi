@@ -33,7 +33,9 @@ export default function ResetPasswordForm({ onSubmit, onSuccess, onError, isLoad
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)}>
-      <Typography variant="subtitle2">Digite o seu email abaixo para nós enviarmos um código de verificação para você poder então proceder em criar uma nova senha.</Typography>
+      <Typography variant="subtitle2">
+        Enter your email below so we can send you a verification code to change your password
+      </Typography>
 
       <TextField type="email" label="Email" placeholder={"your@email.com"}
         {...formActions.register("email", { required: true })}
@@ -42,11 +44,11 @@ export default function ResetPasswordForm({ onSubmit, onSuccess, onError, isLoad
       />
 
       <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-         Criar nova senha
+         Create new password
       </ButtonWithSpinner>
 
       <Typography sx={{ textAlign: 'center', mt: 2 }}>
-        ou <ButtonLink to="/login">Logar</ButtonLink>
+        or <ButtonLink to="/login">Login</ButtonLink>
       </Typography>
     </form>
   );

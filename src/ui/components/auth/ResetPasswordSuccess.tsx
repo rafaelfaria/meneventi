@@ -8,11 +8,11 @@ export default function RegisterSuccess() {
   return (
     <>
     	<Alert severity="success">
-          Sua senha foi alterada com sucesso!
+          Your password has been successfully changed!
       </Alert>
 
       <Button variant="contained" fullWidth onClick={() => navigate('/login')} sx={{ mt: 2}}>
-        Logar
+        Login
       </Button>
     </>
   );

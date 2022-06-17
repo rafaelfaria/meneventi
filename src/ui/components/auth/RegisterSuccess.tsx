@@ -9,11 +9,11 @@ export default function RegisterSuccess() {
   return (
     <Box>
     	<Alert severity="success">
-        Seu cadastro foi verificado com sucesso!
+        Your account has been successfully created!
       </Alert>
 
       <Button variant="contained" fullWidth onClick={() => navigate('/login')} sx={{ mt: 2}}>
-        Logar agora
+        Login now
       </Button>
     </Box>
   );

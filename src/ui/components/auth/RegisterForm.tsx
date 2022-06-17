@@ -67,7 +67,7 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
         <Grid item xs={12}>
            <TextField type="text" variant="outlined" control={formActions.control} fullWidth sx={{ mb: 2 }}
             name="name"
-            label="Nome Completo"
+            label="Full Name"
             rules={{ required: true }}
           />
         </Grid>
@@ -87,39 +87,9 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
             autoComplete="off"
           />
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField type="text" variant="outlined" control={formActions.control} fullWidth sx={{ mb: 2 }}
-            name="telegram"
-            label="Telegram"
-            rules={{ required: true }}
-            InputProps={{
-              startAdornment: <InputAdornment position="start" disableTypography sx={{ fontSize: 12, color: "#CCCCCC" }}>@</InputAdornment>,
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField type="text" variant="outlined" control={formActions.control} fullWidth sx={{ mb: 2 }}
-            name="phoneNumber"
-            label="Telefone"
-            rules={{ required: true }}
-          />
-        </Grid>
         <Grid item xs={12}>
-          <FormGroup sx={{ mt: 2, mb: 3, }}>
-            <CheckBox label={<Typography>Eu aceito os <Link onClick={openTermsAndConditions}>termos e condições</Link> do site</Typography>}
-              name="terms"
-              rules={{ required: true }}
-              control={formActions.control}
-            />
-
-            <CheckBox label="Eu gostaria de receber notícias no meu email"
-              name="newsletter"
-              control={formActions.control}
-            />
-          </FormGroup>
-
           <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-            Criar nova conta
+            Create account
           </ButtonWithSpinner>
         </Grid>
 
@@ -127,7 +97,7 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
 
     </form>
     <Typography color="#FFFFFF" sx={{ textAlign: 'center', mt: 2 }}>
-      ou <Button color="primary" onClick={() => { resendCode()}}>Re-enviar código de confirmação</Button>
+      ou <Button color="primary" onClick={() => { resendCode()}}>Resend confirmation code</Button>
     </Typography>
       <Modal
         open={openModal}
@@ -143,7 +113,7 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
 }
 
 
-const FloatBox = styled(Paper)(({ theme }) => ({
+const FloatBox = styled(Paper)(() => ({
   position: 'absolute',
   top: '50%',
   left: '50%',

@@ -34,7 +34,7 @@ export default function RegisterConfirmForm({ userEmail, obfuscatedEmail, onSubm
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)}>
-      <Typography variant="subtitle2" sx={{ mb: 1 }}>Nós enviamos o código de verificaçào para o seu email {obfuscatedEmail} </Typography>
+      <Typography variant="subtitle2" sx={{ mb: 1 }}>We sent you a verification code to your email {obfuscatedEmail} </Typography>
 
       <TextField type="text" label="Código de verificação"
         {...formActions.register("code", { required: true })}
@@ -43,11 +43,11 @@ export default function RegisterConfirmForm({ userEmail, obfuscatedEmail, onSubm
       />
 
       <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-        Confirmar cadastro
+        Confirm
       </ButtonWithSpinner>
 
       <Typography sx={{ textAlign: 'center', mt: 2 }}>
-        ou <Button color="primary" onClick={() => { resendCode()}}>Re-enviar código de verificação</Button>
+        or <Button color="primary" onClick={() => { resendCode()}}>Resend the verification code</Button>
       </Typography>
 
     </form>
