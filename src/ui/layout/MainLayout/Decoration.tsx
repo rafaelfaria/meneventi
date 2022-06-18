@@ -9,7 +9,7 @@ export default function Decoration() {
           top: 0,
           left: 0,
           width: "100%",
-          height: "170px",
+          height: "250px",
           overflow: "hidden"
         },
         (theme) => ({

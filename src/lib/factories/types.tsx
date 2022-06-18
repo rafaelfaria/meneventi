@@ -2,10 +2,14 @@ import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 
 import { AuthRepositoryInterface } from "../auth/types";
 import { UsersRepositoryInterface } from "../users/types";
+import { TeamsRepositoryInterface } from "../teams/types";
+import { TournamentsRepositoryInterface } from "../tournaments/types";
 
 export type App = {
   authRepository: AuthRepositoryInterface;
-  usersRepository: UsersRepositoryInterface
+  usersRepository: UsersRepositoryInterface;
+  teamsRepository: TeamsRepositoryInterface;
+  tournamentsRepository: TournamentsRepositoryInterface;
 }
 
 

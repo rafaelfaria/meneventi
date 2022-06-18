@@ -1,4 +1,4 @@
-export default function Tournament() {
+export default function TournamentForm() {
   return (
     <div className="Tournament">
       Tournament

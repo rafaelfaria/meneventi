@@ -16,7 +16,9 @@ import Logout from '../ui/pages/auth/Logout';
 // pages
 const FourOFour = Loadable(lazy(() => import('../ui/pages/404')));
 const Home = Loadable(lazy(() => import('../ui/pages/Home')));
-const Tournament = Loadable(lazy(() => import('../ui/pages/Tournament')));
+const Teams = Loadable(lazy(() => import('../ui/pages/Teams')));
+const TeamsForm = Loadable(lazy(() => import('../ui/pages/TeamsForm')));
+const TournamentForm = Loadable(lazy(() => import('../ui/pages/TournamentForm')));
 
 // ==============================|| ROUTING RENDER ||============================== //
 export default function ThemeRoutes() {
@@ -30,7 +32,10 @@ export default function ThemeRoutes() {
           element: <MainLayout />,
           children: [
             { path: '/', element: <Home /> },
-            { path: '/tournament/:tournament', element: <Tournament /> },
+            { path: '/teams', element: <Teams /> },
+            { path: '/teams/new', element: <TeamsForm /> },
+            { path: '/teams/:team', element: <TeamsForm /> },
+            { path: '/tournament/:tournament', element: <TournamentForm /> },
           ]
         }
       ]
