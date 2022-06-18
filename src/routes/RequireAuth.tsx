@@ -20,6 +20,7 @@ export default function RequireAuth({ needAdminAccess }: Props) {
   }
 
   if (authUser && needAdminAccess && !authUser?.isAdmin) {
+    console.log('HERE')
     return <Navigate to="/" replace />;
   }
 

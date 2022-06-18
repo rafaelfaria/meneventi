@@ -13,6 +13,11 @@ import useColorMode from "./hooks/useColorMode";
 import AuthProvider from "./context/AuthProvider";
 import ConfirmProvider from './context/ConfirmProvider';
 
+// notifications
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export default function App() {
 
   const { mode } = useColorMode();
@@ -25,6 +30,7 @@ export default function App() {
             <ThemeProvider theme={themes({ mode: mode as PaletteMode })}>
               <CssBaseline />
               <Routes />
+              <ToastContainer />
             </ThemeProvider>
           </AppProvider>
         </AuthProvider>

@@ -73,7 +73,7 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
    */
   useEffect(() => {
     if (team) {
-      const { createdAt, updatedAt, __typename, owner, ...teamDetails } = team;
+      const { createdAt, updatedAt, __typename, owner, tournament, ...teamDetails } = team;
       formActions.reset(teamDetails);
     } else {
       formActions.reset(defaultInitial);

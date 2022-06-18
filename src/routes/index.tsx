@@ -20,6 +20,10 @@ const Teams = Loadable(lazy(() => import('../ui/pages/Teams')));
 const TeamsForm = Loadable(lazy(() => import('../ui/pages/TeamsForm')));
 const TournamentForm = Loadable(lazy(() => import('../ui/pages/TournamentForm')));
 
+// admin
+const AdminUsers = Loadable(lazy(() => import('../ui/pages/admin/AdminUsers')));
+const AdminUserForm = Loadable(lazy(() => import('../ui/pages/admin/AdminUserForm')));
+
 // ==============================|| ROUTING RENDER ||============================== //
 export default function ThemeRoutes() {
   return useRoutes([
@@ -36,6 +40,21 @@ export default function ThemeRoutes() {
             { path: '/teams/new', element: <TeamsForm /> },
             { path: '/teams/:team', element: <TeamsForm /> },
             { path: '/tournament/:tournament', element: <TournamentForm /> },
+          ]
+        }
+      ]
+    },
+    {
+      path: '/admin',
+      element: <RequireAuth needAdminAccess={true} />,
+      children: [
+        {
+          path: '/admin',
+          element: <MainLayout />,
+          children: [
+            { path: 'users', element: <AdminUsers /> },
+            { path: 'users/new', element: <AdminUserForm /> },
+            { path: 'users/:id', element: <AdminUserForm /> },
           ]
         }
       ]
