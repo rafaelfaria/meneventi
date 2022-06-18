@@ -41,11 +41,11 @@ export type ConfirmProviderProps = {
 
 /************************************************************************/
 const DEFAULT_OPTIONS = {
-  title: 'Você tem certeza?',
+  title: 'Are you sure?',
   description: '',
   content: null,
   confirmationText: 'Ok',
-  cancellationText: 'Cancelar',
+  cancellationText: 'Cancel',
   dialogProps: {},
   confirmationButtonProps: {},
   cancellationButtonProps: {},

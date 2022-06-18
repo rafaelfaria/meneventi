@@ -21,13 +21,14 @@ type Props = {
   isLoading?: boolean;
   state: State;
   actions: Actions<Team>;
+  onCancel?: () => void;
 }
 
 const defaultInitial = {
   name: ''
 }
 
-export default function TeamForm({ state, actions, team, isLoading }: Props) {
+export default function TeamForm({ state, actions, team, isLoading, onCancel }: Props) {
 
   const [{ isLoadingList: isLoadingUsers, users }] = useUser();
 
@@ -101,6 +102,7 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
   }
 
 
+
   /**
    * Save the form
    */
@@ -132,6 +134,14 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
       initials,
       photo
     });
+  }
+
+  const handleOnCancel = () => {
+    if (onCancel) {
+      onCancel()
+    } else {
+      navigate('/teams')
+    }
   }
 
   return (
@@ -191,13 +201,7 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
 
               <Grid item xs={12}>
                 <Stack flexDirection="row" alignItems="center" justifyContent="center" sx={{ mt: 3 }} columnGap={2}>
-                  <Button variant="contained" color="neutral" onClick={() => navigate('/admin/cupoms/lista')}>Cancelar</Button>
-                  {team &&
-                    <ButtonWithSpinner variant="contained" onClick={handleDeleteTeam} sx={{ mr: 1 }} color="neutral" disabled={isSaving}>
-                      Apagar Cupom
-                    </ButtonWithSpinner>
-                  }
-
+                  <Button variant="contained" color="neutral" onClick={handleOnCancel}>Cancel</Button>
                   <ButtonWithSpinner type="submit" variant="contained" showSpinner={isSaving} sx={{ mt: 3, mb: 3 }}>
                     {team ? 'Save' : 'Create'}
                   </ButtonWithSpinner>

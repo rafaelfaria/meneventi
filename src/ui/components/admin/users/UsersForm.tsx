@@ -20,6 +20,7 @@ type Props = {
   isLoading?: boolean;
   state: State;
   actions: Actions;
+  onCancel?: () => void;
 }
 
 const initialDefault = {
@@ -28,8 +29,7 @@ const initialDefault = {
   photo: '',
 }
 
-export default function UsersForm({ state, actions, user, isLoading }: Props) {
-
+export default function UsersForm({ state, actions, user, isLoading, onCancel }: Props) {
   const { confirm } = useConfirm();
   const { authUser } = useAuth();
   const { isError, errorMessage } = state;
@@ -118,7 +118,11 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
       } else {
         const resp = await createUser(formattedData);
         showSuccessNotification('Usuário criado com sucesso');
-        navigate(`/admin/users/${resp?.username}`);
+        if (onCancel) {
+          onCancel();
+        } else {
+          navigate(`/admin/users/${resp?.username}`);
+        }
       }
     } catch(err: any) {
       console.error('User handleSubmitForm', err);
@@ -126,6 +130,14 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
     }
     setIsSaving(false);
 
+  }
+
+  const handleOnCancel = () => {
+    if (onCancel) {
+      onCancel()
+    } else {
+      navigate('/admin/users')
+    }
   }
 
   return (
@@ -184,7 +196,7 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
 
               <Grid item xs={12}>
                 <Stack flexDirection="row" alignItems="center" justifyContent="center" sx={{ mt: 3 }} columnGap={2}>
-                  <Button variant="contained" color="neutral" onClick={() => navigate('/admin/users')}>Cancel</Button>
+                  <Button variant="contained" color="neutral" onClick={handleOnCancel}>Cancel</Button>
                   {user && authUser?.isSuperAdmin && authUser?.username !== user?.username &&
                     <ButtonWithSpinner variant="contained" onClick={handleDeleteUser} sx={{ mr: 1 }} color="neutral" disabled={isSaving}>
                       Delete User

@@ -4,7 +4,7 @@ import useRepository from "../../hooks/useRepository";
 import { Team } from "../../lib/amplify/API";
 import Page from "./Page";
 import ReactLoading from 'react-loading';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import PeopleIcon from '@mui/icons-material/People';
 import Title from "../components/Title";
 import TournamentCard from "../components/teams/TournamentCard";
 
@@ -22,7 +22,7 @@ export default function Home() {
 
         {!state.isLoadingItem &&
           <Grid item xs={12} md={12}>
-            <Title title={state.item?.name} icon={EmojiEventsIcon} link="/" />
+            <Title title={state.item?.name} icon={PeopleIcon} link="/" />
           </Grid>
         }
         {state.isLoadingItem &&
