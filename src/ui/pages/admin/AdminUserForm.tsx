@@ -12,7 +12,7 @@ export default function AdminUsersForm() {
   // Check if it's editing
   const params = useParams();
   const [ state, actions ] = useUser(params.id, { list: false });
-
+console.log({ state })
   return (
     <Page title="Admin | Users">
 

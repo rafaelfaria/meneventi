@@ -4,13 +4,14 @@ import { Avatar, Box, Divider, IconButton, MenuItem, Typography } from '@mui/mat
 import MenuPopover from '../../components/MenuPopover';
 import { Link } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
+import useAuth from '../../../hooks/useAuth';
 
 const MENU_OPTIONS = [
-  {
-    label: 'My account',
-    icon: <SettingsIcon sx={{ color: '#797979' }} />,
-    linkTo: '/my-account'
-  },
+  // {
+  //   label: 'My account',
+  //   icon: <SettingsIcon sx={{ color: '#797979' }} />,
+  //   linkTo: '/my-account'
+  // },
   {
     label: 'Logout',
     icon: <LogoutIcon sx={{ color: '#797979' }} />,
@@ -20,6 +21,7 @@ const MENU_OPTIONS = [
 
 
 export default function AccountPopover() {
+  const { authUser } = useAuth();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
 
@@ -40,7 +42,7 @@ export default function AccountPopover() {
           ml: 2
         }}
       >
-        <Avatar>RC</Avatar>
+        <Avatar src={authUser?.photo as string} alt={authUser?.name} sx={{ width: 30, height: 30, fontSize: 13 }}>{authUser?.initials}</Avatar>
       </IconButton>
 
       <MenuPopover
@@ -51,10 +53,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            Test
+            {authUser?.name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            test@gmail.com
+            {authUser?.email}
           </Typography>
         </Box>
 

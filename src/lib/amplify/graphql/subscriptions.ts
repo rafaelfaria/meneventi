@@ -8,17 +8,9 @@ export const onCreateTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -36,17 +28,9 @@ export const onCreateTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -83,17 +67,9 @@ export const onUpdateTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -111,17 +87,9 @@ export const onUpdateTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -158,17 +126,9 @@ export const onDeleteTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -186,17 +146,9 @@ export const onDeleteTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -244,17 +196,9 @@ export const onCreateTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -272,7 +216,9 @@ export const onCreateTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken
@@ -314,17 +260,9 @@ export const onUpdateTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -342,7 +280,9 @@ export const onUpdateTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken
@@ -384,17 +324,9 @@ export const onDeleteTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -412,7 +344,9 @@ export const onDeleteTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken

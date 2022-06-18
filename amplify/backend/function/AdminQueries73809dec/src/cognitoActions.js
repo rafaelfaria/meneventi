@@ -27,7 +27,7 @@ async function addUserToGroup(username, groupname) {
   console.log(`Attempting to add ${username} to ${groupname}`);
 
   try {
-    const result = await cognitoIdentityServiceProvider.adminAddUserToGroup(params).promise();
+    await cognitoIdentityServiceProvider.adminAddUserToGroup(params).promise();
     console.log(`Success adding ${username} to ${groupname}`);
     return {
       message: `Success adding ${username} to ${groupname}`,
@@ -48,7 +48,7 @@ async function removeUserFromGroup(username, groupname) {
   console.log(`Attempting to remove ${username} from ${groupname}`);
 
   try {
-    const result = await cognitoIdentityServiceProvider.adminRemoveUserFromGroup(params).promise();
+    await cognitoIdentityServiceProvider.adminRemoveUserFromGroup(params).promise();
     console.log(`Removed ${username} from ${groupname}`);
     return {
       message: `Removed ${username} from ${groupname}`,
@@ -67,7 +67,7 @@ async function confirmUserSignUp(username) {
   };
 
   try {
-    const result = await cognitoIdentityServiceProvider.adminConfirmSignUp(params).promise();
+    await cognitoIdentityServiceProvider.adminConfirmSignUp(params).promise();
     console.log(`Confirmed ${username} registration`);
     return {
       message: `Confirmed ${username} registration`,
@@ -85,7 +85,7 @@ async function disableUser(username) {
   };
 
   try {
-    const result = await cognitoIdentityServiceProvider.adminDisableUser(params).promise();
+    await cognitoIdentityServiceProvider.adminDisableUser(params).promise();
     console.log(`Disabled ${username}`);
     return {
       message: `Disabled ${username}`,
@@ -103,7 +103,7 @@ async function enableUser(username) {
   };
 
   try {
-    const result = await cognitoIdentityServiceProvider.adminEnableUser(params).promise();
+    await cognitoIdentityServiceProvider.adminEnableUser(params).promise();
     console.log(`Enabled ${username}`);
     return {
       message: `Enabled ${username}`,
@@ -125,6 +125,69 @@ async function getUser(username) {
   try {
     const result = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
     return result;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+async function createUser(email, name) {
+  const params = {
+    UserPoolId: userPoolId,
+    Username: email,
+    TemporaryPassword: (a=>Array.from({length:11},_=>a[~~(Math.random()*a.length)]).join(''))('*$§!abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'),
+    UserAttributes: [
+      {
+        Name: 'name',
+        Value: name
+      },
+      {
+        Name: 'email',
+        Value: email
+      },
+      {
+        Name: "email_verified",
+        Value: "True"
+      }
+    ]
+  };
+
+  console.log(`Attempting to create new user ${email}`);
+
+  try {
+    const result = await cognitoIdentityServiceProvider.adminCreateUser(params).promise();
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+async function deleteUser(username) {
+
+  try {
+    await disableUser(username);
+  } catch (err) {
+    console.log(err);
+  }
+
+  const params = {
+    UserPoolId: userPoolId,
+    Username: username,
+  }
+
+  try {
+    await signUserOut(username);
+  } catch(err) {
+    console.log(err);
+  }
+
+  try {
+    await cognitoIdentityServiceProvider.adminDeleteUser(params).promise();
+
+    return {
+      message: `Deleted ${username}`
+    };
   } catch (err) {
     console.log(err);
     throw err;
@@ -233,7 +296,7 @@ async function signUserOut(username) {
   console.log(`Attempting to signout ${username}`);
 
   try {
-    const result = await cognitoIdentityServiceProvider.adminUserGlobalSignOut(params).promise();
+    await cognitoIdentityServiceProvider.adminUserGlobalSignOut(params).promise();
     console.log(`Signed out ${username} from all devices`);
     return {
       message: `Signed out ${username} from all devices`,
@@ -256,4 +319,6 @@ module.exports = {
   listGroupsForUser,
   listUsersInGroup,
   signUserOut,
+  createUser,
+  deleteUser
 };

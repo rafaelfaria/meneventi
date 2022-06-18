@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useFieldArray, useForm } from "react-hook-form";
 import ReactLoading from 'react-loading';
-import { Box, Container, Button, Grid, InputAdornment, Stack, Typography, IconButton, CircularProgress, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import { Box, Container, Button, Grid, Stack, Typography, IconButton, CircularProgress, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
 import ButtonWithSpinner from '../ButtonWithSpinner';
 import { Team, User } from "../../../lib/amplify/API";
 import TextField from '../forms/TextField';
-import Dropdown from '../forms/Dropdown';
 import { State, Actions } from '../../../hooks/useRepository';
 import useToastNotification from "../../../hooks/useToastNotification";
 import useConfirm from "../../../hooks/useConfirm";
-import DatePicker from "../forms/DatePicker";
 import DeleteIcon from '@mui/icons-material/Delete';
 import UserSearch from "../forms/UserSearch";
 import useUser from "../../../hooks/useUsers";
@@ -73,8 +71,9 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
    */
   useEffect(() => {
     if (team) {
-      const { createdAt, updatedAt, __typename, owner, tournament, ...teamDetails } = team;
-      formActions.reset(teamDetails);
+      const { createdAt, updatedAt, __typename, owner,tournament, ...teamDetails } = team;
+      // @ts-ignore
+      formActions.reset({ ...teamDetails, users: teamDetails.users || [] });
     } else {
       formActions.reset(defaultInitial);
     }
@@ -92,7 +91,7 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
         try {
           await deleteTeam(team?.id);
           showSuccessNotification(`Team ${team?.name?.toUpperCase()} successfully deleted!`);
-          navigate(`/teams`);
+          navigate('/teams');
         } catch(err: any) {
           console.log(err);
           setError(getErrorMessage(err));
@@ -116,7 +115,7 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
       } else {
         const resp = await createTeam(data as Team);
         showSuccessNotification('Team created successfully!');
-        navigate(`/team/${resp?.id}`);
+        navigate(`/teams/${resp?.id}`);
       }
 
     } catch(err: any) {
@@ -164,7 +163,7 @@ export default function TeamForm({ state, actions, team, isLoading }: Props) {
                 <Box sx={{ my: 2 }}>
                   {isLoadingUsers ?
                     <CircularProgress /> :
-                    <UserSearch label="Usuários" options={users} selectedItems={usersFields} onChange={handleSelectUser} placeholder="Procure o usuário..." />
+                    <UserSearch label="Usuários" options={users} selectedItems={usersFields} onChange={handleSelectUser} placeholder="Find user..." />
                   }
                 </Box>
 

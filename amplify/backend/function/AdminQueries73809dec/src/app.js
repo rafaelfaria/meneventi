@@ -16,6 +16,8 @@ const bodyParser = require('body-parser');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 
 const {
+  createUser,
+  deleteUser,
   addUserToGroup,
   removeUserFromGroup,
   confirmUserSignUp,
@@ -69,6 +71,36 @@ const checkGroup = function (req, res, next) {
 };
 
 app.all('*', checkGroup);
+
+app.post('/createUser', async (req, res, next) => {
+  if (!req.body.username || !req.body.name) {
+    const err = new Error('username and name are required');
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  try {
+    const response = await createUser(req.body.username, req.body.name);
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/deleteUser', async (req, res, next) => {
+  if (!req.body.username) {
+    const err = new Error('username is required');
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  try {
+    const response = await deleteUser(req.body.username);
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.post('/addUserToGroup', async (req, res, next) => {
   if (!req.body.username || !req.body.groupname) {

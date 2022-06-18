@@ -168,9 +168,11 @@
                 "cognito-idp:AdminEnableUser",
                 "cognito-idp:AdminDisableUser",
                 "cognito-idp:AdminRemoveUserFromGroup",
+                "cognito-idp:AdminDeleteUser",
                 "cognito-idp:AdminAddUserToGroup",
                 "cognito-idp:AdminListGroupsForUser",
                 "cognito-idp:AdminGetUser",
+                "cognito-idp:AdminCreateUser",
                 "cognito-idp:AdminConfirmSignUp",
                 "cognito-idp:ListUsers",
                 "cognito-idp:ListGroups"

@@ -64,7 +64,7 @@ export default function LoginForm({ onSubmit, onSuccess, onError, isLoading }: P
         sx={{ mb: 2 }}
       />
       <Box sx={{ display: "flex", justifyContent: "end" }}>
-        <ButtonLink to="/esqueci-minha-senha">Forgot password?</ButtonLink>
+        <ButtonLink to="/forgot-password">Forgot password?</ButtonLink>
       </Box>
       <br/>
 

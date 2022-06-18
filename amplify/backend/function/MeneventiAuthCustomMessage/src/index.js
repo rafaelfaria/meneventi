@@ -1,33 +1,36 @@
-/**
- * @fileoverview
- *
- * This CloudFormation Trigger creates a handler which awaits the other handlers
- * specified in the `MODULES` env var, located at `./${MODULE}`.
- */
+const { forgotPasswordTemplate } = require('./templates/forgot-password');
+const { verificationTemplate } = require('./templates/verification');
+const { createUserTemplate } = require('./templates/created-user');
 
-/**
- * The names of modules to load are stored as a comma-delimited string in the
- * `MODULES` env var.
- */
-const moduleNames = process.env.MODULES.split(',');
-/**
- * The array of imported modules.
- */
-const modules = moduleNames.map(name => require(`./${name}`));
-
-/**
- * This async handler iterates over the given modules and awaits them.
- *
- * @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html#nodejs-handler-async
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- * 
- */
 exports.handler = async (event, context) => {
-  /**
-   * Instead of naively iterating over all handlers, run them concurrently with
-   * `await Promise.all(...)`. This would otherwise just be determined by the
-   * order of names in the `MODULES` var.
-   */
-  await Promise.all(modules.map(module => module.handler(event, context)));
-  return event;
+  try {
+		let { request, triggerSource } = event;
+		let { userAttributes } = request;
+
+		switch(triggerSource) {
+      case 'CustomMessage_AdminCreateUser':
+				event.response.emailSubject = 'Welcome to the Meneventi';
+				event.response.emailMessage =  createUserTemplate(event, userAttributes);
+      break;
+			case 'CustomMessage_ResendCode':
+			case 'CustomMessage_SignUp':
+        event.response.smsMessage = 'Welcome to Meneventi. Your verification code is ' + event.request.codeParameter;
+				event.response.emailSubject = 'Meneventi - Verification Code';
+				event.response.emailMessage =  verificationTemplate(event, userAttributes);
+			break;
+			case 'CustomMessage_ForgotPassword':
+				event.response.emailSubject = 'Meneventi - Forgot Password';
+ 				event.response.emailMessage =  forgotPasswordTemplate(event, userAttributes);
+			break;
+		}
+
+    console.log('new...');
+    console.log(event);
+
+    context.done(null, event);
+
+    return event;
+	} catch (err) {
+		console.log(err);
+	}
 };

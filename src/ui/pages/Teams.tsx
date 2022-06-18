@@ -27,7 +27,7 @@ export default function Teams() {
             <Title title="Teams" icon={ArticleIcon} link="/teams" />
             <Box display="flex" flexGrow={1} width="100%" justifyContent="flex-end">
               <Box>
-                <Button variant="contained" onClick={() => navigate('/teams/new')}>Adicionar Novo</Button>
+                <Button variant="contained" onClick={() => navigate('/teams/new')}>Add new team</Button>
               </Box>
             </Box>
           </Stack>

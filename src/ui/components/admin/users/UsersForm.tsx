@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import ReactLoading from 'react-loading';
-import { Box, Container, Button, Grid, Stack, Typography, Avatar, TableRow, Paper } from '@mui/material';
+import { Box, Container, Button, Grid, Stack, Typography, Avatar } from '@mui/material';
 import ButtonWithSpinner from '../../ButtonWithSpinner';
 import { User } from "../../../../lib/amplify/API";
 import TextField from '../../forms/TextField';
@@ -11,7 +11,6 @@ import { State, Actions } from '../../../../hooks/useUsers';
 import useAuth from '../../../../hooks/useAuth';
 import useToastNotification from "../../../../hooks/useToastNotification";
 import { getInitials } from "../../../../lib/helpers/user";
-import { styled } from '@mui/material/styles';
 import useConfirm from "../../../../hooks/useConfirm";
 
 type FormData = User;
@@ -36,7 +35,6 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
   const { isError, errorMessage } = state;
   const { create: createUser, save: saveUser, delete: deleteUser  } = actions;
   const [ error, setError ] = useState<string | null>();
-  const [ userInitials, setUserInitials ] = useState<string | undefined | null>(user?.initials);
   const [ isSaving, setIsSaving ] = useState<boolean>(false);
 
 
@@ -67,28 +65,11 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
   const formActions = useForm<FormData>();
 
   /**
-   * Listen to any changes in the controlled forms
-   */
-  useEffect(() => {
-    const subscription = formActions.watch((value: any, { name }) => {
-      if (!name) return;
-
-      if (name === "name") {
-        const initials = getInitials(value.name);
-        formActions.setValue('initials', initials);
-        setUserInitials(initials);
-      }
-
-    });
-    return () => subscription.unsubscribe();
-  }, [formActions.watch]);
-
-  /**
    * Every time the analysis object changes, we make sure the forms are clear and reset with all the new information
    */
   useEffect(() => {
     if (user) {
-      const { createdAt, updatedAt, teamUsersId, ...details } = user;
+      const { createdAt, updatedAt, ...details } = user;
       formActions.reset(details)
     } else {
       formActions.reset(initialDefault);
@@ -124,13 +105,20 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
     try {
       setIsSaving(true);
       setError(null);
+      const initials = getInitials(data.name);
+
+      const formattedData = {
+        ...data,
+        initials
+      }
+
       if (user) {
-        await saveUser(user.username, data);
+        await saveUser(user.username, formattedData);
         showSuccessNotification('User saved successfully');
       } else {
-        const resp = await createUser(data);
+        const resp = await createUser(formattedData);
         showSuccessNotification('Usuário criado com sucesso');
-        navigate(`/admin/users/edit/${resp?.username}`);
+        navigate(`/admin/users/${resp?.username}`);
       }
     } catch(err: any) {
       console.error('User handleSubmitForm', err);
@@ -158,7 +146,7 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
               {user ?
                 <Grid item xs={12}>
                   <Stack flexDirection="row" alignItems="center" sx={{ mb: 3 }}>
-                    <Avatar sx={{ mr: 1, width: 56, height: 56 }} src={user?.photo as string} alt={user?.name}>{userInitials}</Avatar>
+                    <Avatar sx={{ mr: 1, width: 56, height: 56 }} src={user?.photo as string} alt={user?.name} />
                     <Stack flexDirection="column">
                       <Typography variant="body1">{user?.email}</Typography>
                       <Typography variant="body2" sx={{ color: '#CECECE'}}>{user?.username}</Typography>
@@ -196,10 +184,10 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
 
               <Grid item xs={12}>
                 <Stack flexDirection="row" alignItems="center" justifyContent="center" sx={{ mt: 3 }} columnGap={2}>
-                  <Button variant="contained" color="neutral" onClick={() => navigate('/admin/usuarios/lista')}>Cancelar</Button>
+                  <Button variant="contained" color="neutral" onClick={() => navigate('/admin/users')}>Cancel</Button>
                   {user && authUser?.isSuperAdmin && authUser?.username !== user?.username &&
                     <ButtonWithSpinner variant="contained" onClick={handleDeleteUser} sx={{ mr: 1 }} color="neutral" disabled={isSaving}>
-                      Apagar Usuário
+                      Delete User
                     </ButtonWithSpinner>
                   }
 
@@ -216,19 +204,3 @@ export default function UsersForm({ state, actions, user, isLoading }: Props) {
     </form>
   );
 }
-
-const FloatBox = styled(Paper)(() => ({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  padding: '15px',
-}));
-
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.mode === 'dark' ? "#1f2028" : "#F4F5F9",
-  },
-}));

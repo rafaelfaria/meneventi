@@ -15,7 +15,6 @@ export const createUser = /* GraphQL */ `
       photo
       createdAt
       updatedAt
-      teamUsersId
     }
   }
 `;
@@ -32,7 +31,6 @@ export const deleteUser = /* GraphQL */ `
       photo
       createdAt
       updatedAt
-      teamUsersId
     }
   }
 `;
@@ -45,17 +43,9 @@ export const createTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -73,17 +63,9 @@ export const createTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -123,17 +105,9 @@ export const deleteTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -151,17 +125,9 @@ export const deleteTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -212,17 +178,9 @@ export const createTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -240,7 +198,9 @@ export const createTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken
@@ -285,17 +245,9 @@ export const deleteTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -313,7 +265,9 @@ export const deleteTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken
@@ -351,7 +305,6 @@ export const updateUser = /* GraphQL */ `
       photo
       createdAt
       updatedAt
-      teamUsersId
     }
   }
 `;
@@ -364,17 +317,9 @@ export const updateTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -392,17 +337,9 @@ export const updateTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -453,17 +390,9 @@ export const updateTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -481,7 +410,9 @@ export const updateTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken

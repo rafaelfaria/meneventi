@@ -19,7 +19,6 @@ export const isUserAdmin = async (): Promise<any> => {
   try {
     const user = await isUserLoggedIn();
     const userGroups = user.signInUserSession.accessToken.payload["cognito:groups"] || [];
-    console.log({ userGroups });
     return userGroups.includes("Admin");
   } catch {
     return false;

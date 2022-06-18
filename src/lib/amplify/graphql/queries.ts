@@ -12,7 +12,6 @@ export const getUser = /* GraphQL */ `
       photo
       createdAt
       updatedAt
-      teamUsersId
     }
   }
 `;
@@ -39,7 +38,6 @@ export const listUsers = /* GraphQL */ `
         photo
         createdAt
         updatedAt
-        teamUsersId
       }
       nextToken
     }
@@ -51,17 +49,9 @@ export const getTeam = /* GraphQL */ `
       id
       name
       users {
-        items {
-          username
-          email
-          name
-          initials
-          photo
-          createdAt
-          updatedAt
-          teamUsersId
-        }
-        nextToken
+        email
+        name
+        photo
       }
       tournament {
         items {
@@ -79,17 +69,9 @@ export const getTeam = /* GraphQL */ `
             id
             name
             users {
-              items {
-                username
-                email
-                name
-                initials
-                photo
-                createdAt
-                updatedAt
-                teamUsersId
-              }
-              nextToken
+              email
+              name
+              photo
             }
             tournament {
               items {
@@ -131,17 +113,9 @@ export const listTeams = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -159,7 +133,9 @@ export const listTeams = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken
@@ -199,17 +175,9 @@ export const getTournament = /* GraphQL */ `
         id
         name
         users {
-          items {
-            username
-            email
-            name
-            initials
-            photo
-            createdAt
-            updatedAt
-            teamUsersId
-          }
-          nextToken
+          email
+          name
+          photo
         }
         tournament {
           items {
@@ -227,7 +195,9 @@ export const getTournament = /* GraphQL */ `
               id
               name
               users {
-                nextToken
+                email
+                name
+                photo
               }
               tournament {
                 nextToken
@@ -274,17 +244,9 @@ export const listTournaments = /* GraphQL */ `
           id
           name
           users {
-            items {
-              username
-              email
-              name
-              initials
-              photo
-              createdAt
-              updatedAt
-              teamUsersId
-            }
-            nextToken
+            email
+            name
+            photo
           }
           tournament {
             items {

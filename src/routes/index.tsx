@@ -38,8 +38,8 @@ export default function ThemeRoutes() {
             { path: '/', element: <Home /> },
             { path: '/teams', element: <Teams /> },
             { path: '/teams/new', element: <TeamsForm /> },
-            { path: '/teams/:team', element: <TeamsForm /> },
-            { path: '/tournament/:tournament', element: <TournamentForm /> },
+            { path: '/teams/:teamId', element: <TeamsForm /> },
+            { path: '/tournament/:tournamentId', element: <TournamentForm /> },
           ]
         }
       ]
