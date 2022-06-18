@@ -1,6 +1,6 @@
 import { Typography, Card, Box, CardContent, CardMedia } from '@mui/material';
-import { Tournament } from "../../../lib/amplify/API";
-import Chip from '../../../assets/chip.png';
+import { Tournament } from "../../lib/amplify/API";
+import Chip from '../../assets/chip.png';
 
 type Props = {
   data?: Partial<Tournament>;

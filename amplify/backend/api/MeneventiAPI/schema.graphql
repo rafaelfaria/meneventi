@@ -14,27 +14,6 @@ type User @model(subscriptions: null)
   photo: String
 }
 
-type UserSimple {
-  email: String!
-  name: String!
-  photo: String
-}
-
-type Team @model
-  @auth(
-    rules: [
-      { allow: owner },
-      { allow: private, operations: [read, update], provider: iam },
-      { allow: groups, groups: ["Admin"] }
-    ]
-  )
-{
-  id: ID!
-  name: String!
-  users: [UserSimple]
-  tournament: [Tournament] @hasMany(indexName: "byTournament", fields: ["id"])
-}
-
 type Tournament @model
   @auth(
     rules: [
@@ -50,9 +29,6 @@ type Tournament @model
   totalPrize: Float
   buyIn: Int
   leaderboard: [TornamentLeaderboard]
-
-  teamID: ID! @index(name: "byTournament")
-  team: Team @belongsTo(fields: ["teamID"])
 }
 
 type TornamentLeaderboard {

@@ -5,22 +5,15 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import PeopleIcon from '@mui/icons-material/People';
-import TeamForm from "./teams/TeamForm";
 import useRepository from "../../hooks/useRepository";
 import useApp from "../../hooks/useApp";
 import UsersForm from "./admin/users/UsersForm";
 import useUser from "../../hooks/useUsers";
 
-const MENEVENTI_TEAM = '9f7ecfa7-f541-4166-96ed-606cc7999f92'
-
 export default function ActionsButton() {
   const [ openTournamentModal, setOpenTournamentModal ] = useState<boolean>(false);
-  const [ openTeamModal, setOpenTeamModal ] = useState<boolean>(false);
   const [ openUserModal, setOpenUserModal ] = useState<boolean>(false);
 
-  const { teamsRepository } = useApp();
-  const [ teamState, teamActions ] = useRepository(teamsRepository)
   const [ userState, userActions ] = useUser();
 
   const navigate = useNavigate();
@@ -36,11 +29,6 @@ export default function ActionsButton() {
 
   const openPopover = Boolean(anchorEl);
 
-  const handleCloseTeamModal = () => {
-    handleClosePopover();
-    setOpenTeamModal(false);
-  }
-
   const handleCloseTournamentModal = () => {
     handleClosePopover();
     setOpenTournamentModal(false);
@@ -49,12 +37,6 @@ export default function ActionsButton() {
   const handleCloseUserModal = () => {
     handleClosePopover();
     setOpenUserModal(false);
-  }
-
-  const handleEditTeam = async () => {
-    setOpenTeamModal(true);
-    handleClosePopover();
-    await teamActions.getById(MENEVENTI_TEAM);
   }
 
   return (
@@ -95,14 +77,6 @@ export default function ActionsButton() {
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton onClick={handleEditTeam}>
-                  <ListItemIcon>
-                    <PeopleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Edit Team"  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
                 <ListItemButton onClick={() => { setOpenUserModal(true); handleClosePopover(); } }>
                   <ListItemIcon>
                     <GroupAddIcon />
@@ -117,12 +91,6 @@ export default function ActionsButton() {
       <Fab color="primary" sx={{ position: 'fixed', bottom: 30, right: 30 }} onClick={handleClick}>
         <AddIcon />
       </Fab>
-
-      <Modal open={openTeamModal} onClose={handleCloseTeamModal}>
-        <FloatBox sx={{ p: 3 }} component={Paper}>
-          <TeamForm state={teamState} actions={teamActions} team={teamState.item} isLoading={teamState.isLoadingItem} onCancel={handleCloseTeamModal} />
-        </FloatBox>
-      </Modal>
 
       <Modal open={openUserModal} onClose={handleCloseUserModal}>
         <FloatBox sx={{ p: 3 }} component={Paper}>
