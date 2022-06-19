@@ -20,7 +20,6 @@ const UserSearch =  ({
   const [ value, setValue ] = useState<string | null | undefined>(null);
 
   useEffect(() => {
-    console.log({selectedValue })
     setValue(selectedValue);
   }, [selectedValue])
 

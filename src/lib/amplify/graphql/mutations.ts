@@ -44,7 +44,6 @@ export const createTournament = /* GraphQL */ `
       name
       date
       totalPrize
-      buyIn
       leaderboard {
         place
         username
@@ -70,7 +69,6 @@ export const deleteTournament = /* GraphQL */ `
       name
       date
       totalPrize
-      buyIn
       leaderboard {
         place
         username
@@ -112,7 +110,6 @@ export const updateTournament = /* GraphQL */ `
       name
       date
       totalPrize
-      buyIn
       leaderboard {
         place
         username

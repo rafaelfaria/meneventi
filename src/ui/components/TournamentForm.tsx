@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import ReactLoading from 'react-loading';
-import { Box, Button, Grid, Stack, Typography, IconButton, List, ListItem, ListItemText, ListItemAvatar, Avatar, InputAdornment, Divider } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, IconButton, List, ListItem, InputAdornment, Divider } from '@mui/material';
 import ButtonWithSpinner from './ButtonWithSpinner';
 import { Tournament, User } from '../../lib/amplify/API';
 import TextField from './forms/TextField';
@@ -13,10 +13,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import UserSearch from './forms/UserSearch';
 import useUser from '../../hooks/useUsers';
 import { getErrorMessage } from '../../lib/helpers';
-import Dropdown from "./forms/Dropdown";
 import AddIcon from '@mui/icons-material/AddCircle';
 import DatePicker from "./forms/DatePicker";
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 type FormData = Tournament;
 
@@ -31,10 +29,10 @@ type Props = {
 const defaultInitial = {
   name: '',
   date: (new Date()).toISOString(),
-  buyIn: 15,
   leaderboard: [
     {
       place: 1,
+      buyIn: 15
     }
   ]
 }
@@ -121,22 +119,26 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
    * Save the form
    */
   const handleSubmitForm = async (data: FormData) => {
-    console.log({ data })
 
     try {
       setError(null);
 
       const formattedData = {
         ...data,
-        date: (new Date(data.date || new Date())).toISOString()
+        date: (new Date(data.date || new Date())).toISOString(),
+        totalPrize: leaderboard?.reduce((acc, item) => acc + Number(item?.prize || 0), 0),
+        leaderboard: leaderboard?.filter(item => item).map((item, index) => {
+          if (!item) return item;
+          item.place = index + 1;
+          return item;
+        })
       }
 
       if (tournament) {
         await saveTournament(tournament.id, formattedData as Tournament);
         showSuccessNotification('Tournament saved successfully!');
       } else {
-        const resp = await createTournament(formattedData as Tournament);
-        console.log({ resp });
+        await createTournament(formattedData as Tournament);
         showSuccessNotification('Tournament created successfully!');
         if (onCancel) {
           onCancel();
@@ -152,11 +154,13 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
   }
 
   const handleSelectUser = (index: number, user: User) => {
-    console.log({ index, user });
-    formActions.setValue(`leaderboard.${index}.username`, user.username);
-    formActions.setValue(`leaderboard.${index}.name`, user.name);
-    formActions.setValue(`leaderboard.${index}.email`, user.email);
-    formActions.setValue(`leaderboard.${index}.photo`, user.photo);
+    // @ts-ignore
+    formActions.setValue(`leaderboard.${index}.username`, user ? user.username : null);
+    // @ts-ignore
+    formActions.setValue(`leaderboard.${index}.name`, user ? user.name : null);
+    // @ts-ignore
+    formActions.setValue(`leaderboard.${index}.email`, user ? user.email : null);
+    formActions.setValue(`leaderboard.${index}.photo`, user ? user.photo : null);
   }
 
   const handleOnCancel = () => {
@@ -167,7 +171,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
     }
   }
 
-  console.log({ usersFields })
+  console.log(usersFields)
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)} style={{ display: "block", padding: "10px" }}>
@@ -187,7 +191,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
               <Typography variant="h6" sx={{ mb: 2 }}>Details</Typography>
             </Grid>
 
-            <Grid item xs={12} md={5}>
+            <Grid item xs={12} md={9}>
               <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
                 label="Tournament Name"
                 name="name"
@@ -198,30 +202,6 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
               />
             </Grid>
 
-
-            <Grid item xs={6} md={2}>
-              <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
-                label="Buy-In"
-                name="buyIn"
-                control={formActions.control}
-                disabled={isSaving}
-                size="small"
-                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
-              />
-            </Grid>
-
-            <Grid item xs={6} md={2}>
-              <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
-                label="Total Prize"
-                name="totalPrize"
-                rules={{ required: true }}
-                control={formActions.control}
-                disabled={isSaving}
-                size="small"
-                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
-
-              />
-            </Grid>
             <Grid item xs={12} md={3}>
               <DatePicker
                 name="date"
@@ -230,7 +210,6 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                 control={formActions.control}
                 rules={{ required: true }}
                 autoOk
-                disablePast
                 disabled={isSaving}
                 size="small"
                 sx={{ mb: 2 }}
@@ -252,7 +231,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                   const showRemove = (usersFields.length > 1) || (index === 0 && usersFields.length > 1);
                   return (
                     <ListItem
-                      sx={{ padding: 0 }}
+                      sx={{ padding: 0, mb: 1 }}
                       key={item.username}
                       secondaryAction={
                       showRemove &&
@@ -260,38 +239,14 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                           <DeleteIcon />
                         </IconButton>
                       }>
-                      <ListItemText sx={{ width: 70, flex: '0 0 auto', mr: 1 }}>
-                        <Dropdown
-                          name={`leaderboard.${index}.place`}
-                          options={[
-                            { label: "#1", value: 1 },
-                            { label: "#2", value: 2 },
-                            { label: "#3", value: 3 },
-                            { label: "#4", value: 4 },
-                            { label: "#5", value: 5 },
-                            { label: "#6", value: 6 },
-                            { label: "#7", value: 7 },
-                            { label: "#8", value: 8 },
-                            { label: "#9", value: 9 },
-                            { label: "#10", value: 10 },
-                          ]}
-                          control={formActions.control}
-                          variant="filled"
-                          disabled={isSaving}
-                          fullWidth
-                          size="small"
-                        />
-                      </ListItemText>
-                      {/* <ListItemAvatar>
-                        <Avatar src={item.photo as string} alt={item.name}>{item.initials}</Avatar>
-                      </ListItemAvatar> */}
+
                       <UserSearch
                         label="Player"
                         isLoading={isLoadingUsers}
                         options={users}
-                        selectedItems={usersFields}
+                        selectedItems={leaderboard}
                         onChange={(user: User) => handleSelectUser(index, user)}
-                        selectedValue={leaderboard ? {
+                        selectedValue={(leaderboard && leaderboard[index]?.username) ? {
                           username: leaderboard[index]?.username,
                           name: leaderboard[index]?.name,
                           } : null}
@@ -327,7 +282,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
               </List>
             </Grid>
             <Grid item xs={12} display="flex" justifyContent="right">
-              <Button onClick={() => appendUser({ place: usersFields.length + 1, prize: 0, buyIn: 15 })} startIcon={<AddIcon />}>
+              <Button onClick={() => appendUser({ prize: 0, buyIn: 15 })} startIcon={<AddIcon />}>
                 Add new user
               </Button>
             </Grid>
@@ -335,7 +290,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
 
             <Grid item xs={12}>
               <Stack flexDirection="row" alignItems="center" justifyContent="center" sx={{ mt: 3 }} columnGap={2}>
-                <Button variant="contained" color="neutral" onClick={handleOnCancel}>Cancel</Button>
+                <Button variant="contained" color="neutral" onClick={handleOnCancel}>Home</Button>
                 {tournament &&
                   <ButtonWithSpinner variant="contained" onClick={handleDeleteItem} sx={{ mr: 1 }} color="neutral" disabled={isSaving}>
                     Delete

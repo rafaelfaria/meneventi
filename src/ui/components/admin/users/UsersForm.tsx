@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import ReactLoading from 'react-loading';
-import { Box, Container, Button, Grid, Stack, Typography, Avatar } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, Avatar } from '@mui/material';
 import ButtonWithSpinner from '../../ButtonWithSpinner';
 import { User } from "../../../../lib/amplify/API";
 import TextField from '../../forms/TextField';
@@ -12,8 +12,6 @@ import useAuth from '../../../../hooks/useAuth';
 import useToastNotification from "../../../../hooks/useToastNotification";
 import { getInitials } from "../../../../lib/helpers/user";
 import useConfirm from "../../../../hooks/useConfirm";
-import Title from "../../Title";
-import UsersIcon from '@mui/icons-material/People';
 
 type FormData = User;
 

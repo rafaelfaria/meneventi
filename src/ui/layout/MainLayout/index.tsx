@@ -4,8 +4,11 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from './Header';
 import ActionsButton from '../../components/ActionsButton';
+import useAuth from '../../../hooks/useAuth';
 
 export default function MainLayout() {
+  const { authUser } = useAuth();
+
   return (
     <>
       <Main>
@@ -13,7 +16,7 @@ export default function MainLayout() {
         <Header />
         <Box component="main" sx={{ p: 3, marginTop: '20px', position: "relative", width: "100%" }}>
           <Outlet />
-          <ActionsButton />
+          {authUser?.isAdmin ? <ActionsButton /> : null }
         </Box>
       </Main>
     </>

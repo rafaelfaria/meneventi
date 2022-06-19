@@ -50,7 +50,6 @@ export const getTournament = /* GraphQL */ `
       name
       date
       totalPrize
-      buyIn
       leaderboard {
         place
         username
@@ -78,7 +77,6 @@ export const listTournaments = /* GraphQL */ `
         name
         date
         totalPrize
-        buyIn
         leaderboard {
           place
           username

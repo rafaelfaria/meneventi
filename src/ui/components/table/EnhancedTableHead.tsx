@@ -48,6 +48,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             align={headCell.align || 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             width={headCell.width ? headCell.width : 'auto'}
+            sx={{ width: headCell.width ? headCell.width : 'auto'}}
           >
           {sorting ?
             <TableSortLabel

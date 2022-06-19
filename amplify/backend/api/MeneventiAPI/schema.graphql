@@ -27,15 +27,14 @@ type Tournament @model
   name: String
   date: AWSDateTime
   totalPrize: Float
-  buyIn: Int
-  leaderboard: [TournamentLeaderboard]
+  leaderboard: [TournamentLeaderboard!]
 }
 
 type TournamentLeaderboard {
-  place: Int
-  username: String
-  email: String
-  name: String
+  place: Int!
+  username: String!
+  email: String!
+  name: String!
   photo: String
   buyIn: Float
   prize: Float

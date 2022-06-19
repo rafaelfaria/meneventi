@@ -7,6 +7,9 @@ import ReactLoading from 'react-loading';
 import TournamentCard from "../components/TournamentCard";
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 import { onCreateTournamentPublic, onUpdateTournamentPublic, onDeleteTournamentPublic } from "../../lib/amplify/graphql/subscriptions";
+import useTournaments from "../../hooks/useTournaments";
+import DataList from "../components/table/DataList";
+import LeaderboardData from "../components/LeaderboardData";
 
 export default function Home() {
 
@@ -23,6 +26,8 @@ export default function Home() {
     }
   });
 
+  const [ leaderboard ] = useTournaments({ list: state.items })
+
   return (
     <Page title="Tournaments">
 
@@ -38,8 +43,20 @@ export default function Home() {
           : null
         }
 
+
         {state.items?.length ?
-          state.items?.map((item) => <Grid key={item.id} item xs={12} sx={{ mb: 2 }}><TournamentCard data={item} /></Grid>)
+          <>
+            <Grid item xs={12}>
+              <Typography variant="h5" sx={{ mb: 2 }}>Leaderboard</Typography>
+            </Grid>
+            <Grid item xs={12} sx={{ mb: 5 }} >
+              <DataList title="Leaderboard" columnData={LeaderboardData} items={leaderboard} hideCheckbox={true} hideToolbar={true} />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h5" sx={{ mb: 2 }}>Tournaments</Typography>
+            </Grid>
+            {state.items?.map((item) => <Grid key={item.id} item xs={12} sx={{ mb: 2 }}><TournamentCard data={item} /></Grid>)}
+          </>
           : null
         }
 
