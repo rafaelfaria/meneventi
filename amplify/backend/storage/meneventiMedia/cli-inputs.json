@@ -1,0 +1,15 @@
+{
+  "resourceName": "meneventiMedia",
+  "policyUUID": "faa550d5",
+  "bucketName": "meneventi-media",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

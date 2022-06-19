@@ -12,6 +12,8 @@ import Login from '../ui/pages/auth/Login';
 import Register from '../ui/pages/auth/Register';
 import ResetPassword from '../ui/pages/auth/ResetPassword';
 import Logout from '../ui/pages/auth/Logout';
+import MyAccount from '../ui/pages/MyAccount';
+import MyAccountChangePassword from '../ui/pages/MyAccountChangePassword';
 
 // pages
 const FourOFour = Loadable(lazy(() => import('../ui/pages/404')));
@@ -36,6 +38,8 @@ export default function ThemeRoutes() {
             { path: '/', element: <Home /> },
             { path: '/tournament/new', element: <TournamentForm /> },
             { path: '/tournament/:id', element: <TournamentForm /> },
+            { path: '/my-account', element: <MyAccount /> },
+            { path: '/my-account/change-password', element: <MyAccountChangePassword /> },
           ]
         }
       ]

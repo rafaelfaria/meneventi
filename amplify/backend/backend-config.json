@@ -109,5 +109,12 @@
         }
       }
     }
+  },
+  "storage": {
+    "meneventiMedia": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "MeneventiAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "menevea8f5a6d4",
     "userPoolName": "MeneventiAuthUserPool",
     "autoVerifiedAttributes": [
@@ -79,7 +79,9 @@
       }
     ],
     "permissions": [],
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"MeneventiAuthCustomMessage\"\n  }\n]",
+    "authTriggerConnections": [
+      "{\"triggerType\":\"CustomMessage\",\"lambdaFunctionName\":\"MeneventiAuthCustomMessage\"}"
+    ],
     "adminQueryGroup": "Admin",
     "parentStack": {
       "Ref": "AWS::StackId"

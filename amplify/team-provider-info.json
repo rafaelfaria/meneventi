@@ -14,7 +14,8 @@
     },
     "categories": {
       "auth": {
-        "MeneventiAuth": {}
+        "MeneventiAuth": {},
+        "true": {}
       },
       "function": {
         "MeneventiAuthCustomMessage": {

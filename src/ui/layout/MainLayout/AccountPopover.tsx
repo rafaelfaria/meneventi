@@ -5,13 +5,19 @@ import MenuPopover from '../../components/MenuPopover';
 import { Link } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import useAuth from '../../../hooks/useAuth';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 const MENU_OPTIONS = [
-  // {
-  //   label: 'My account',
-  //   icon: <SettingsIcon sx={{ color: '#797979' }} />,
-  //   linkTo: '/my-account'
-  // },
+  {
+    label: 'My Account',
+    icon: <SettingsIcon sx={{ color: '#797979' }} />,
+    linkTo: '/my-account'
+  },
+  {
+    label: 'Change Password',
+    icon: <LockOpenIcon sx={{ color: '#797979' }} />,
+    linkTo: '/my-account/change-password'
+  },
   {
     label: 'Logout',
     icon: <LogoutIcon sx={{ color: '#797979' }} />,
