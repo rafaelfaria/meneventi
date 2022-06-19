@@ -14,6 +14,7 @@ export const onCreateTournamentPublic = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -36,6 +37,7 @@ export const onUpdateTournamentPublic = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -58,6 +60,7 @@ export const onDeleteTournamentPublic = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -80,6 +83,7 @@ export const onCreateTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -102,6 +106,7 @@ export const onUpdateTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -124,6 +129,7 @@ export const onDeleteTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize

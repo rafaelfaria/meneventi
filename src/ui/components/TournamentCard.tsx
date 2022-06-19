@@ -1,9 +1,11 @@
-import { Typography, Card, Box, CardContent, CardMedia, IconButton } from '@mui/material';
+import { Typography, Card, Box, CardContent, CardMedia, IconButton, Modal, Paper, Grid, Stack, Avatar } from '@mui/material';
 import { Tournament } from "../../lib/amplify/API";
 import Chip from '../../assets/chip.png';
 import { format } from 'date-fns'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
 
 type Props = {
   data: Partial<Tournament>;
@@ -17,8 +19,11 @@ export default function TournamentCard({ data }: Props) {
   const day = format(date, 'dd');
   const month = format(date, 'MMM');
 
+  const [ openTournamentModal, setOpenTournamentModal ] = useState<boolean>(false);
+
   return (
-      <Card sx={{ display: 'flex' }}>
+    <>
+      <Card sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => setOpenTournamentModal(true)}>
         <Box position="relative">
           <Box textAlign="center" sx={{
             color: '#000',
@@ -55,10 +60,53 @@ export default function TournamentCard({ data }: Props) {
           <Typography variant="h6">${data.totalPrize}</Typography>
         </Box>
         <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-          <IconButton onClick={() => navigate(`/tournament/${data.id}`)}><MoreVertIcon /></IconButton>
+          <IconButton onClick={(e) => { e.stopPropagation(); navigate(`/tournament/${data.id}`); }}><MoreVertIcon /></IconButton>
         </Box>
       </Card>
+      <Modal open={openTournamentModal} onClose={() => setOpenTournamentModal(false)}>
+        <FloatBox sx={{ p: 1 }}>
+          <Grid container sx={{ p: 3 }}>
+            <Grid item xs={12}>
+              <Typography variant="h6" sx={{ fontSize: 20 }}>
+                {data.name}
+              </Typography>
+            </Grid>
+            {data.leaderboard?.map((player) => {
+              return (
+                <Grid item xs={12}>
+                  <Box sx={{ mb: 1, p: 2 }} component={Paper}>
+                    <Stack flexDirection="row" columnGap={1} alignItems="center">
+                      <Typography variant="h6" sx={{ fontSize: 30 }}>{player.place === 1 ? '🥇' : player.place === 2 ? '🥈' : player.place === 3 ? '🥉' : ''}</Typography>
+                      <Avatar src={player.photo as string} alt={player.name} sx={{ width: 30, height: 30, fontSize: 20, mr: 1 }}>{player.initials}</Avatar>
+                      <Stack flexDirection="column" columnGap={1}>
+                        <Typography>{player.name}</Typography>
+                        <Stack flexDirection="row" columnGap={1}>
+                           {(player.prize && (player.prize > 0)) ? <Typography><strong>Prize:</strong> ${player.prize}</Typography> : null}
+                        </Stack>
+                      </Stack>
+                    </Stack>
+                  </Box>
+                </Grid>
+              );
+            })}
+
+          </Grid>
+        </FloatBox>
+      </Modal>
+    </>
   );
 }
 
+
+const FloatBox = styled(Paper)(() => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '800px',
+  maxWidth: '100%',
+  padding: '15px',
+  maxHeight: '480px',
+  overflowY: 'auto'
+}));
 

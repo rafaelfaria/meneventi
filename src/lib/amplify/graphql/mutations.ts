@@ -49,6 +49,7 @@ export const createTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -74,6 +75,7 @@ export const deleteTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -115,6 +117,7 @@ export const updateTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize

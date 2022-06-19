@@ -55,6 +55,7 @@ export const getTournament = /* GraphQL */ `
         username
         email
         name
+        initials
         photo
         buyIn
         prize
@@ -82,6 +83,7 @@ export const listTournaments = /* GraphQL */ `
           username
           email
           name
+          initials
           photo
           buyIn
           prize

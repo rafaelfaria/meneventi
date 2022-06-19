@@ -160,6 +160,8 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
     formActions.setValue(`leaderboard.${index}.name`, user ? user.name : null);
     // @ts-ignore
     formActions.setValue(`leaderboard.${index}.email`, user ? user.email : null);
+    // @ts-ignore
+    formActions.setValue(`leaderboard.${index}.initials`, user ? user.initials : null);
     formActions.setValue(`leaderboard.${index}.photo`, user ? user.photo : null);
   }
 
@@ -196,7 +198,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                 label="Tournament Name"
                 name="name"
                 rules={{ required: true }}
-                  control={formActions.control}
+                control={formActions.control}
                 disabled={isSaving}
                 size="small"
               />
