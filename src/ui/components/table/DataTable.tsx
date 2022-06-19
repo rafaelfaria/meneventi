@@ -169,7 +169,7 @@ export default function DataTable(props: DataTableProps) {
                     tabIndex={-1}
                     key={row[idProp]}
                     selected={isItemSelected || row[idProp] === highlightItem?.[idProp]}
-                    sx={{ background: (index % 2) ? "#F4F5F9" : "transparent" }}
+                    sx={{ backgroundColor: (index % 2) ? "#F4F5F9" : "transparent !important" }}
                   >
                     {!hideCheckbox &&
                       <TableCell padding="checkbox">
