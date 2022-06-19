@@ -9,8 +9,10 @@ import useApp from "../../hooks/useApp";
 import UsersForm from "./admin/users/UsersForm";
 import useUser from "../../hooks/useUsers";
 import TournamentForm from "./TournamentForm";
+import { useNavigate } from "react-router-dom";
 
 export default function ActionsButton() {
+  const navigate = useNavigate();
   const [ openTournamentModal, setOpenTournamentModal ] = useState<boolean>(false);
   const [ openUserModal, setOpenUserModal ] = useState<boolean>(false);
 
@@ -70,7 +72,7 @@ export default function ActionsButton() {
           }}>
             <List>
               <ListItem disablePadding>
-                <ListItemButton onClick={() => { setOpenTournamentModal(true); handleClosePopover(); } }>
+                <ListItemButton onClick={() => { navigate('/tournament/new'); handleClosePopover(); } }>
                   <ListItemIcon>
                     <EmojiEventsIcon />
                   </ListItemIcon>
@@ -78,7 +80,7 @@ export default function ActionsButton() {
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton onClick={() => { setOpenUserModal(true); handleClosePopover(); } }>
+                <ListItemButton onClick={() => { navigate('/admin/users/new'); handleClosePopover(); } }>
                   <ListItemIcon>
                     <GroupAddIcon />
                   </ListItemIcon>

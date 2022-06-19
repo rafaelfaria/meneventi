@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import ReactLoading from 'react-loading';
-import { Box, Button, Grid, Stack, Typography, IconButton, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, IconButton, List, ListItem, ListItemText, ListItemAvatar, Avatar, InputAdornment, Divider } from '@mui/material';
 import ButtonWithSpinner from './ButtonWithSpinner';
 import { Tournament, User } from '../../lib/amplify/API';
 import TextField from './forms/TextField';
@@ -108,7 +108,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
         try {
           await deleteTournament(tournament?.id);
           showSuccessNotification(`Tournament ${tournament?.name?.toUpperCase()} successfully deleted!`);
-          navigate('/tournaments');
+          navigate('/');
         } catch(err: any) {
           console.log(err);
           setError(getErrorMessage(err));
@@ -163,7 +163,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
     if (onCancel) {
       onCancel()
     } else {
-      navigate('/tournaments')
+      navigate('/')
     }
   }
 
@@ -172,13 +172,6 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)} style={{ display: "block", padding: "10px" }}>
       <Grid container columnSpacing={1}>
-        <Grid item xs={12}>
-
-          <Typography  variant="h5" sx={{ mb: 2 }}>
-            <EmojiEventsIcon sx={{ position: 'relative', top: 3, mr: 1 }} />
-            {tournament ? 'Edit Tournament' : 'Add New Tournament' }
-          </Typography>
-        </Grid>
         {isLoading &&
           <Grid item xs={12} sx={{ mb: 2 }}>
             <Box sx={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "center", alignItems: "center" }}>
@@ -190,17 +183,46 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
 
         {!isLoading &&
           <>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12}>
+              <Typography variant="h6" sx={{ mb: 2 }}>Details</Typography>
+            </Grid>
+
+            <Grid item xs={12} md={5}>
               <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
                 label="Tournament Name"
                 name="name"
                 rules={{ required: true }}
-                control={formActions.control}
+                  control={formActions.control}
                 disabled={isSaving}
                 size="small"
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+
+
+            <Grid item xs={6} md={2}>
+              <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
+                label="Buy-In"
+                name="buyIn"
+                control={formActions.control}
+                disabled={isSaving}
+                size="small"
+                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+              />
+            </Grid>
+
+            <Grid item xs={6} md={2}>
+              <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
+                label="Total Prize"
+                name="totalPrize"
+                rules={{ required: true }}
+                control={formActions.control}
+                disabled={isSaving}
+                size="small"
+                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
               <DatePicker
                 name="date"
                 label="Data"
@@ -214,10 +236,15 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                 sx={{ mb: 2 }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Divider sx={{ mt: 4, mb: 2 }} />
+            </Grid>
 
             <Grid item xs={12}>
               <Typography variant="h6" sx={{ mt: 2 }}>Players</Typography>
             </Grid>
+
+
 
             <Grid item xs={12}>
               <List>
@@ -281,6 +308,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                         disabled={isSaving}
                         size="small"
                         sx={{ ml: 1 }}
+                        InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                       />
 
                       <TextField variant="filled" type="text"
@@ -290,6 +318,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                         disabled={isSaving}
                         size="small"
                         sx={{ ml: 1 }}
+                        InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                       />
 
                     </ListItem>
@@ -309,7 +338,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                 <Button variant="contained" color="neutral" onClick={handleOnCancel}>Cancel</Button>
                 {tournament &&
                   <ButtonWithSpinner variant="contained" onClick={handleDeleteItem} sx={{ mr: 1 }} color="neutral" disabled={isSaving}>
-                    Apagar Trade
+                    Delete
                   </ButtonWithSpinner>
                 }
 

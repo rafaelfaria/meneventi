@@ -16,6 +16,7 @@ import Logout from '../ui/pages/auth/Logout';
 // pages
 const FourOFour = Loadable(lazy(() => import('../ui/pages/404')));
 const Home = Loadable(lazy(() => import('../ui/pages/Home')));
+const TournamentForm = Loadable(lazy(() => import('../ui/pages/TournamentForm')));
 
 // admin
 const AdminUsers = Loadable(lazy(() => import('../ui/pages/admin/AdminUsers')));
@@ -32,7 +33,9 @@ export default function ThemeRoutes() {
           path: '/',
           element: <MainLayout />,
           children: [
-            { path: '/', element: <Home /> }
+            { path: '/', element: <Home /> },
+            { path: '/tournament/new', element: <TournamentForm /> },
+            { path: '/tournament/:id', element: <TournamentForm /> },
           ]
         }
       ]

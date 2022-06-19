@@ -12,7 +12,7 @@ type Props = {
 
 const Title: React.FC<Props> = ({ icon: Icon, title, link, children, sx }) => {
   return (
-    <Box sx={[{ minHeight: '80px' }, sx]}>
+    <Box sx={[{ minHeight: '40px' }, sx]}>
       <Stack flexDirection="row" alignItems="center">
         <Icon sx={{ color: '#FFFFFF', mr: 1 }} fontSize="medium" />
         <ConditionalLink to={link} condition={link}>

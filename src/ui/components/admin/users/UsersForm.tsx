@@ -12,6 +12,8 @@ import useAuth from '../../../../hooks/useAuth';
 import useToastNotification from "../../../../hooks/useToastNotification";
 import { getInitials } from "../../../../lib/helpers/user";
 import useConfirm from "../../../../hooks/useConfirm";
+import Title from "../../Title";
+import UsersIcon from '@mui/icons-material/People';
 
 type FormData = User;
 
@@ -114,10 +116,10 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
 
       if (user) {
         await saveUser(user.username, formattedData);
-        showSuccessNotification('User saved successfully');
+        showSuccessNotification('Player saved successfully');
       } else {
         const resp = await createUser(formattedData);
-        showSuccessNotification('Usuário criado com sucesso');
+        showSuccessNotification('Player created successfully!');
         if (onCancel) {
           onCancel();
         } else {
@@ -142,7 +144,6 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)} style={{ display: "block", padding: "10px" }}>
-      <Container maxWidth="lg">
         <Grid container columnSpacing={2} sx={{ mt: 2 }}>
           {(isLoading) &&
             <Grid item xs={12} sx={{ mb: 2 }}>
@@ -165,15 +166,15 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
                     </Stack>
                   </Stack>
                 </Grid>
-                :
-                <Grid item xs={12}>
-                  <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>Adicionar Usuário</Typography>
-                </Grid>
+                : null
+                // <Grid item xs={12}>
+                //   <Title title={user ? 'Edit Player' : 'Add Player' } icon={UsersIcon} />
+                // </Grid>
               }
 
               <Grid item xs={12}>
                 <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
-                  label="Nome"
+                  label="Name"
                   name="name"
                   rules={{ required: true }}
                   control={formActions.control}
@@ -204,15 +205,13 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
                   }
 
                   <ButtonWithSpinner type="submit" variant="contained" showSpinner={isSaving} sx={{ mt: 3, mb: 3 }}>
-                    {user ? 'Salvar Usuário' : 'Criar Usuário'}
+                    {user ? 'Save' : 'Create'}
                   </ButtonWithSpinner>
                 </Stack>
               </Grid>
             </>
           }
-
         </Grid>
-      </Container>
     </form>
   );
 }

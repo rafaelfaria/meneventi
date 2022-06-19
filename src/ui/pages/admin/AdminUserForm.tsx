@@ -14,23 +14,16 @@ export default function AdminUsersForm() {
   const [ state, actions ] = useUser(params.id, { list: false });
 console.log({ state })
   return (
-    <Page title="Admin | Users">
+    <Page title="Admin | Players">
 
       <Grid container spacing={0} columnSpacing={4}>
 
         <Grid item xs={12} md={4}>
-          {/* Page Title */}
-          {/* ********************************************************************* */}
-          <Title title="Users" icon={UsersIcon} link="/admin/users" />
+          <Title title="Players" icon={UsersIcon} link="/admin/users" />
         </Grid>
 
         <Grid item xs={12} md={12}>
-
-          {/* Form */}
-          {/* ********************************************************************* */}
-          <FormBody>
-            <UsersForm state={state} actions={actions} user={state.user} isLoading={state.isLoadingUser} />
-          </FormBody>
+          <UsersForm state={state} actions={actions} user={state.user} isLoading={state.isLoadingUser} />
         </Grid>
       </Grid>
     </Page>
