@@ -2,21 +2,22 @@ import { Modal, Fab, Popover, Paper, Box, List, ListItem, ListItemButton, ListIt
 import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import useRepository from "../../hooks/useRepository";
 import useApp from "../../hooks/useApp";
 import UsersForm from "./admin/users/UsersForm";
 import useUser from "../../hooks/useUsers";
+import TournamentForm from "./TournamentForm";
 
 export default function ActionsButton() {
   const [ openTournamentModal, setOpenTournamentModal ] = useState<boolean>(false);
   const [ openUserModal, setOpenUserModal ] = useState<boolean>(false);
 
+  const { tournamentsRepository } = useApp();
+  const [ tournamentState, tournamentActions ] = useRepository(tournamentsRepository);
   const [ userState, userActions ] = useUser();
 
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClosePopover = () => {
@@ -73,7 +74,7 @@ export default function ActionsButton() {
                   <ListItemIcon>
                     <EmojiEventsIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Add Tournament"  />
+                  <ListItemText primary="Add tournament"  />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
@@ -81,7 +82,7 @@ export default function ActionsButton() {
                   <ListItemIcon>
                     <GroupAddIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Add user"  />
+                  <ListItemText primary="Add player"  />
                 </ListItemButton>
               </ListItem>
             </List>
@@ -93,29 +94,27 @@ export default function ActionsButton() {
       </Fab>
 
       <Modal open={openUserModal} onClose={handleCloseUserModal}>
-        <FloatBox sx={{ p: 3 }} component={Paper}>
+        <FloatBox sx={{ p: 1 }} component={Paper}>
           <UsersForm state={userState} actions={userActions} onCancel={handleCloseUserModal} />
         </FloatBox>
       </Modal>
 
       <Modal open={openTournamentModal} onClose={handleCloseTournamentModal}>
-        <FloatBox sx={{ p: 3 }} component={Paper}>
-          TESTE
-          {/* <TournamentsFormSimple title="Tournaments Rapidos" initialData={initialData} onCreated={handleCloseTournamentModal} /> */}
+        <FloatBox sx={{ p: 1 }} component={Paper}>
+          <TournamentForm state={tournamentState} actions={tournamentActions} onCancel={handleCloseTournamentModal} />
         </FloatBox>
       </Modal>
     </>
   );
 }
 
-const FloatBox = styled(Box)(({ theme }) => ({
+const FloatBox = styled(Box)(() => ({
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  maxWidth: '95%',
+  width: '100%',
+  height: '100%',
   padding: 0,
-  [theme.breakpoints.up('md')]: {
-    minWidth: '800px',
-  }
+  overflow: 'auto'
 }));

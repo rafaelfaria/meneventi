@@ -43,121 +43,6 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
-export const getTeam = /* GraphQL */ `
-  query GetTeam($id: ID!) {
-    getTeam(id: $id) {
-      id
-      name
-      users {
-        email
-        name
-        photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listTeams = /* GraphQL */ `
-  query ListTeams(
-    $filter: ModelTeamFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
 export const getTournament = /* GraphQL */ `
   query GetTournament($id: ID!) {
     getTournament(id: $id) {
@@ -165,56 +50,15 @@ export const getTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -234,48 +78,15 @@ export const listTournaments = /* GraphQL */ `
         name
         date
         totalPrize
+        buyIn
         leaderboard {
           place
-          userID
-          prize
-        }
-        teamID
-        team {
-          id
+          username
+          email
           name
-          users {
-            email
-            name
-            photo
-          }
-          tournament {
-            items {
-              id
-              name
-              date
-              totalPrize
-              leaderboard {
-                place
-                userID
-                prize
-              }
-              teamID
-              team {
-                id
-                name
-                createdAt
-                updatedAt
-                owner
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
+          photo
+          buyIn
+          prize
         }
         createdAt
         updatedAt

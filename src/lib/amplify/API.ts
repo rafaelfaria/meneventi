@@ -75,86 +75,22 @@ export type DeleteUserInput = {
   username: string,
 };
 
-export type CreateTeamInput = {
-  id?: string | null,
-  name: string,
-  users?: Array< UserSimpleInput | null > | null,
-};
-
-export type UserSimpleInput = {
-  email: string,
-  name: string,
-  photo?: string | null,
-};
-
-export type ModelTeamConditionInput = {
-  name?: ModelStringInput | null,
-  and?: Array< ModelTeamConditionInput | null > | null,
-  or?: Array< ModelTeamConditionInput | null > | null,
-  not?: ModelTeamConditionInput | null,
-};
-
-export type Team = {
-  __typename: "Team",
-  id: string,
-  name: string,
-  users?:  Array<UserSimple | null > | null,
-  tournament?: ModelTournamentConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type UserSimple = {
-  __typename: "UserSimple",
-  email: string,
-  name: string,
-  photo?: string | null,
-};
-
-export type ModelTournamentConnection = {
-  __typename: "ModelTournamentConnection",
-  items:  Array<Tournament | null >,
-  nextToken?: string | null,
-};
-
-export type Tournament = {
-  __typename: "Tournament",
-  id: string,
-  name?: string | null,
-  date: string,
-  totalPrize?: number | null,
-  leaderboard?:  Array<TornamentLeaderboard | null > | null,
-  teamID: string,
-  team?: Team | null,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type TornamentLeaderboard = {
-  __typename: "TornamentLeaderboard",
-  place: number,
-  userID: string,
-  prize?: number | null,
-};
-
-export type DeleteTeamInput = {
-  id: string,
-};
-
 export type CreateTournamentInput = {
   id?: string | null,
   name?: string | null,
-  date: string,
+  date?: string | null,
   totalPrize?: number | null,
-  leaderboard?: Array< TornamentLeaderboardInput | null > | null,
-  teamID: string,
+  buyIn?: number | null,
+  leaderboard?: Array< TournamentLeaderboardInput | null > | null,
 };
 
-export type TornamentLeaderboardInput = {
-  place: number,
-  userID: string,
+export type TournamentLeaderboardInput = {
+  place?: number | null,
+  username?: string | null,
+  email?: string | null,
+  name?: string | null,
+  photo?: string | null,
+  buyIn?: number | null,
   prize?: number | null,
 };
 
@@ -162,7 +98,7 @@ export type ModelTournamentConditionInput = {
   name?: ModelStringInput | null,
   date?: ModelStringInput | null,
   totalPrize?: ModelFloatInput | null,
-  teamID?: ModelIDInput | null,
+  buyIn?: ModelIntInput | null,
   and?: Array< ModelTournamentConditionInput | null > | null,
   or?: Array< ModelTournamentConditionInput | null > | null,
   not?: ModelTournamentConditionInput | null,
@@ -180,20 +116,40 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
+};
+
+export type Tournament = {
+  __typename: "Tournament",
+  id: string,
+  name?: string | null,
+  date?: string | null,
+  totalPrize?: number | null,
+  buyIn?: number | null,
+  leaderboard?:  Array<TournamentLeaderboard | null > | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type TournamentLeaderboard = {
+  __typename: "TournamentLeaderboard",
+  place?: number | null,
+  username?: string | null,
+  email?: string | null,
+  name?: string | null,
+  photo?: string | null,
+  buyIn?: number | null,
+  prize?: number | null,
 };
 
 export type DeleteTournamentInput = {
@@ -208,19 +164,13 @@ export type UpdateUserInput = {
   photo?: string | null,
 };
 
-export type UpdateTeamInput = {
-  id: string,
-  name?: string | null,
-  users?: Array< UserSimpleInput | null > | null,
-};
-
 export type UpdateTournamentInput = {
   id: string,
   name?: string | null,
   date?: string | null,
   totalPrize?: number | null,
-  leaderboard?: Array< TornamentLeaderboardInput | null > | null,
-  teamID?: string | null,
+  buyIn?: number | null,
+  leaderboard?: Array< TournamentLeaderboardInput | null > | null,
 };
 
 export type ModelUserFilterInput = {
@@ -246,29 +196,37 @@ export type ModelUserConnection = {
   nextToken?: string | null,
 };
 
-export type ModelTeamFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  and?: Array< ModelTeamFilterInput | null > | null,
-  or?: Array< ModelTeamFilterInput | null > | null,
-  not?: ModelTeamFilterInput | null,
-};
-
-export type ModelTeamConnection = {
-  __typename: "ModelTeamConnection",
-  items:  Array<Team | null >,
-  nextToken?: string | null,
-};
-
 export type ModelTournamentFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   date?: ModelStringInput | null,
   totalPrize?: ModelFloatInput | null,
-  teamID?: ModelIDInput | null,
+  buyIn?: ModelIntInput | null,
   and?: Array< ModelTournamentFilterInput | null > | null,
   or?: Array< ModelTournamentFilterInput | null > | null,
   not?: ModelTournamentFilterInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelTournamentConnection = {
+  __typename: "ModelTournamentConnection",
+  items:  Array<Tournament | null >,
+  nextToken?: string | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -307,150 +265,6 @@ export type DeleteUserMutation = {
   } | null,
 };
 
-export type CreateTeamMutationVariables = {
-  input: CreateTeamInput,
-  condition?: ModelTeamConditionInput | null,
-};
-
-export type CreateTeamMutation = {
-  createTeam?:  {
-    __typename: "Team",
-    id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
-      photo?: string | null,
-    } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type DeleteTeamMutationVariables = {
-  input: DeleteTeamInput,
-  condition?: ModelTeamConditionInput | null,
-};
-
-export type DeleteTeamMutation = {
-  deleteTeam?:  {
-    __typename: "Team",
-    id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
-      photo?: string | null,
-    } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
 export type CreateTournamentMutationVariables = {
   input: CreateTournamentInput,
   condition?: ModelTournamentConditionInput | null,
@@ -461,68 +275,19 @@ export type CreateTournamentMutation = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -539,68 +304,19 @@ export type DeleteTournamentMutation = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -625,78 +341,6 @@ export type UpdateUserMutation = {
   } | null,
 };
 
-export type UpdateTeamMutationVariables = {
-  input: UpdateTeamInput,
-  condition?: ModelTeamConditionInput | null,
-};
-
-export type UpdateTeamMutation = {
-  updateTeam?:  {
-    __typename: "Team",
-    id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
-      photo?: string | null,
-    } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
 export type UpdateTournamentMutationVariables = {
   input: UpdateTournamentInput,
   condition?: ModelTournamentConditionInput | null,
@@ -707,68 +351,19 @@ export type UpdateTournamentMutation = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -817,143 +412,6 @@ export type ListUsersQuery = {
   } | null,
 };
 
-export type GetTeamQueryVariables = {
-  id: string,
-};
-
-export type GetTeamQuery = {
-  getTeam?:  {
-    __typename: "Team",
-    id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
-      photo?: string | null,
-    } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListTeamsQueryVariables = {
-  filter?: ModelTeamFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListTeamsQuery = {
-  listTeams?:  {
-    __typename: "ModelTeamConnection",
-    items:  Array< {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetTournamentQueryVariables = {
   id: string,
 };
@@ -963,68 +421,19 @@ export type GetTournamentQuery = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1044,58 +453,19 @@ export type ListTournamentsQuery = {
       __typename: "Tournament",
       id: string,
       name?: string | null,
-      date: string,
+      date?: string | null,
       totalPrize?: number | null,
+      buyIn?: number | null,
       leaderboard?:  Array< {
-        __typename: "TornamentLeaderboard",
-        place: number,
-        userID: string,
+        __typename: "TournamentLeaderboard",
+        place?: number | null,
+        username?: string | null,
+        email?: string | null,
+        name?: string | null,
+        photo?: string | null,
+        buyIn?: number | null,
         prize?: number | null,
       } | null > | null,
-      teamID: string,
-      team?:  {
-        __typename: "Team",
-        id: string,
-        name: string,
-        users?:  Array< {
-          __typename: "UserSimple",
-          email: string,
-          name: string,
-          photo?: string | null,
-        } | null > | null,
-        tournament?:  {
-          __typename: "ModelTournamentConnection",
-          items:  Array< {
-            __typename: "Tournament",
-            id: string,
-            name?: string | null,
-            date: string,
-            totalPrize?: number | null,
-            leaderboard?:  Array< {
-              __typename: "TornamentLeaderboard",
-              place: number,
-              userID: string,
-              prize?: number | null,
-            } | null > | null,
-            teamID: string,
-            team?:  {
-              __typename: "Team",
-              id: string,
-              name: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null >,
-          nextToken?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1104,213 +474,72 @@ export type ListTournamentsQuery = {
   } | null,
 };
 
-export type OnCreateTeamSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateTeamSubscription = {
-  onCreateTeam?:  {
-    __typename: "Team",
+export type OnCreateTournamentPublicSubscription = {
+  onCreateTournamentPublic?:  {
+    __typename: "Tournament",
     id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
+    name?: string | null,
+    date?: string | null,
+    totalPrize?: number | null,
+    buyIn?: number | null,
+    leaderboard?:  Array< {
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
       photo?: string | null,
+      buyIn?: number | null,
+      prize?: number | null,
     } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
   } | null,
 };
 
-export type OnUpdateTeamSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateTeamSubscription = {
-  onUpdateTeam?:  {
-    __typename: "Team",
+export type OnUpdateTournamentPublicSubscription = {
+  onUpdateTournamentPublic?:  {
+    __typename: "Tournament",
     id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
+    name?: string | null,
+    date?: string | null,
+    totalPrize?: number | null,
+    buyIn?: number | null,
+    leaderboard?:  Array< {
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
       photo?: string | null,
+      buyIn?: number | null,
+      prize?: number | null,
     } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
   } | null,
 };
 
-export type OnDeleteTeamSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteTeamSubscription = {
-  onDeleteTeam?:  {
-    __typename: "Team",
+export type OnDeleteTournamentPublicSubscription = {
+  onDeleteTournamentPublic?:  {
+    __typename: "Tournament",
     id: string,
-    name: string,
-    users?:  Array< {
-      __typename: "UserSimple",
-      email: string,
-      name: string,
+    name?: string | null,
+    date?: string | null,
+    totalPrize?: number | null,
+    buyIn?: number | null,
+    leaderboard?:  Array< {
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
       photo?: string | null,
+      buyIn?: number | null,
+      prize?: number | null,
     } | null > | null,
-    tournament?:  {
-      __typename: "ModelTournamentConnection",
-      items:  Array< {
-        __typename: "Tournament",
-        id: string,
-        name?: string | null,
-        date: string,
-        totalPrize?: number | null,
-        leaderboard?:  Array< {
-          __typename: "TornamentLeaderboard",
-          place: number,
-          userID: string,
-          prize?: number | null,
-        } | null > | null,
-        teamID: string,
-        team?:  {
-          __typename: "Team",
-          id: string,
-          name: string,
-          users?:  Array< {
-            __typename: "UserSimple",
-            email: string,
-            name: string,
-            photo?: string | null,
-          } | null > | null,
-          tournament?:  {
-            __typename: "ModelTournamentConnection",
-            items:  Array< {
-              __typename: "Tournament",
-              id: string,
-              name?: string | null,
-              date: string,
-              totalPrize?: number | null,
-              teamID: string,
-              createdAt: string,
-              updatedAt: string,
-              owner?: string | null,
-            } | null >,
-            nextToken?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1326,68 +555,19 @@ export type OnCreateTournamentSubscription = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1403,68 +583,19 @@ export type OnUpdateTournamentSubscription = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1480,68 +611,19 @@ export type OnDeleteTournamentSubscription = {
     __typename: "Tournament",
     id: string,
     name?: string | null,
-    date: string,
+    date?: string | null,
     totalPrize?: number | null,
+    buyIn?: number | null,
     leaderboard?:  Array< {
-      __typename: "TornamentLeaderboard",
-      place: number,
-      userID: string,
+      __typename: "TournamentLeaderboard",
+      place?: number | null,
+      username?: string | null,
+      email?: string | null,
+      name?: string | null,
+      photo?: string | null,
+      buyIn?: number | null,
       prize?: number | null,
     } | null > | null,
-    teamID: string,
-    team?:  {
-      __typename: "Team",
-      id: string,
-      name: string,
-      users?:  Array< {
-        __typename: "UserSimple",
-        email: string,
-        name: string,
-        photo?: string | null,
-      } | null > | null,
-      tournament?:  {
-        __typename: "ModelTournamentConnection",
-        items:  Array< {
-          __typename: "Tournament",
-          id: string,
-          name?: string | null,
-          date: string,
-          totalPrize?: number | null,
-          leaderboard?:  Array< {
-            __typename: "TornamentLeaderboard",
-            place: number,
-            userID: string,
-            prize?: number | null,
-          } | null > | null,
-          teamID: string,
-          team?:  {
-            __typename: "Team",
-            id: string,
-            name: string,
-            users?:  Array< {
-              __typename: "UserSimple",
-              email: string,
-              name: string,
-              photo?: string | null,
-            } | null > | null,
-            tournament?:  {
-              __typename: "ModelTournamentConnection",
-              nextToken?: string | null,
-            } | null,
-            createdAt: string,
-            updatedAt: string,
-            owner?: string | null,
-          } | null,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null >,
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,

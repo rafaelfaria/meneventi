@@ -25,14 +25,35 @@ type Tournament @model
 {
   id: ID!
   name: String
-  date: AWSDate!
+  date: AWSDateTime
   totalPrize: Float
   buyIn: Int
-  leaderboard: [TornamentLeaderboard]
+  leaderboard: [TournamentLeaderboard]
 }
 
-type TornamentLeaderboard {
-  place: Int!
-  userID: String!
+type TournamentLeaderboard {
+  place: Int
+  username: String
+  email: String
+  name: String
+  photo: String
+  buyIn: Float
   prize: Float
+}
+
+
+type Subscription {
+  onCreateTournamentPublic: Tournament
+      @aws_subscribe(mutations: ["createTournament"])
+      @aws_iam
+      @aws_cognito_user_pools
+  onUpdateTournamentPublic: Tournament
+      @aws_subscribe(mutations: ["updateTournament"])
+      @aws_iam
+      @aws_cognito_user_pools
+  onDeleteTournamentPublic: Tournament
+      @aws_subscribe(mutations: ["deleteTournament"])
+      @aws_iam
+      @aws_cognito_user_pools
+
 }

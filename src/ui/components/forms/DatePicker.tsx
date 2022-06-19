@@ -10,6 +10,7 @@ const DatePickerComponent =  ({
   control,
   rules,
   error,
+  size,
   ...inputProps
 }: any) => {
 
@@ -24,7 +25,7 @@ const DatePickerComponent =  ({
               <DatePicker
               label={label}
               clearable
-              renderInput={(params) => <TextField {...params} variant="filled" />}
+              renderInput={(params) => <TextField {...params} size={size} variant="filled" /> }
               error={Boolean(fieldState.invalid)}
               helperText={fieldState.error?.message}
               {...inputProps}

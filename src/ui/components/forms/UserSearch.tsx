@@ -1,5 +1,5 @@
-import { memo, useState } from 'react';
-import { Avatar, FormControl, ListItemText, Stack, Typography } from '@mui/material';
+import { memo, useEffect, useState } from 'react';
+import { Avatar, Box, CircularProgress, FormControl, ListItemText, Stack, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from './TextField';
 import { User } from '../../../lib/amplify/API';
@@ -10,21 +10,31 @@ const UserSearch =  ({
   options,
   variant = 'filled',
   onChange,
+  selectedValue,
   selectedItems,
+  isLoading,
+  InputProps,
   ...inputProps
 }: any) => {
 
-  const [ value, setValue ] = useState<string | null>(null);
+  const [ value, setValue ] = useState<string | null | undefined>(null);
 
+  useEffect(() => {
+    console.log({selectedValue })
+    setValue(selectedValue);
+  }, [selectedValue])
 
   return (
-    <FormControl sx={{ minWidth: 120 }} fullWidth>
+    <FormControl sx={{ minWidth: 120, flexGrow: 1 }}>
       <Autocomplete
           {...inputProps}
           options={options}
           onChange={(_, item) => { onChange(item); }}
           onClose={() =>  setValue(null)}
-          getOptionLabel={(option:User) => `${option.name} (${option.email})`}
+          getOptionLabel={(option:User) => `${option.name || ''}`}
+          isOptionEqualToValue={(option: User, value: User) => {
+            return (option.username === value.username)
+          }}
           renderOption={(props: any, option: User) => {
             return (
               <ListItemText
@@ -46,14 +56,19 @@ const UserSearch =  ({
           popupIcon={null}
           value={value}
           filterOptions={(options: User[]) => (options || []).filter((option: User) => !(selectedItems || []).map((item: Partial<User>) => item.username).includes(option.username))}
-          noOptionsText="Nenhum resultado encontrado"
+          noOptionsText="No match"
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label={label}
-              placeholder={placeholder}
-              variant={variant}
-            />
+            <Box position="relative">
+              {isLoading ?  <CircularProgress sx={{ position: 'absolute', zIndex: 1, top: 15, right: 10 }} size={20} /> : null }
+              <TextField
+                {...params}
+                label={label}
+                placeholder={placeholder}
+                variant={variant}
+                disabled={isLoading}
+                {...InputProps}
+              />
+            </Box>
           )}
         />
     </FormControl>

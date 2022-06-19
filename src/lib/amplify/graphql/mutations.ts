@@ -34,130 +34,6 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
-export const createTeam = /* GraphQL */ `
-  mutation CreateTeam(
-    $input: CreateTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    createTeam(input: $input, condition: $condition) {
-      id
-      name
-      users {
-        email
-        name
-        photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteTeam = /* GraphQL */ `
-  mutation DeleteTeam(
-    $input: DeleteTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    deleteTeam(input: $input, condition: $condition) {
-      id
-      name
-      users {
-        email
-        name
-        photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
 export const createTournament = /* GraphQL */ `
   mutation CreateTournament(
     $input: CreateTournamentInput!
@@ -168,56 +44,15 @@ export const createTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -235,56 +70,15 @@ export const deleteTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -308,68 +102,6 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
-export const updateTeam = /* GraphQL */ `
-  mutation UpdateTeam(
-    $input: UpdateTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    updateTeam(input: $input, condition: $condition) {
-      id
-      name
-      users {
-        email
-        name
-        photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
 export const updateTournament = /* GraphQL */ `
   mutation UpdateTournament(
     $input: UpdateTournamentInput!
@@ -380,56 +112,15 @@ export const updateTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt

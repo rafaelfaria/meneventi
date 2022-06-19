@@ -34,7 +34,7 @@ const Dropdown =  ({
                   {...rest}
                   value={rest.value || (inputProps.multiple ? [] : '')}
                 >
-                  {options?.map((option: any, index: any) => {
+                  {options?.map((option: any) => {
                       return (
                         <MenuItem key={option.value} value={option.value}>
                           {checkbox && <Checkbox checked={(rest.value || []).indexOf(option.value) > -1} />}

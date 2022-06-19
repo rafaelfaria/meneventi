@@ -2,58 +2,22 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTeam = /* GraphQL */ `
-  subscription OnCreateTeam($owner: String) {
-    onCreateTeam(owner: $owner) {
+export const onCreateTournamentPublic = /* GraphQL */ `
+  subscription OnCreateTournamentPublic {
+    onCreateTournamentPublic {
       id
       name
-      users {
+      date
+      totalPrize
+      buyIn
+      leaderboard {
+        place
+        username
         email
         name
         photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -61,58 +25,22 @@ export const onCreateTeam = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateTeam = /* GraphQL */ `
-  subscription OnUpdateTeam($owner: String) {
-    onUpdateTeam(owner: $owner) {
+export const onUpdateTournamentPublic = /* GraphQL */ `
+  subscription OnUpdateTournamentPublic {
+    onUpdateTournamentPublic {
       id
       name
-      users {
+      date
+      totalPrize
+      buyIn
+      leaderboard {
+        place
+        username
         email
         name
         photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -120,58 +48,22 @@ export const onUpdateTeam = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteTeam = /* GraphQL */ `
-  subscription OnDeleteTeam($owner: String) {
-    onDeleteTeam(owner: $owner) {
+export const onDeleteTournamentPublic = /* GraphQL */ `
+  subscription OnDeleteTournamentPublic {
+    onDeleteTournamentPublic {
       id
       name
-      users {
+      date
+      totalPrize
+      buyIn
+      leaderboard {
+        place
+        username
         email
         name
         photo
-      }
-      tournament {
-        items {
-          id
-          name
-          date
-          totalPrize
-          leaderboard {
-            place
-            userID
-            prize
-          }
-          teamID
-          team {
-            id
-            name
-            users {
-              email
-              name
-              photo
-            }
-            tournament {
-              items {
-                id
-                name
-                date
-                totalPrize
-                teamID
-                createdAt
-                updatedAt
-                owner
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -186,56 +78,15 @@ export const onCreateTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -250,56 +101,15 @@ export const onUpdateTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt
@@ -314,56 +124,15 @@ export const onDeleteTournament = /* GraphQL */ `
       name
       date
       totalPrize
+      buyIn
       leaderboard {
         place
-        userID
-        prize
-      }
-      teamID
-      team {
-        id
+        username
+        email
         name
-        users {
-          email
-          name
-          photo
-        }
-        tournament {
-          items {
-            id
-            name
-            date
-            totalPrize
-            leaderboard {
-              place
-              userID
-              prize
-            }
-            teamID
-            team {
-              id
-              name
-              users {
-                email
-                name
-                photo
-              }
-              tournament {
-                nextToken
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
+        photo
+        buyIn
+        prize
       }
       createdAt
       updatedAt
