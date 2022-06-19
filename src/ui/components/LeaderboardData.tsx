@@ -1,3 +1,4 @@
+import { Avatar, Stack, Typography } from '@mui/material';
 import { Leaderboard } from '../../hooks/useTournaments';
 
 const columnData = () => {
@@ -20,7 +21,12 @@ const columnData = () => {
         disablePadding: false
       },
       render: (rowData:Leaderboard) => {
-        return rowData.player;
+        return (
+          <Stack flexDirection="row">
+            <Avatar src={rowData.player.photo as string} alt={rowData.player.name} sx={{ width: 25, height: 25, fontSize: 20, mr: 1 }}>{rowData.player.initials}</Avatar>
+            <Typography>{rowData.player.name}</Typography>
+          </Stack>
+        )
       },
     },
     {
