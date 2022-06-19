@@ -14,7 +14,7 @@ export default function ResetPassword() {
   const [ userEmail, setUserEmail ] = useState<string>('');
   const [ obfuscatedEmail, setObfuscatedEmail ] = useState<string>('');
   const [ step, setNextStep ] = useState<string>('reset');
-  const [ title, setTitle ] = useState<string>('Esqueceu sua senha?');
+  const [ title, setTitle ] = useState<string>('Forgot your password?');
 
 	/**
 	 * General function for all the forms to be called after being submited

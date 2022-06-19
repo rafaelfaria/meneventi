@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import useAuth from '../../hooks/useAuth';
 
 type Props = {
   data: Partial<Tournament>;
@@ -13,6 +14,7 @@ type Props = {
 
 export default function TournamentCard({ data }: Props) {
 
+  const { authUser } = useAuth();
   const navigate = useNavigate();
 
   const date = new Date(data.date || new Date())
@@ -23,24 +25,25 @@ export default function TournamentCard({ data }: Props) {
 
   return (
     <>
-      <Card sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => setOpenTournamentModal(true)}>
-        <Box position="relative">
+      <Card sx={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }} onClick={() => setOpenTournamentModal(true)}>
+        <Box position="relative" sx={{ pl: 1 }}>
           <Box textAlign="center" sx={{
             color: '#000',
             position: 'absolute',
             top: '50%',
             left: '50%',
-            width: '60px',
-            height: '60px',
+            width: '80px',
+            height: '80px',
             transform: 'translate(-50%, -50%)',
-            paddingTop: '10px'
+            paddingTop: '20px',
+            paddingLeft: '8px'
           }}>
             <Typography variant="body1" sx={{ fontSize: '20px', lineHeight: 1 }}>{day}</Typography>
             <Typography variant="body1">{month}</Typography>
           </Box>
           <CardMedia
             component="img"
-            sx={{ width: 80, pt: 1 }}
+            sx={{ width: 80 }}
             image={Chip}
             alt={`${day} ${month}`}
           />
@@ -55,13 +58,16 @@ export default function TournamentCard({ data }: Props) {
             </Typography>
           </CardContent>
         </Box>
-        <Box sx={{ width: '100px' }} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-          <Typography variant="body1" sx={{ color: '#CCC' }}>Prize</Typography>
+        <Box sx={{ width: '100px', display: { xs: 'none', md: 'flex' } }} flexDirection="column" justifyContent="center" alignItems="center">
+          <Typography variant="body1" sx={{ color: '#CCC' }}>Total Prize</Typography>
           <Typography variant="h6">${data.totalPrize}</Typography>
         </Box>
-        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-          <IconButton onClick={(e) => { e.stopPropagation(); navigate(`/tournament/${data.id}`); }}><MoreVertIcon /></IconButton>
-        </Box>
+        {authUser?.isAdmin ?
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+            <IconButton onClick={(e) => { e.stopPropagation(); navigate(`/tournament/${data.id}`); }}><MoreVertIcon /></IconButton>
+          </Box>
+          : null
+        }
       </Card>
       <Modal open={openTournamentModal} onClose={() => setOpenTournamentModal(false)}>
         <FloatBox sx={{ p: 1 }}>
@@ -104,7 +110,7 @@ const FloatBox = styled(Paper)(() => ({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '800px',
-  maxWidth: '100%',
+  maxWidth: '90%',
   padding: '15px',
   maxHeight: '480px',
   overflowY: 'auto'

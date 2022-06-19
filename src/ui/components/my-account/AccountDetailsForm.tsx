@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactLoading from 'react-loading';
-import { Box, Grid, InputAdornment, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import ButtonWithSpinner from '../ButtonWithSpinner';
 import { User } from '../../../lib/amplify/API';
 import TextField from '../forms/TextField';
 import { getErrorMessage } from '../../../lib/helpers';
 import { State as UserState, Actions as UserActions } from '../../../hooks/useUsers';
 import useToastNotification from '../../../hooks/useToastNotification';
-import DatePicker from '../forms/DatePicker';
 import { getInitials } from '../../../lib/helpers/user';
 import AccountPhoto from "./AccountPhoto";
-import { format, parseISO } from "date-fns";
-import LinearProgressWithLabel from "../LinearProgressWithLabel";
 
 type FormData = User;
 
@@ -115,7 +112,7 @@ export default function AccountDetailsForm({ state, actions, user, isLoading }: 
         {!isLoading &&
           <>
             <Grid item xs={12} md={3}>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
                 <AccountPhoto initials={userInitials} />
               </Box>
             </Grid>
