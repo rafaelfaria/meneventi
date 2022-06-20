@@ -26,7 +26,7 @@ const Branding = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   width: 'inherit',
-  padding: '22px 12px 22px 10px',
+  padding: '22px 12px 22px 22px',
   overflow: 'hidden',
   cursor: 'pointer'
 }));

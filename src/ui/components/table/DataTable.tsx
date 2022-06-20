@@ -169,7 +169,6 @@ export default function DataTable(props: DataTableProps) {
                     tabIndex={-1}
                     key={row[idProp]}
                     selected={isItemSelected || row[idProp] === highlightItem?.[idProp]}
-                    sx={{ backgroundColor: (index % 2) ? "#F4F5F9" : "transparent !important" }}
                   >
                     {!hideCheckbox &&
                       <TableCell padding="checkbox">
@@ -251,7 +250,19 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 }
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
+  '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.mode === 'dark' ? "#1f2028" : "#F4F5F9",
   },
+  '&:nth-of-type(even)': {
+    backgroundColor: 'transparent',
+  },
+  '&:hover': {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.mode === 'dark' ? "#1f2028" : "#F4F5F9",
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: 'transparent',
+    },
+  }
+
 }));
