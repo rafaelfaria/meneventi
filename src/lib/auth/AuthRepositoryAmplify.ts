@@ -91,6 +91,10 @@ export default class AuthRepositoryAmplify implements AuthRepositoryInterface {
           ) as CreateUserResult;
 
           user = userResponse.data?.createUser as User;
+        } else {
+          await this.userRepository.save(username, {
+            status: UserStatus.ACTIVE,
+          });
         }
 
        } catch (err) {
