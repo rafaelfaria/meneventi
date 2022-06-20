@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import ReactLoading from 'react-loading';
 import { Box, Button, Grid, Stack, Typography, Avatar } from '@mui/material';
 import ButtonWithSpinner from '../../ButtonWithSpinner';
-import { User } from "../../../../lib/amplify/API";
+import { User, UserStatus } from "../../../../lib/amplify/API";
 import TextField from '../../forms/TextField';
 import { getErrorMessage } from '../../../../lib/helpers';
 import { State, Actions } from '../../../../hooks/useUsers';
@@ -117,7 +117,7 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
         await saveUser(user.username, formattedData);
         showSuccessNotification('Player saved successfully');
       } else {
-        const resp = await createUser(formattedData);
+        const resp = await createUser({ ...formattedData, status: UserStatus.INACTIVE });
         showSuccessNotification('Player created successfully!');
         if (onCancel) {
           onCancel();

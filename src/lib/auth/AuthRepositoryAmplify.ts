@@ -1,6 +1,6 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
-import { User } from "../amplify/API";
+import { User, UserStatus } from "../amplify/API";
 import { createUser } from "../amplify/graphql/mutations";
 import { getErrorMessage } from "../helpers";
 import { getInitials } from "../helpers/user";
@@ -84,6 +84,7 @@ export default class AuthRepositoryAmplify implements AuthRepositoryInterface {
                 name: authUser.attributes.name,
                 email: authUser.attributes.email,
                 initials: getInitials(authUser.attributes.name),
+                status: UserStatus.ACTIVE,
                 ...extraParams
               }
             })

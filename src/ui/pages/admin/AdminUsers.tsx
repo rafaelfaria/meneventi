@@ -14,11 +14,11 @@ export default function AdminUsers() {
   const navigate = useNavigate();
 
   return (
-    <Page title="Admin | Users">
+    <Page title="Admin | Players">
       <Grid container spacing={0} columnSpacing={4}>
         <Grid item xs={12} md={12}>
           <Stack flexDirection="row">
-            <Title title="Users" icon={UsersIcon} link="/admin/users" />
+            <Title title="Players" icon={UsersIcon} link="/admin/users" />
             <Box display="flex" flexGrow={1} width="100%" justifyContent="flex-end">
               <Box>
                 <Button variant="contained" onClick={() => navigate('/admin/users/new')}>Add new user</Button>

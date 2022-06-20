@@ -20,7 +20,7 @@
       "function": {
         "MeneventiAuthCustomMessage": {
           "deploymentBucketName": "amplify-meneventi-prod-102802-deployment",
-          "s3Key": "amplify-builds/MeneventiAuthCustomMessage-5779502f4770344c652f-build.zip"
+          "s3Key": "amplify-builds/MeneventiAuthCustomMessage-62584f67416d6b7a3374-build.zip"
         },
         "AdminQueries73809dec": {
           "deploymentBucketName": "amplify-meneventi-prod-102802-deployment",

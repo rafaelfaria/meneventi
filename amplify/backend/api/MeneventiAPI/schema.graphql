@@ -12,6 +12,12 @@ type User @model(subscriptions: null)
   name: String!
   initials: String
   photo: String
+  status: UserStatus
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
 }
 
 type Tournament @model

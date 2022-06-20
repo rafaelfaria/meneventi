@@ -1,4 +1,4 @@
-const createUserTemplate = (event) => `
+const createUserTemplate = (event, userAttributes) => `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,11 +37,11 @@ const createUserTemplate = (event) => `
     /* End Old CSS */
 
     @media only screen and (max-width:640px){
-      .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
+      .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; clear: both;}
     }
 
     @media only screen and (max-width:480px){
-      .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
+      .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; clear: both;}
     }
 
     td ul{list-style: initial; margin:0; padding-left:20px;}
@@ -95,15 +95,15 @@ const createUserTemplate = (event) => `
         <!--END HEADER-->
         <!-- START ORDER-TABLE -->
         <tr>
-          <td valign="top" align="center" style="background-color: #ffffff; " bgcolor="#ffffff">
+          <td valign="top" style="background-color: #ffffff; " bgcolor="#ffffff">
             <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style="background-color: #ffffff; margin: 0px auto; width: 600px; min-width: 320px; max-width: 90%;" role="presentation">
               <tbody><tr>
                 <td valign="top" align="center">
-                  <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style="margin: 0px auto; width: 560px; min-width: 280px; max-width: 90%;" role="presentation">
+                  <table width="560" border="0" cellspacing="0" cellpadding="0" class="full-width" style="margin: 0px auto; width: 560px; min-width: 280px; max-width: 90%;" role="presentation">
                     <!-- start title -->
                     <tbody><tr>
                       <td valign="top">
-                        <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" style="margin: 0px auto; min-width: 100%;" role="presentation">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 0px auto; min-width: 100%;" role="presentation">
                           <!-- start space -->
                           <tbody>
                           <tr>
@@ -122,7 +122,7 @@ const createUserTemplate = (event) => `
                           <tr>
                             <td>
                               <span style="color: #4b4b60; text-decoration: none; font-style: normal; font-size: 16px; line-height: 19px; font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;">
-                                Hello 👋
+                                Hello ${userAttributes.name} 👋
                                 <br /><br />
                                 The Meneventi have the pleasure to welcome you to our platform.
                                 <br /><br />

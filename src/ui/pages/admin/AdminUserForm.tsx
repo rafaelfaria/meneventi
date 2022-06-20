@@ -4,7 +4,6 @@ import UsersIcon from '@mui/icons-material/People';
 import { useParams } from "react-router-dom";
 import Title from "../../components/Title";
 import UsersForm from "../../components/admin/users/UsersForm";
-import FormBody from "../../components/FormBody";
 import useUser from "../../../hooks/useUsers";
 
 export default function AdminUsersForm() {
@@ -12,7 +11,7 @@ export default function AdminUsersForm() {
   // Check if it's editing
   const params = useParams();
   const [ state, actions ] = useUser(params.id, { list: false });
-console.log({ state })
+
   return (
     <Page title="Admin | Players">
 
