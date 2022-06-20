@@ -99,10 +99,6 @@ const DataList = (props: DataListProps) => {
           }
         }
 
-        console.log('FINISHED')
-
-
-
         showSuccessNotification('Items apagados com sucesso!')
         setIsDeleting([]);
         return deletedIds.map((item: any) => item[idProp]);

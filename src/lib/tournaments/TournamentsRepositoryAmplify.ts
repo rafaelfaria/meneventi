@@ -86,7 +86,7 @@ export default class TournamentsRepositoryAmplify implements TournamentsReposito
     const items = [ ...(!results ? [] : results), ...data.listTournaments.items ] as Tournament[];
 
     if (!data.listTournaments.nextToken) {
-      return orderBy(items, ['createdAt'], ['desc'])
+      return orderBy(items, ['date', 'updatedAt'], ['desc', 'desc'])
     } else {
       return this.list({ ...params, nextToken: data.listTournaments.nextToken }, items) as Promise<Tournament[]>;
     }

@@ -10,7 +10,7 @@ const forgotPasswordTemplate = (event) => `
 <title>Meneventi</title>
 
 	<style type="text/css">
-    .ReadMsgBody { width: 100%; background-color: #ffffff;}
+     .ReadMsgBody { width: 100%; background-color: #ffffff;}
     .ExternalClass {width: 100%; background-color: #ffffff;}
     .ExternalClass, .ExternalClass p, .ExternalClass span,
     .ExternalClass font, .ExternalClass td, .ExternalClass tbody {line-height:100%;}
@@ -30,38 +30,26 @@ const forgotPasswordTemplate = (event) => `
 
     /* Start Old CSS */
     @media only screen and (max-width: 640px){
-      .container{width:95%!important; max-width:95%!important; min-width:95%!important;
-      padding-left:15px!important; padding-right:15px!important; text-align: center!important; clear: both;}
       .full-width{width:100%!important; max-width:100%!important; min-width:100%!important; clear: both;}
     }
     @media only screen and (max-width: 479px){
-      .container{width:95%!important; max-width:95%!important; min-width:124px!important;
-      padding-left:15px!important; padding-right:15px!important; text-align: center!important; clear: both;}
-      .full-width,.full-width-479{width:100%!important; max-width:100%!important; min-width:124px!important; clear: both;}
-      .full-width-center {width: 100%!important; max-width:100%!important; min-width:124px!important; text-align: center!important; clear: both; margin:0 auto; float:none;}
-      .full-block-479{display:block !important; clear: both; padding-top:10px; padding-bottom:10px; }
+      .full-width {width:100%!important; max-width:100%!important; min-width:124px!important; clear: both;}
       /* halper */
       img{max-width:280px !important;}
-      .resize-font, .resize-font *{font-size: 37px !important; line-height: 48px !important;}
     }
     /* End Old CSS */
 
     @media only screen and (max-width:640px){
       .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
-      .full-width.fix-800{min-width:auto!important;}
     }
 
     @media only screen and (max-width:480px){
       .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
-      .full-width.fix-800{min-width:auto!important;}
     }
 
     td ul{list-style: initial; margin:0; padding-left:20px;}
 
     body{background-color:#ffffff; margin: 0 auto !important; height:auto!important;}
-    tr.tpl-repeatblock , tr.tpl-repeatblock > td{ display:block !important;}
-    .tpl-repeatblock {padding: 0px !important;border: 1px dotted rgba(0,0,0,0.2); }
-
 
     *[x-apple-data-detectors], .unstyle-auto-detected-links *,
     .aBn{border-bottom: 0 !important; cursor: default !important;color: inherit !important; text-decoration: none !important;font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important;line-height: inherit !important;}
@@ -168,10 +156,11 @@ const forgotPasswordTemplate = (event) => `
                       </tr>
                     </tbody>
                   </table>
-
-
                 </td>
               </tr>
+              <tr>
+                <td valign="top" height="30" style="height: 30px; font-size: 0px; line-height: 0;" aria-hidden="true">&nbsp;</td>
+              </tr><!-- end space -->
 
             </tbody></table>
           </td>
@@ -182,8 +171,7 @@ const forgotPasswordTemplate = (event) => `
 
 </tbody></table></center>
 
-</body></html>
-`;
+</body></html>`;
 
 
 module.exports = {

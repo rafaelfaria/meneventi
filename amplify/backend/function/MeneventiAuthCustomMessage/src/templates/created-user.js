@@ -10,19 +10,15 @@ const createUserTemplate = (event) => `
 <title>Meneventi</title>
 
 	<style type="text/css">
-    .ReadMsgBody { width: 100%; background-color: #ffffff;}
     .ExternalClass {width: 100%; background-color: #ffffff;}
     .ExternalClass, .ExternalClass p, .ExternalClass span,
     .ExternalClass font, .ExternalClass td, .ExternalClass tbody {line-height:100%;}
-    #outlook a { padding:0;}
     html,body {margin: 0 auto !important; padding: 0 !important; height: 100% !important; width: 100% !important;}
     * {-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;}
     table,td {mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important;}
     table {border-spacing: 0 !important;}
     table table table {table-layout: auto;}
     a,span a{text-decoration: none !important;}
-    .yshortcuts, .yshortcuts a, .yshortcuts a:link,.yshortcuts a:visited,
-    .yshortcuts a:hover, .yshortcuts a span { text-decoration: none !important; border-bottom: none !important;}
 
     /*mailChimp class*/
     ul{padding-left:10px; margin:0;}
@@ -35,7 +31,6 @@ const createUserTemplate = (event) => `
     @media only screen and (max-width: 479px){
       .full-width,.full-width-479{width:100%!important; max-width:100%!important; min-width:124px!important; clear: both;}
       .full-width-center {width: 100%!important; max-width:100%!important; min-width:124px!important; text-align: center!important; clear: both; margin:0 auto; float:none;}
-      .full-block-479{display:block !important; clear: both; padding-top:10px; padding-bottom:10px; }
       /* halper */
       img{max-width:280px !important;}
     }
@@ -43,20 +38,15 @@ const createUserTemplate = (event) => `
 
     @media only screen and (max-width:640px){
       .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
-      .full-width.fix-800{min-width:auto!important;}
     }
 
     @media only screen and (max-width:480px){
       .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
-      .full-width.fix-800{min-width:auto!important;}
     }
 
     td ul{list-style: initial; margin:0; padding-left:20px;}
 
     body{background-color:#ffffff; margin: 0 auto !important; height:auto!important;}
-    tr.tpl-repeatblock , tr.tpl-repeatblock > td{ display:block !important;}
-    .tpl-repeatblock {padding: 0px !important;border: 1px dotted rgba(0,0,0,0.2); }
-
 
     *[x-apple-data-detectors], .unstyle-auto-detected-links *,
     .aBn{border-bottom: 0 !important; cursor: default !important;color: inherit !important; text-decoration: none !important;font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important;line-height: inherit !important;}
@@ -138,13 +128,12 @@ const createUserTemplate = (event) => `
                                 <br /><br />
                                 Follow the steps below: 👇
                                 <br /><br />
-                                <strong>1. Access our website <a href="http://meneventi.com" style="color:#4272bf;">portal</a></strong> 🌐<br/>
+                                <strong>Access our website <a href="http://meneventi.com" style="color:#4272bf;">http://meneventi.com</a></strong> 🌐<br/>
                                 The first step is for you to login and change your temporary password
                                 <br /><br />
                                 <table width="100%" style="max-width: 100%;">
                                   <tr>
                                     <td style="color: #4272bf; text-decoration: none; font-style: normal; font-size: 16px; line-height: 19px; font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif; border: 1px solid #EEE; padding: 20px; line-height: 26px;">
-                                      <a href="http://meneventi.com" style="color:#4272bf;">http://meneventi.com</a><br /><br />
                                       <strong>Email</strong>: {username}<br/>
                                       <strong>Password</strong>: {####}
                                     </td>
@@ -175,8 +164,7 @@ const createUserTemplate = (event) => `
   </center>
 
 </body>
-</html>
-`;
+</html>`;
 
 module.exports = {
  createUserTemplate

@@ -10,9 +10,12 @@ import { onCreateTournamentPublic, onUpdateTournamentPublic, onDeleteTournamentP
 import useTournaments from "../../hooks/useTournaments";
 import DataList from "../components/table/DataList";
 import LeaderboardData from "../components/LeaderboardData";
+import useAuth from "../../hooks/useAuth";
+import Waiting from "./Waiting";
 
 export default function Home() {
 
+  const { authUser } = useAuth();
   const { tournamentsRepository } = useApp();
   const [ state ] = useRepository<Tournament>(tournamentsRepository, {
     subscribeOnCreate: {
@@ -27,6 +30,10 @@ export default function Home() {
   });
 
   const [ leaderboard ] = useTournaments({ list: state.items })
+
+  if (authUser?.email !== 'rafaelfaria1@gmail.com') {
+    return <Waiting />
+  }
 
   return (
     <Page title="Tournaments">

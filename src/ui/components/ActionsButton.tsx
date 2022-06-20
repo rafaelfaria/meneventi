@@ -10,6 +10,7 @@ import UsersForm from "./admin/users/UsersForm";
 import useUser from "../../hooks/useUsers";
 import TournamentForm from "./TournamentForm";
 import { useNavigate } from "react-router-dom";
+import UsersIcon from '@mui/icons-material/People';
 
 export default function ActionsButton() {
   const navigate = useNavigate();
@@ -85,6 +86,14 @@ export default function ActionsButton() {
                     <GroupAddIcon />
                   </ListItemIcon>
                   <ListItemText primary="Add player"  />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton onClick={() => { navigate('/admin/users'); handleClosePopover(); } }>
+                  <ListItemIcon>
+                    <UsersIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Players"  />
                 </ListItemButton>
               </ListItem>
             </List>

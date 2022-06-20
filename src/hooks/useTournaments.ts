@@ -37,7 +37,7 @@ const useTournaments = ({ list }: Props) => {
 
     let place = 1;
     const prev = acc[index > 0 ? index-1 : 0];
-    console.log(item, prev)
+
     if (index > 0) {
       if (prev.wins === item.wins) {
         place = prev.place;
@@ -51,8 +51,6 @@ const useTournaments = ({ list }: Props) => {
 
     return acc;
   }, leaderboard);
-
-  console.log({ leaderboard })
 
   return [ leaderboard ];
 };

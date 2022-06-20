@@ -31,31 +31,23 @@ const verificationTemplate = (event) => `
       .full-width{width:100%!important; max-width:100%!important; min-width:100%!important; clear: both;}
     }
     @media only screen and (max-width: 479px){
-      .full-width,.full-width-479{width:100%!important; max-width:100%!important; min-width:124px!important; clear: both;}
-      .full-width-center {width: 100%!important; max-width:100%!important; min-width:124px!important; text-align: center!important; clear: both; margin:0 auto; float:none;}
-      .full-block-479{display:block !important; clear: both; padding-top:10px; padding-bottom:10px; }
+      .full-width {width:100%!important; max-width:100%!important; min-width:124px!important; clear: both;}
       /* halper */
       img{max-width:280px !important;}
-      .resize-font, .resize-font *{font-size: 37px !important; line-height: 48px !important;}
     }
     /* End Old CSS */
 
     @media only screen and (max-width:640px){
       .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
-      .full-width.fix-800{min-width:auto!important;}
     }
 
     @media only screen and (max-width:480px){
       .full-width,.container{width:95%!important; float:none!important; min-width:95%!important; max-width:95%!important; margin:0 auto!important; padding-left:15px; padding-right:15px; text-align: center!important; clear: both;}
-      .full-width.fix-800{min-width:auto!important;}
     }
 
     td ul{list-style: initial; margin:0; padding-left:20px;}
 
     body{background-color:#ffffff; margin: 0 auto !important; height:auto!important;}
-    tr.tpl-repeatblock , tr.tpl-repeatblock > td{ display:block !important;}
-    .tpl-repeatblock {padding: 0px !important;border: 1px dotted rgba(0,0,0,0.2); }
-
 
     *[x-apple-data-detectors], .unstyle-auto-detected-links *,
     .aBn{border-bottom: 0 !important; cursor: default !important;color: inherit !important; text-decoration: none !important;font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important;line-height: inherit !important;}
@@ -166,17 +158,8 @@ const verificationTemplate = (event) => `
                   </td>
                 </tr>
                 <tr>
-                  <td valign="top" align="center">
-                    <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" style="margin: 0px auto; min-width: 100%;" role="presentation">
-                      <tbody>
-
-
-                      <tr>
-                        <td valign="top" height="30" style="height: 30px; font-size: 0px; line-height: 0;" aria-hidden="true">&nbsp;</td>
-                      </tr><!-- end space -->
-                    </tbody></table>
-                  </td>
-                </tr>
+                  <td valign="top" height="30" style="height: 30px; font-size: 0px; line-height: 0;" aria-hidden="true">&nbsp;</td>
+                </tr><!-- end space -->
               </tbody></table>
             </td>
           </tr>
@@ -187,8 +170,7 @@ const verificationTemplate = (event) => `
   </tbody>
 </table>
 
-</body></html>
-`;
+</body></html>`;
 
 module.exports = {
  verificationTemplate

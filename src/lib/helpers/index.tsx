@@ -29,3 +29,6 @@ export const slugify = (text: string, separator = "-") => {
         .trim()
         .replace(/\s+/g, separator);
 };
+
+
+export const zeroPad = (num: number, places: number = 2) => String(num).padStart(places, '0')

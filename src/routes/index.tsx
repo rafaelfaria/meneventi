@@ -52,6 +52,7 @@ export default function ThemeRoutes() {
           path: '/admin',
           element: <MainLayout />,
           children: [
+            { path: '/admin/', element:  <Navigate to="/" replace /> },
             { path: 'users', element: <AdminUsers /> },
             { path: 'users/new', element: <AdminUserForm /> },
             { path: 'users/:id', element: <AdminUserForm /> },

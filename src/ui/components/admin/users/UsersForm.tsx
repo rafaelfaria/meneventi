@@ -12,6 +12,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useToastNotification from "../../../../hooks/useToastNotification";
 import { getInitials } from "../../../../lib/helpers/user";
 import useConfirm from "../../../../hooks/useConfirm";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 type FormData = User;
 
@@ -195,7 +196,10 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
 
               <Grid item xs={12}>
                 <Stack flexDirection="row" alignItems="center" justifyContent="center" sx={{ mt: 3 }} columnGap={2}>
-                  <Button variant="contained" color="neutral" onClick={handleOnCancel}>Cancel</Button>
+                  <Button variant="contained" color="neutral" onClick={handleOnCancel}>
+                    <KeyboardArrowLeftIcon />
+                    Return to list
+                  </Button>
                   {user && authUser?.isSuperAdmin && authUser?.username !== user?.username &&
                     <ButtonWithSpinner variant="contained" onClick={handleDeleteUser} sx={{ mr: 1 }} color="neutral" disabled={isSaving}>
                       Delete User
