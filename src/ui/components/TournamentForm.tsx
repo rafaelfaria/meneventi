@@ -70,7 +70,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
    * Setup the default values of the form
    */
   const formActions = useForm<FormData>();
-  console.log(formActions.formState.errors);
+  // console.log(formActions.formState.errors);
 
   // @ts-ignore
   const leaderboard = useWatch({ control: formActions.control, name: 'leaderboard' });
@@ -172,8 +172,6 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
       navigate('/')
     }
   }
-
-  console.log(usersFields)
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)} style={{ display: "block", padding: "10px" }}>

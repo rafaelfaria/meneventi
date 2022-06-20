@@ -1,9 +1,8 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import useApp from "../../hooks/useApp";
 import useRepository from "../../hooks/useRepository";
 import { Tournament } from "../../lib/amplify/API";
 import Page from "./Page";
-import ReactLoading from 'react-loading';
 import Title from "../components/Title";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { useParams } from "react-router-dom";
