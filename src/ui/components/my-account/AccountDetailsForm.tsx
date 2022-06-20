@@ -57,7 +57,8 @@ export default function AccountDetailsForm({ state, actions, user, isLoading }: 
    */
   useEffect(() => {
     if (user) {
-      formActions.reset(user);
+      const { photo, ...detailsUser } = user
+      formActions.reset(detailsUser);
       setUserInitials(user?.initials);
     }
   }, [user]);
