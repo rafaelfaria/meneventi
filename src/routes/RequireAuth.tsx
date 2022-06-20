@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import AuthLoading from "../ui/components/auth/AuthLoading";
+import LandingPage from "../ui/pages/LandingPage";
 
 type Props = {
   needAdminAccess?: boolean
@@ -16,11 +17,15 @@ export default function RequireAuth({ needAdminAccess }: Props) {
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
     // than dropping them off on the home page.
-    return <Navigate to="/login" state={{ from: location }} replace />;
+
+    if (location.pathname === '/') {
+      return <LandingPage />;
+    } else {
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
   }
 
   if (authUser && needAdminAccess && !authUser?.isAdmin) {
-    console.log('HERE')
     return <Navigate to="/" replace />;
   }
 
