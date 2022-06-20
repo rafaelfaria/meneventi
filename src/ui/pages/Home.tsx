@@ -31,7 +31,7 @@ export default function Home() {
 
   const [ leaderboard ] = useTournaments({ list: state.items })
 
-  if (authUser?.email !== 'rafaelfaria1@gmail.com') {
+  if (authUser?.email !== 'rafaelfaria@gmail.com') {
     return <Waiting />
   }
 
