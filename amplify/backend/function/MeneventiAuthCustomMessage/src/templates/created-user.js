@@ -128,7 +128,7 @@ const createUserTemplate = (event) => `
                                 <br /><br />
                                 Follow the steps below: 👇
                                 <br /><br />
-                                <strong>Access our website <a href="http://meneventi.com" style="color:#4272bf;">http://meneventi.com</a></strong> 🌐<br/>
+                                <strong>Access our website <a href="http://meneventi.com/login" style="color:#4272bf;">http://meneventi.com</a></strong> 🌐<br/>
                                 The first step is for you to login and change your temporary password
                                 <br /><br />
                                 <table width="100%" style="max-width: 100%;">
