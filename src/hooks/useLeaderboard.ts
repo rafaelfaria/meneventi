@@ -1,5 +1,6 @@
 import { Tournament, User } from '../lib/amplify/API';
 import orderBy from 'lodash/orderBy';
+import useUser from './useUsers';
 
 type Props = {
   list: Tournament[];
@@ -14,7 +15,11 @@ export type Leaderboard = {
   buyInTotal: number;
 }
 
-const useTournaments = ({ list }: Props) => {
+const useLeaderboard = ({ list }: Props) => {
+
+  const [ { users } ] = useUser();
+
+
   let leaderboard: any = {};
   for (let tournament of list) {
     if (!tournament.leaderboard) continue;
@@ -48,6 +53,7 @@ const useTournaments = ({ list }: Props) => {
       place = index === 0 ? 1 : prev.place + 1;
     }
     acc[index].place = place;
+    acc[index].player = users.find(user => user.username === acc[index].player.username) || acc[index].player
 
     return acc;
   }, leaderboard);
@@ -55,4 +61,4 @@ const useTournaments = ({ list }: Props) => {
   return [ leaderboard ];
 };
 
-export default useTournaments;
+export default useLeaderboard;

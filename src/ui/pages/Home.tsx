@@ -7,7 +7,7 @@ import ReactLoading from 'react-loading';
 import TournamentCard from "../components/TournamentCard";
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 import { onCreateTournamentPublic, onUpdateTournamentPublic, onDeleteTournamentPublic } from "../../lib/amplify/graphql/subscriptions";
-import useTournaments from "../../hooks/useTournaments";
+import useLeaderboard from "../../hooks/useLeaderboard";
 import DataList from "../components/table/DataList";
 import LeaderboardData from "../components/LeaderboardData";
 import useAuth from "../../hooks/useAuth";
@@ -29,7 +29,7 @@ export default function Home() {
     }
   });
 
-  const [ leaderboard ] = useTournaments({ list: state.items })
+  const [ leaderboard ] = useLeaderboard({ list: state.items })
 
   if (authUser?.email !== 'rafaelfaria@gmail.com') {
     return <Waiting />

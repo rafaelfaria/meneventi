@@ -8,8 +8,7 @@ import useCountdown from "../../hooks/useCountdown";
 
 export default function Waiting() {
 
-  const  [days, hours, minutes, seconds] = useCountdown(new Date('2022-06-23 19:30'))
-
+  const  [days, hours, minutes, seconds] = useCountdown((new Date(1655976600000)).getTime())
   return (
     <Page>
       <FullWidthWrapper>
@@ -17,8 +16,9 @@ export default function Waiting() {
           <Box className="coin"></Box>
           <Typography variant="h4">Meneventi</Typography>
           <br />
-          <Typography variant="h4">A surprise will be revealed soon! 🃏</Typography>
+          <Typography variant="h6">A surprise will be revealed soon! 🃏</Typography>
         </Container>
+        {}
 
         <Stack flexDirection="row" columnGap={2} sx={{ mt: 2 }}>
           <DateTimeDisplay value={days} type="Days" />
@@ -39,7 +39,7 @@ type TimeDisplayProps = {
 const DateTimeDisplay = ({ value, type }: TimeDisplayProps) => {
   return (
     <Box textAlign="center">
-      <Typography variant="h3" sx={{ background: '#3a827d', p: 2, minWidth: 120, borderRadius: 2 }}>{value}</Typography>
+      <Typography variant="h3" sx={{ background: '#3a827d', p: 2, minWidth: { xs: 80, md: 120 }, borderRadius: 2, fontSize: { xs: 18, md: 30 } }}>{value}</Typography>
       <Typography>{type.toUpperCase()}</Typography>
     </Box>
   );

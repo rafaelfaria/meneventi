@@ -1,5 +1,5 @@
 import { Avatar, Stack, Typography } from '@mui/material';
-import { Leaderboard } from '../../hooks/useTournaments';
+import { Leaderboard } from '../../hooks/useLeaderboard';
 
 const columnData = () => {
   return [

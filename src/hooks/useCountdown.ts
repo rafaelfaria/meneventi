@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { zeroPad } from '../lib/helpers';
 
-const useCountdown = (targetDate: Date) => {
-  const countDownDate = new Date(targetDate).getTime();
+const useCountdown = (targetDate: Date | number) => {
+  const countDownDate = (new Date(targetDate)).getTime();
 
   const [countDown, setCountDown] = useState<number>(
     countDownDate - new Date().getTime()
@@ -10,7 +10,7 @@ const useCountdown = (targetDate: Date) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCountDown(countDownDate - new Date().getTime());
+      setCountDown(countDownDate - (new Date()).getTime());
     }, 1000);
 
     return () => clearInterval(interval);
