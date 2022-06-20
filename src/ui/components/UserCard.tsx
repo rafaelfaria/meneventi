@@ -14,8 +14,8 @@ export default function UserCard({ data }: Props) {
     <Box sx={{ mb: 1, p: 2 }} component={Paper}>
       <Stack flexDirection="row" columnGap={1}>
         <Avatar src={data.photo as string} alt={data.name} sx={{ width: 50, height: 50, fontSize: 20, mr: 1 }}>{data.initials}</Avatar>
-        <Stack flexDirection="column" flexGrow={1}>
-          <Typography>{data.name} {data.status !== UserStatus.ACTIVE ? <Typography sx={{color: 'red'}}>(INACTIVE)</Typography> : ''}</Typography>
+        <Stack flexDirection="column" flexGrow={1} sx={{ color: data.status !== UserStatus.ACTIVE ? 'red' : 'inherit'}}>
+          <Typography>{data.name}</Typography>
           <Typography>{data.email}</Typography>
         </Stack>
         <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
