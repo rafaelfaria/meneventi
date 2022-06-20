@@ -34,8 +34,8 @@ export default function ChangeTemporaryPasswordForm({ onSubmit, onSuccess, onErr
 
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)}>
-      <Typography color="#000000" variant="subtitle2">Bem vindo {user?.challengeParam?.userAttributes?.name} 👋.</Typography>
-      <Typography color="#000000" variant="subtitle2" sx={{ mb: 2 }}> Como este é o seu primeiro login, você precisa mudar a sua senha.</Typography>
+      <Typography variant="subtitle2">Welcome {user?.challengeParam?.userAttributes?.name} 👋.</Typography>
+      <Typography variant="subtitle2" sx={{ mb: 2 }}> Since this is your first login, you need to choose your own password.</Typography>
 
       <TextField type="password" label="Nova Senha"
         {...formActions.register("newPassword", { required: true })}
@@ -44,7 +44,7 @@ export default function ChangeTemporaryPasswordForm({ onSubmit, onSuccess, onErr
       />
 
       <ButtonWithSpinner type="submit" variant="contained" fullWidth showSpinner={isLoading}>
-        Salvar nova senha
+        Save new password
       </ButtonWithSpinner>
 
     </form>
