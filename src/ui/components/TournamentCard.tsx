@@ -82,7 +82,7 @@ export default function TournamentCard({ data }: Props) {
                 <Grid item xs={12}>
                   <Box sx={{ mb: 1, p: 2 }} component={Paper}>
                     <Stack flexDirection="row" columnGap={1} alignItems="center">
-                      <Typography variant="h6" sx={{ fontSize: 30 }}>{player.place === 1 ? '🥇' : player.place === 2 ? '🥈' : player.place === 3 ? '🥉' : ''}</Typography>
+                      <Typography variant="h6" sx={{ fontSize: 30 }}>{player.place === 1 ? '🥇' : (player.place === 2 && (player.prize || 0) > 0) ? '🥈' : ''}</Typography>
                       <Avatar src={player.photo as string} alt={player.name} sx={{ width: 30, height: 30, fontSize: 20, mr: 1 }}>{player.initials}</Avatar>
                       <Stack flexDirection="column" columnGap={1}>
                         <Typography>{player.name}</Typography>
