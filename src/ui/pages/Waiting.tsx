@@ -6,6 +6,8 @@ import FullWidthWrapper from '../components/FullwidthWrapper';
 import './LandingPage.scss'
 import useCountdown from "../../hooks/useCountdown";
 
+import Logo from '../../assets/logo-chip.png';
+
 export default function Waiting() {
 
   const  [days, hours, minutes, seconds] = useCountdown((new Date(1655976600000)).getTime())
@@ -13,7 +15,7 @@ export default function Waiting() {
     <Page>
       <FullWidthWrapper>
         <Container sx={{ mt:10, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-          <Box className="coin"></Box>
+          <img src={Logo} width="200" />
           <Typography variant="h4">Meneventi</Typography>
           <br />
           <Typography variant="h6">A surprise will be revealed soon! 🃏</Typography>
