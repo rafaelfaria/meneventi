@@ -9,11 +9,18 @@ export type CreateUserInput = {
   initials?: string | null,
   photo?: string | null,
   status?: UserStatus | null,
+  type?: UserType | null,
 };
 
 export enum UserStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
+}
+
+
+export enum UserType {
+  ADMIN = "ADMIN",
+  USER = "USER",
 }
 
 
@@ -23,6 +30,7 @@ export type ModelUserConditionInput = {
   initials?: ModelStringInput | null,
   photo?: ModelStringInput | null,
   status?: ModelUserStatusInput | null,
+  type?: ModelUserTypeInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -73,6 +81,11 @@ export type ModelUserStatusInput = {
   ne?: UserStatus | null,
 };
 
+export type ModelUserTypeInput = {
+  eq?: UserType | null,
+  ne?: UserType | null,
+};
+
 export type User = {
   __typename: "User",
   username: string,
@@ -81,6 +94,7 @@ export type User = {
   initials?: string | null,
   photo?: string | null,
   status?: UserStatus | null,
+  type?: UserType | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -164,6 +178,7 @@ export type UpdateUserInput = {
   initials?: string | null,
   photo?: string | null,
   status?: UserStatus | null,
+  type?: UserType | null,
 };
 
 export type UpdateTournamentInput = {
@@ -181,6 +196,7 @@ export type ModelUserFilterInput = {
   initials?: ModelStringInput | null,
   photo?: ModelStringInput | null,
   status?: ModelUserStatusInput | null,
+  type?: ModelUserTypeInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -244,6 +260,7 @@ export type CreateUserMutation = {
     initials?: string | null,
     photo?: string | null,
     status?: UserStatus | null,
+    type?: UserType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -263,6 +280,7 @@ export type DeleteUserMutation = {
     initials?: string | null,
     photo?: string | null,
     status?: UserStatus | null,
+    type?: UserType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -340,6 +358,7 @@ export type UpdateUserMutation = {
     initials?: string | null,
     photo?: string | null,
     status?: UserStatus | null,
+    type?: UserType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -387,6 +406,7 @@ export type GetUserQuery = {
     initials?: string | null,
     photo?: string | null,
     status?: UserStatus | null,
+    type?: UserType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -411,6 +431,7 @@ export type ListUsersQuery = {
       initials?: string | null,
       photo?: string | null,
       status?: UserStatus | null,
+      type?: UserType | null,
       createdAt: string,
       updatedAt: string,
     } | null >,

@@ -14,6 +14,7 @@ export const createUser = /* GraphQL */ `
       initials
       photo
       status
+      type
       createdAt
       updatedAt
     }
@@ -31,6 +32,7 @@ export const deleteUser = /* GraphQL */ `
       initials
       photo
       status
+      type
       createdAt
       updatedAt
     }
@@ -100,6 +102,7 @@ export const updateUser = /* GraphQL */ `
       initials
       photo
       status
+      type
       createdAt
       updatedAt
     }

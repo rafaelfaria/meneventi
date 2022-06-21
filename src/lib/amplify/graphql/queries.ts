@@ -11,6 +11,7 @@ export const getUser = /* GraphQL */ `
       initials
       photo
       status
+      type
       createdAt
       updatedAt
     }
@@ -38,6 +39,7 @@ export const listUsers = /* GraphQL */ `
         initials
         photo
         status
+        type
         createdAt
         updatedAt
       }

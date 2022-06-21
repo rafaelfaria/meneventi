@@ -31,8 +31,11 @@ export default function Home() {
 
   const [ leaderboard ] = useLeaderboard({ list: state.items })
 
-  if (authUser?.email !== 'rafaelfaria@gmail.com') {
-    return <Waiting />
+  const today = (new Date()).getTime();
+  const endDate = (new Date(1655976600000)).getTime();
+
+  if (authUser?.email !== 'rafaelfaria@gmail.com' && today < endDate) {
+    return <Waiting endDate={endDate} />
   }
 
   return (

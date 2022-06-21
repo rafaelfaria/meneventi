@@ -1,16 +1,27 @@
 import Page from "./Page";
 
-import { Container, Typography, Box, Stack } from '@mui/material';
+import { Container, Typography, Box, Stack, Button } from '@mui/material';
 import FullWidthWrapper from '../components/FullwidthWrapper';
 
 import './LandingPage.scss'
 import useCountdown from "../../hooks/useCountdown";
 
 import Logo from '../../assets/logo-chip.png';
+import { Navigate } from "react-router-dom";
+type Props = {
+  endDate: number;
+}
 
-export default function Waiting() {
+export default function Waiting({ endDate }: Props) {
 
-  const  [days, hours, minutes, seconds] = useCountdown((new Date(1655976600000)).getTime())
+  const  [days, hours, minutes, seconds] = useCountdown(endDate)
+
+  const today = (new Date()).getTime();
+
+  if (today > endDate) {
+    return <Navigate to="/" replace />
+  }
+
   return (
     <Page>
       <FullWidthWrapper>
