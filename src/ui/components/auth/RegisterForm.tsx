@@ -66,7 +66,7 @@ export default function RegisterForm({ onSubmit, onSuccess, onError, resendCode,
           <TextField type="email" variant="outlined" control={formActions.control} fullWidth sx={{ mb: 2 }}
             name="email"
             label="Email"
-            placeholder="seu@email.com"
+            placeholder="your@email.com"
             rules={{ required: true }}
           />
         </Grid>
