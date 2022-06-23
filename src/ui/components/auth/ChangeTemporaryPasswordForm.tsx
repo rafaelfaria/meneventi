@@ -37,7 +37,7 @@ export default function ChangeTemporaryPasswordForm({ onSubmit, onSuccess, onErr
       <Typography variant="subtitle2">Welcome {user?.challengeParam?.userAttributes?.name} 👋.</Typography>
       <Typography variant="subtitle2" sx={{ mb: 2 }}> Since this is your first login, you need to choose your own password.</Typography>
 
-      <TextField type="password" label="Nova Senha"
+      <TextField type="password" label="New Password"
         {...formActions.register("newPassword", { required: true })}
         fullWidth
         sx={{ mb: 2 }}

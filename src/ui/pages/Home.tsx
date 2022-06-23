@@ -11,11 +11,9 @@ import useLeaderboard from "../../hooks/useLeaderboard";
 import DataList from "../components/table/DataList";
 import LeaderboardData from "../components/LeaderboardData";
 import useAuth from "../../hooks/useAuth";
-import Waiting from "./Waiting";
 
 export default function Home() {
 
-  const { authUser } = useAuth();
   const { tournamentsRepository } = useApp();
   const [ state ] = useRepository<Tournament>(tournamentsRepository, {
     subscribeOnCreate: {
@@ -29,14 +27,8 @@ export default function Home() {
     }
   });
 
+console.log({ state })
   const [ leaderboard ] = useLeaderboard({ list: state.items })
-
-  const today = (new Date()).getTime();
-  const endDate = (new Date(1655976600000)).getTime();
-
-  if (authUser?.email !== 'rafaelfaria@gmail.com' && today < endDate) {
-    return <Waiting endDate={endDate} />
-  }
 
   return (
     <Page title="Tournaments">

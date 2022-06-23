@@ -5,6 +5,7 @@ import { getTournament, listTournaments, } from "../amplify/graphql/queries";
 import { createTournament, deleteTournament, updateTournament } from "../amplify/graphql/mutations";
 import orderBy from 'lodash/orderBy';
 import { ListParams } from "../factories/types";
+import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 
 export default class TournamentsRepositoryAmplify implements TournamentsRepositoryInterface {
 
@@ -75,9 +76,12 @@ export default class TournamentsRepositoryAmplify implements TournamentsReposito
 
     let { limit = 1000, filter = null, nextToken } = params || {};
 
-    const { data } = (await API.graphql(
-      graphqlOperation(listTournaments, { limit, filter, nextToken })
-    )) as ListTournamentsResult;
+    const { data } = (await API.graphql({
+          query: listTournaments,
+          variables: { limit, filter, nextToken },
+          authMode: GRAPHQL_AUTH_MODE.AWS_IAM,
+      })) as ListTournamentsResult;
+
 
     if (!data) {
       throw new Error("Error trying to get the list");
