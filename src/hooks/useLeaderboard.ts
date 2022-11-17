@@ -58,6 +58,8 @@ const useLeaderboard = ({ list }: Props) => {
     return acc;
   }, leaderboard);
 
+  console.log({ leaderboard })
+
   return [ leaderboard ];
 };
 

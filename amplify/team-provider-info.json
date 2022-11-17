@@ -26,6 +26,13 @@
           "deploymentBucketName": "amplify-meneventi-prod-102802-deployment",
           "s3Key": "amplify-builds/AdminQueries73809dec-356366733657794c314a-build.zip"
         }
+      },
+      "api": {
+        "AdminQueries": {},
+        "MeneventiAPI": {}
+      },
+      "storage": {
+        "meneventiMedia": {}
       }
     }
   }

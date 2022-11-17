@@ -50,10 +50,19 @@ const columnData = () => {
     {
       header: {
         id: 'totalPrize',
-        label: 'Total $'
+        label: 'Prize'
       },
       render: (rowData:Leaderboard) => {
-        return rowData.totalPrize;
+        return `$${rowData.totalPrize}`;
+      },
+    },
+    {
+      header: {
+        id: 'totalPrize',
+        label: 'Buy In'
+      },
+      render: (rowData:Leaderboard) => {
+        return `$${rowData.buyInTotal}`;
       },
     }
   ]
