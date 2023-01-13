@@ -58,7 +58,7 @@ const columnData = () => {
     },
     {
       header: {
-        id: 'totalPrize',
+        id: 'buyInTotal',
         label: 'Buy In'
       },
       render: (rowData:Leaderboard) => {

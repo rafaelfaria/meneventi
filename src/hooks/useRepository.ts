@@ -230,9 +230,11 @@ const useRepository = <Item>(repository: Repository<Item>, options?: Options): [
       },
 
       async list(options?: ListOptions) {
+        console.log({ options })
         try {
           setState({ isLoadingList: options?.isRefreshing ? false : true, isError: false, isSaving: false })
           const items = await repository.list({ filter: options?.filter });
+          console.log({ items })
 
           if (options?.updateListState === false) {
             setState({ isLoadingList: false });
