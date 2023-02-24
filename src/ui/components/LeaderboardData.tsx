@@ -49,8 +49,26 @@ const columnData = () => {
     },
     {
       header: {
+        id: 'roi',
+        label: 'ROI %'
+      },
+      render: (rowData:Leaderboard) => {
+        return `${rowData.roi.toFixed(2).replace('.00','')}%`;
+      },
+    },
+    {
+      header: {
+        id: 'totalProfit',
+        label: 'Profit'
+      },
+      render: (rowData:Leaderboard) => {
+        return `$${rowData.totalProfit}`;
+      },
+    },
+    {
+      header: {
         id: 'totalPrize',
-        label: 'Prize'
+        label: 'Total Prize'
       },
       render: (rowData:Leaderboard) => {
         return `$${rowData.totalPrize}`;
@@ -58,13 +76,13 @@ const columnData = () => {
     },
     {
       header: {
-        id: 'buyInTotal',
-        label: 'Buy In'
+        id: 'totalInvestment',
+        label: 'Total Buy In',
       },
       render: (rowData:Leaderboard) => {
-        return `$${rowData.buyInTotal}`;
+        return `$${rowData.totalInvestment}`;
       },
-    }
+    },
   ]
 };
 

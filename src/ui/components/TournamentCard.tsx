@@ -73,9 +73,12 @@ export default function TournamentCard({ data }: Props) {
         <FloatBox sx={{ p: 1 }}>
           <Grid container sx={{ p: 3 }}>
             <Grid item xs={12}>
-              <Typography variant="h6" sx={{ fontSize: 20 }}>
+              <Typography variant="h4">
                 {data.name}
               </Typography>
+              <Typography variant="h6" sx={{ fontSize: 20, mb: 3, color: '#94a7bd' }}>
+               {format(new Date(data.date as string), 'dd MMM yyyy')}
+               </Typography>
             </Grid>
             {data.leaderboard?.map((player) => {
               return (
@@ -112,7 +115,7 @@ const FloatBox = styled(Paper)(() => ({
   width: '800px',
   maxWidth: '90%',
   padding: '15px',
-  maxHeight: '480px',
+  maxHeight: '680px',
   overflowY: 'auto'
 }));
 
