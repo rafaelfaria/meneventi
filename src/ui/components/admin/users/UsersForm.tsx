@@ -13,6 +13,7 @@ import useToastNotification from "../../../../hooks/useToastNotification";
 import { getInitials } from "../../../../lib/helpers/user";
 import useConfirm from "../../../../hooks/useConfirm";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import Dropdown from "../../forms/Dropdown";
 
 type FormData = User;
 
@@ -179,6 +180,22 @@ export default function UsersForm({ state, actions, user, isLoading, onCancel }:
                   control={formActions.control}
                   disabled={isSaving}
                 />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Dropdown
+                    name="status"
+                    label="Status"
+                    options={[
+                      { label: UserStatus.ACTIVE, value: UserStatus.ACTIVE },
+                      { label: UserStatus.INACTIVE, value: UserStatus.INACTIVE },
+                    ]}
+                    fullWidth
+                    control={formActions.control}
+                    variant="filled"
+                    disabled={isSaving}
+                    sx={{ mb: 2 }}
+                  />
               </Grid>
 
               {!user &&
