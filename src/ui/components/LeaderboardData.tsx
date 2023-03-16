@@ -62,7 +62,7 @@ const columnData = () => {
         label: 'Profit'
       },
       render: (rowData:Leaderboard) => {
-        return `$${rowData.totalProfit}`;
+        return `$${rowData.totalProfit}`.replace('$-','-$');
       },
     },
     {
