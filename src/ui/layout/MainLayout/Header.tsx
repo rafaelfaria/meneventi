@@ -1,15 +1,18 @@
-import { Stack } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import ColorMode from './ColorMode';
 import AccountPopover from './AccountPopover';
-import Decoration from './Decoration';
+
 import SiteTitle from './SiteTitle';
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const theme = useTheme();
+  const navigate = useNavigate()
 
   return (
     <Box position="relative">
@@ -35,6 +38,7 @@ const Header = () => {
           <SiteTitle />
           <Box sx={{ flexGrow: 1 }} />
           <Stack sx={{ flexGrow: 0 }} flexDirection="row" alignItems="center">
+            <IconButton onClick={() => navigate('/timer')}><AlarmOnIcon /></IconButton>
             <ColorMode />
             <AccountPopover />
           </Stack>
