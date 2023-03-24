@@ -1,6 +1,6 @@
 import Page from "./Page";
 
-import { Container, Typography, Box, Stack, Button } from '@mui/material';
+import { Container, Typography, Box, Stack } from '@mui/material';
 import FullWidthWrapper from '../components/FullwidthWrapper';
 
 import './LandingPage.scss'

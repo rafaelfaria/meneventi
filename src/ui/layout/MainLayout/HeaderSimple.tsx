@@ -30,7 +30,7 @@ const HeaderSimple = () => {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Decoration />
+
     </Box>
   );
 };

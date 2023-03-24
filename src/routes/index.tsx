@@ -14,6 +14,7 @@ import ResetPassword from '../ui/pages/auth/ResetPassword';
 import Logout from '../ui/pages/auth/Logout';
 import MyAccount from '../ui/pages/MyAccount';
 import MyAccountChangePassword from '../ui/pages/MyAccountChangePassword';
+import Timer from '../ui/pages/Timer';
 
 // pages
 const FourOFour = Loadable(lazy(() => import('../ui/pages/404')));
@@ -36,6 +37,7 @@ export default function ThemeRoutes() {
           element: <MainLayout />,
           children: [
             { path: '/', element: <Home /> },
+            { path: '/timer', element: <Timer /> },
             { path: '/tournament/new', element: <TournamentForm /> },
             { path: '/tournament/:id', element: <TournamentForm /> },
             { path: '/my-account', element: <MyAccount /> },

@@ -10,7 +10,6 @@ type Props = {
 const FullWidthWrapper: React.FC<Props> = ({ children }) => {
   return (
     <Main>
-      <Decoration />
       <Grid sx={{ height: "100%"}} container spacing={2}>
         <Grid item xs={12}>
           <Box sx={{ height: "100%", display: "flex",  justifyContent: "center",  alignItems: "center", flexDirection: "column", position: 'relative' }}>

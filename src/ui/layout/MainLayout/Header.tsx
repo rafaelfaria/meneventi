@@ -40,7 +40,6 @@ const Header = () => {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Decoration />
     </Box>
   );
 };
