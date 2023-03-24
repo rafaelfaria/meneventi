@@ -1,11 +1,20 @@
-const columnData = () => {
+import { IconButton } from "@mui/material";
+import { ColumnParams } from "./table/DataList";
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
+
+
+const columnData = (params: ColumnParams & {
+  moveToRound: (round: number, autoStart?: boolean) => void;
+}) => {
+  const { moveToRound } = params || {};
+
   return [
     {
       header: {
         id: 'round',
         label: 'Round',
         disablePadding: false,
-        width: 20
+        width: 20,
       },
       render: (rowData:any) => {
         return rowData.round;
@@ -35,7 +44,17 @@ const columnData = () => {
         label: 'Duration',
       },
       render: (rowData:any) => {
-        return rowData.duration;
+        return `${rowData.duration} min`;
+      },
+    },
+    {
+      header: {
+        id: 'actions',
+        label: 'Actions',
+        width: 40
+      },
+      render: (rowData:any) => {
+        return <IconButton onClick={() => moveToRound(rowData.round - 1, false)}><PlayCircleFilledWhiteIcon /></IconButton>;
       },
     }
   ]

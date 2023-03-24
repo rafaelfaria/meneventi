@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { getErrorMessage } from "../../../lib/helpers";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
@@ -10,7 +10,7 @@ import useColorMode from '../../../hooks/useColorMode';
 
 export interface HeadCell {
   id: string,
-  label: string,
+  label: string | React.ReactNode,
   disablePadding?: boolean;
   width?: number;
   align?: any; //'inherit' | 'left' | 'center' | 'right' | 'justify';
@@ -35,22 +35,26 @@ type DataListProps = {
   tableId?: string;
   title: string;
   items: any;
-  columnData: (props: ColumnParams) => TableColProps[];
+  columnData: (props: ColumnParams & any) => TableColProps[];
   columnDataParams?: any,
-  onDelete?: (id: string) => any;
-  onDeleteBulk?: (ids: string[]) => any;
+  onDelete?: (id: string, obj?: any) => any;
+  onDeleteBulk?: (ids: string[], obj?: any) => any;
   isLoading?: boolean;
-  deleteItemKey?: string;
+  deleteLabelKey?: string | string[];
+  deleteTitle?: string;
+  hideDeleteSuccessMessage?: boolean;
   hideCheckbox?: boolean;
   hideToolbar?: boolean;
   hideHeading?: boolean;
   sorting?: boolean;
   idProp?: string;
   rowsPerPage?: number;
+  highlightItem?: any;
+  onRowClick?: (data: any) => void
 }
 
 const DataList = (props: DataListProps) => {
-  const { tableId, title, columnData, items, isLoading, onDelete, onDeleteBulk, deleteItemKey = 'title', hideCheckbox = false, hideToolbar = false, columnDataParams = {}, sorting, hideHeading, idProp = 'id', rowsPerPage = 25 } = props;
+  const { tableId, title, columnData, items, isLoading, onDelete, onDeleteBulk, deleteLabelKey = 'title', hideDeleteSuccessMessage, deleteTitle, hideCheckbox = false, hideToolbar = false, columnDataParams = {}, sorting, hideHeading, idProp = 'id', rowsPerPage = 25, highlightItem, onRowClick } = props;
 
   const navigate = useNavigate();
   const { confirm } = useConfirm();
@@ -66,47 +70,48 @@ const DataList = (props: DataListProps) => {
    */
   const handleDeleteItems = async (ids: string[]) => {
     try {
+
       const itemsToDelete = items.filter((item: any) => ids.indexOf(item[idProp]) > -1);
       const maxItemsToShow = 5;
+      const title = deleteTitle || `Are you sure you want to delete the below ${itemsToDelete.length > 1 ? 'items' : 'item'}?`
 
       await confirm({
-        title: `Você tem certeza que deseja apagar ${itemsToDelete.length > 1 ? 'os items' : 'o item'} abaixo?`,
+        title,
         description: <Box>
-          <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+          <List dense sx={{ width: '100%', bgcolor: 'background.paper' }}>
             {itemsToDelete.slice(0, maxItemsToShow).map((item: any) => {
               return (
                 <ListItem key={item.id} component="li">
                   <ItemIcon sx={{ mr: 1 }} />
-                  <ListItemText>{item[deleteItemKey]}</ListItemText>
+                  <ListItemText>{deleteLabelKey instanceof Array ? deleteLabelKey.map((key) => item[key]).join(' - ') : item[deleteLabelKey]}</ListItemText>
                 </ListItem>
               );
             })}
           </List>
-          {itemsToDelete.length > maxItemsToShow && <Typography>e outros <strong>{itemsToDelete.length-maxItemsToShow} items...</strong></Typography>}
+          {itemsToDelete.length > maxItemsToShow && <Typography>and others <strong>{itemsToDelete.length-maxItemsToShow} items...</strong></Typography>}
         </Box>
       });
 
       setIsDeleting(ids);
 
       try {
-        let deletedIds = [];
         if (onDeleteBulk) {
-          deletedIds = await onDeleteBulk(ids as string[]);
+          await onDeleteBulk(ids as string[], itemsToDelete);
         } else if (onDelete) {
           for (let id of ids) {
-            const resp = await onDelete(id);
-            deletedIds.push(resp);
+            await onDelete(id, itemsToDelete.find((item: any) => item[idProp] === id));
           }
         }
 
-        showSuccessNotification('Items apagados com sucesso!')
+        if (!hideDeleteSuccessMessage) {
+          showSuccessNotification('Items successfully deleted!')
+        }
+
         setIsDeleting([]);
-        return deletedIds.map((item: any) => item[idProp]);
       } catch(err: any) {
+        console.error('DataList: handleDeleteItems', err);
         setIsDeleting([]);
-        console.log(err);
         showErrorNotification(getErrorMessage(err));
-        return false;
       }
 
     } catch(err) {
@@ -128,6 +133,8 @@ const DataList = (props: DataListProps) => {
       columnData={columnData({ navigate, isDark, isItemDeleting, handleDeleteItems, isDeleting, ...columnDataParams })}
       idProp={idProp}
       rowsPerPage={rowsPerPage}
+      highlightItem={highlightItem}
+      onRowClick={onRowClick}
     />
   );
 }

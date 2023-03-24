@@ -11,11 +11,11 @@ import Checkbox from '@mui/material/Checkbox';
 import EnhancedTableHead from './EnhancedTableHead';
 import EnhancedTableToolbar from './EnhancedTableToolbar';
 import useLocalStorage from '../../../hooks/useLocalStorage';
-import ReactLoading from 'react-loading';
 
 import { TableColProps } from './DataList';
 import { styled } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
+import Loading from '../Loading';
 
 type DataTableProps = {
   tableId?: string;
@@ -31,12 +31,13 @@ type DataTableProps = {
   sorting?: boolean;
   idProp?: string;
   rowsPerPage?: number;
+  onRowClick?: (data: any) => void
 }
 
 type Order = 'asc' | 'desc';
 
 export default function DataTable(props: DataTableProps) {
-  const { tableId, title, items, columnData, isLoading, onDelete, highlightItem, hideCheckbox, hideToolbar, sorting, hideHeading, idProp = 'id', rowsPerPage: defaultRowsPerPage = 25} = props;
+  const { tableId, title, items, columnData, isLoading, onDelete, highlightItem, hideCheckbox, hideToolbar, sorting, hideHeading, idProp = 'id', rowsPerPage: defaultRowsPerPage = 25, onRowClick } = props;
 
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<any>('');
@@ -125,10 +126,6 @@ export default function DataTable(props: DataTableProps) {
    */
   const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
-  /**
-   * Avoid a layout jump when reaching the last page with empty rows.
-   */
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - (items?.length || 0)) : 0;
 
   /**
    * Map the headings of the cells
@@ -157,7 +154,13 @@ export default function DataTable(props: DataTableProps) {
           )}
           <TableBody>
             {!items?.length && isLoading &&
-              <TableRow><TableCell colSpan={headCellsHeading.length + 1}><Box sx={{ display: 'flex', justifyContent: 'center', p: 5 }}><ReactLoading type="spin" color="#d7e0e8" width={100} height={100}  /></Box></TableCell></TableRow>
+              <TableRow>
+                <TableCell colSpan={headCellsHeading.length + 1}>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', p: 5 }}>
+                    <Loading type="bars" color="#d7e0e8" width={100} height={100} />
+                  </Box>
+                </TableCell>
+              </TableRow>
             }
             {stableSort<any>(items || [], getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
@@ -169,6 +172,8 @@ export default function DataTable(props: DataTableProps) {
                     tabIndex={-1}
                     key={row[idProp]}
                     selected={isItemSelected || row[idProp] === highlightItem?.[idProp]}
+                    onClick={() => onRowClick && onRowClick(row)}
+                    sx={{ background: (index % 2) ? "#F4F5F9" : "transparent", ...(onRowClick ? { cursor: 'pointer' } : {}) }}
                   >
                     {!hideCheckbox &&
                       <TableCell padding="checkbox">
@@ -176,21 +181,16 @@ export default function DataTable(props: DataTableProps) {
                       </TableCell>
                     }
                     {columnData.filter((column) => !column.header.onlyAdmin || (column.header.onlyAdmin && authUser?.isAdmin)).map(column => {
-                      return <TableCell key={column.header.id}>{column.render(row)}</TableCell>
+                      return (
+                        <TableCell key={column.header.id}>
+                          {column.render(row)}
+                        </TableCell>
+                      );
                     })}
                   </StyledTableRow>
                 );
               })}
 
-            {emptyRows > 0 && (
-              <TableRow
-                style={{
-                  height: 53 * emptyRows,
-                }}
-              >
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -255,6 +255,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
   '&:nth-of-type(even)': {
     backgroundColor: 'transparent',
+  },
+  '&.Mui-selected': {
+    backgroundColor: '#2e324b !important'
   },
   '&:hover': {
     '&:nth-of-type(odd)': {
