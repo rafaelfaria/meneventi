@@ -29,15 +29,15 @@ const useLeaderboard = ({ list }: Props) => {
       const current = { ...(leaderboard[player?.username] || { wins: 0, played: 0, totalInvestment: 0, totalPrize: 0 }) };
       const totalInvestment = current.totalInvestment + (player?.buyIn || 0);
       const totalPrize = current.totalPrize + (player?.prize || 0);
-      const totalProfit = totalPrize - totalInvestment;
-      const roi = (totalProfit / totalInvestment) * 100;
+      const netProfit = totalPrize - totalInvestment;
+      const roi = (netProfit / totalInvestment) * 100;
 
       leaderboard[player?.username] = {
         player,
         wins: current.wins + ((player?.place === 1) ? 1 : 0),
         played: current.played + 1,
         totalPrize,
-        totalProfit,
+        totalProfit: netProfit,
         totalInvestment,
         roi
       }
@@ -53,7 +53,7 @@ const useLeaderboard = ({ list }: Props) => {
     const prev = acc[index > 0 ? index-1 : 0];
 
     if (index > 0) {
-      if (prev.wins === item.wins) {
+      if (prev.wins === item.wins && prev.roi === item.roi) {
         place = prev.place;
       } else {
         place = prev.place + 1;

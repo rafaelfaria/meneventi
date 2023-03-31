@@ -16,7 +16,7 @@ export default function LandingPage() {
           <Box className="coin"></Box>
           <Typography variant="h4">Meneventi</Typography>
         </Container>
-        <Button onClick={() => navigate('/login')} sx={{ position: 'absolute', bottom: 0, right: 0, color: '#141313' }}><Typography variant="h3">𝛑</Typography></Button>
+        <Button onClick={() => navigate('/login')} sx={{ position: 'absolute', bottom: 0, right: 0, color: '#6c3636' }}><Typography variant="h3">𝛑</Typography></Button>
       </FullWidthWrapper>
     </Page>
   );
