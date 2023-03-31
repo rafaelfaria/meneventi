@@ -127,17 +127,19 @@ export default function Timer() {
 
         </Grid>
         <Grid item xs={12}>
-          <DataList
-            title="Leaderboard"
-            columnData={TimerData}
-            items={AppConfig.timer}
-            hideCheckbox={true}
-            hideToolbar={true}
-            idProp="round"
-            highlightItem={currentRound}
-            columnDataParams={{ moveToRound }}
-            onRowClick={(item) => moveToRound(item.round-1, timerState === 'RUNNING')}
-          />
+          <Box overflow="auto" maxHeight="400px">
+            <DataList
+              title="Leaderboard"
+              columnData={TimerData}
+              items={AppConfig.timer}
+              hideCheckbox={true}
+              hideToolbar={true}
+              idProp="round"
+              highlightItem={currentRound}
+              columnDataParams={{ moveToRound }}
+              onRowClick={(item) => moveToRound(item.round-1, timerState === 'RUNNING')}
+            />
+          </Box>
         </Grid>
 
       </Grid>
@@ -173,6 +175,7 @@ const Break = styled(Typography)(() => ({
   background: 'linear-gradient(to right, #fa486a 30%, #edca8c 70%)',
   '-webkit-background-clip': 'text',
   '-webkit-text-fill-color': 'transparent',
+  fontSize: 80
 }));
 
 type BlindsProps = {
