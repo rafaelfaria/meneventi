@@ -45,7 +45,7 @@ const useLeaderboard = ({ list }: Props) => {
   }
 
   leaderboard = Object.keys(leaderboard).map(key => leaderboard[key]) as Leaderboard[];
-  leaderboard = orderBy(leaderboard, ['wins', 'roi', 'profit', 'totalPrize', 'played'], ['desc', 'desc',  'desc', 'desc', 'desc']);
+  leaderboard = orderBy(leaderboard, ['wins', 'roi', 'totalProfit', 'totalPrize', 'totalInvestment', 'played'], ['desc', 'desc',  'desc', 'desc', 'desc', 'desc']);
 
   leaderboard = leaderboard.reduce((acc: Leaderboard[], item: Leaderboard, index: number) => {
 
