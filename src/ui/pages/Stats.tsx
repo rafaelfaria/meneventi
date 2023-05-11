@@ -136,6 +136,9 @@ export default function Stats() {
             <Grid item xs={12} md={4}>
               <TableList title="Top 5 - Tournament Played" stats={stats.played} />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <TableList title="Top 5 - Final Table" stats={stats.finalTable} />
+            </Grid>
         </> : null}
         </Grid>
     </Page>
