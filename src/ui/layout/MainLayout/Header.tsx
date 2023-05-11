@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import ColorMode from './ColorMode';
 import AccountPopover from './AccountPopover';
-
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import SiteTitle from './SiteTitle';
 import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import { useNavigate } from 'react-router-dom';
@@ -39,6 +39,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 1 }} />
           <Stack sx={{ flexGrow: 0 }} flexDirection="row" alignItems="center">
             <IconButton onClick={() => navigate('/timer')}><AlarmOnIcon /></IconButton>
+            <IconButton onClick={() => navigate('/stats')}><QueryStatsIcon /></IconButton>
             <ColorMode />
             <AccountPopover />
           </Stack>

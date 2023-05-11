@@ -138,7 +138,7 @@ export default function DataTable(props: DataTableProps) {
     <Box sx={{ width: '100%' }} component={Paper}>
       {!hideToolbar && <EnhancedTableToolbar title={title} selected={selected} onDelete={handleBulkDelete} />}
       <TableContainer>
-        <Table sx={{ minWidth: 600 }} size="medium">
+        <Table size="medium">
           {!hideHeading && (
             <EnhancedTableHead
               sorting={sorting}
