@@ -33,10 +33,19 @@ const useStats = () => {
         players[player.username].played = (players[player.username].played || 0) + 1;
 
         if (player.place === 1) {
-          let finalPlayers = orderBy([player, leaderboard[i+1]], ['username'], ['asc']);
+          let finalPlayers = orderBy([player, leaderboard[i+1]], ['name'], ['asc']);
           const key = `${finalPlayers[0].username}-${finalPlayers[1].username}`;
-          if (!finalTable[key]) finalTable[key] = { player1: finalPlayers[0], player2: finalPlayers[1], count: 0 };
+          if (!finalTable[key]) finalTable[key] = {
+            player1: finalPlayers[0],
+            player2: finalPlayers[1],
+            count: 0,
+            [`wins_${finalPlayers[0].username}`]: 0,
+            [`wins_${finalPlayers[1].username}`]: 0,
+          };
           finalTable[key].count++;
+
+          const winner = finalPlayers[0].place === 1 ? 0 : 1;
+          finalTable[key][`wins_${finalPlayers[winner].username}`]++;
         }
       }
     }
