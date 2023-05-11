@@ -5,7 +5,7 @@ import { Box, Button, Divider, Grid, Paper, Typography } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import DataList from "../components/table/DataList";
-import TimerData from "../components/TimerData";
+import TimerData from "../components/table-columns/TimerData";
 import AppConfig from "../../config";
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';

@@ -9,7 +9,7 @@ import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 import { onCreateTournamentPublic, onUpdateTournamentPublic, onDeleteTournamentPublic } from "../../lib/amplify/graphql/subscriptions";
 import useLeaderboard from "../../hooks/useLeaderboard";
 import DataList from "../components/table/DataList";
-import LeaderboardData from "../components/LeaderboardData";
+import LeaderboardData from "../components/table-columns/LeaderboardData";
 import Dropdown from "../components/forms/Dropdown";
 import { useForm, useWatch } from "react-hook-form";
 import { useEffect } from "react";

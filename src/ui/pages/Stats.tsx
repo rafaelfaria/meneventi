@@ -13,7 +13,8 @@ import { useEffect, useState } from "react";
 import ReactLoading from 'react-loading';
 import Dropdown from "../components/forms/Dropdown";
 import DataList from "../components/table/DataList";
-import statsData from "../components/StatsData";
+import statsData from "../components/table-columns/StatsData";
+import finalTableData from "../components/table-columns/FinalTableData";
 
 const DEFAULT_YEAR_FILTER = (new Date()).getFullYear();
 
@@ -119,25 +120,25 @@ export default function Stats() {
         {!state.isLoadingList ?
           <>
             <Grid item xs={12} md={4}>
-              <TableList title="Top 5 - 1st Place" stats={stats.p1} />
+              <TableList title="Top 5 - 1st Place" stats={stats.p1} dataRender={statsData} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <TableList title="Top 5 - 2nd Place" stats={stats.p2} />
+              <TableList title="Top 5 - 2nd Place" stats={stats.p2} dataRender={statsData} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <TableList title="Top 5 - 3rd Place" stats={stats.p3} />
+              <TableList title="Top 5 - 3rd Place" stats={stats.p3} dataRender={statsData} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <TableList title="Top 5 - Final Table" stats={stats.final} />
+              <TableList title="Top 5 - Final Table" stats={stats.final} dataRender={statsData} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <TableList title="Top 5 - Number of Buy-ins" stats={stats.buyIn} />
+              <TableList title="Top 5 - Number of Buy-ins" stats={stats.buyIn} dataRender={statsData} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <TableList title="Top 5 - Tournament Played" stats={stats.played} />
+              <TableList title="Top 5 - Tournament Played" stats={stats.played} dataRender={statsData} />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <TableList title="Top 5 - Final Table" stats={stats.finalTable} />
+            <Grid item xs={12} md={12}>
+              <TableList title="Top 5 - Final Table" stats={stats.finalTable} dataRender={finalTableData} />
             </Grid>
         </> : null}
         </Grid>
@@ -148,14 +149,15 @@ export default function Stats() {
 
 type ListProps = {
   title: string,
-  stats: StatsProps[]
+  stats: StatsProps[],
+  dataRender: any
 }
 
-const TableList = ({ title, stats }: ListProps) => {
+const TableList = ({ title, stats, dataRender }: ListProps) => {
   return (
     <Box>
       <Typography variant="h5" sx={{ mb: 2 }}>{title}</Typography>
-      <DataList title={title} columnData={statsData} items={stats}  hideCheckbox={true} hideToolbar={true} />
+      <DataList title={title} columnData={dataRender} items={stats}  hideCheckbox={true} hideToolbar={true} />
     </Box>
   )
 }

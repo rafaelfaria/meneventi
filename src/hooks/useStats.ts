@@ -51,9 +51,13 @@ const useStats = () => {
     }
     finalTable = orderBy(Object.keys(finalTable).map(key => finalTable[key]), ['count'], ['desc']);
     finalTable = finalTable.map((item: any) => ({
-      name: `${item.player1.name} vs ${item.player2.name}`,
-      value: item.count,
+      player1: item.player1,
+      player1Wins: item[`wins_${item.player1.username}`],
+      total: item.count,
+      player2: item.player2,
+      player2Wins: item[`wins_${item.player2.username}`],
     }));
+
 
     players = Object.keys(players).map(key => players[key]);
     const p1 = orderPlayers(players, 'p1');
@@ -62,9 +66,11 @@ const useStats = () => {
     const final = orderPlayers(players, 'final');
     const buyIn = orderPlayers(players, 'buyIn');
     const played = orderPlayers(players, 'played');
-    console.log({ p1, p2, p3, final, buyIn })
 
-    return { p1, p2, p3, final, buyIn, played, finalTable };
+    const response = { p1, p2, p3, final, buyIn, played, finalTable };
+
+    console.log(response);
+    return response
   }
 
   return { getStats }
