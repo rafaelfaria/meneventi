@@ -13,6 +13,7 @@ import LeaderboardData from "../components/table-columns/LeaderboardData";
 import Dropdown from "../components/forms/Dropdown";
 import { useForm, useWatch } from "react-hook-form";
 import { useEffect } from "react";
+import useProfile from "../../hooks/useProfile";
 
 type FormData = {
   yearFilter: number
@@ -43,6 +44,7 @@ export default function Home() {
     }
   });
 
+  const { openProfile } = useProfile();
 
   const [ leaderboard ] = useLeaderboard({ list: state.items })
   const formActions = useForm<FormData>({
@@ -107,7 +109,14 @@ export default function Home() {
                 </Stack>
             </Grid>
             <Grid item xs={12} sx={{ mb: 5 }} >
-              <DataList title="Leaderboard" columnData={LeaderboardData} items={leaderboard} hideCheckbox={true} hideToolbar={true} />
+              <DataList
+                title="Leaderboard"
+                columnData={LeaderboardData}
+                columnDataParams={{ openProfile }}
+                items={leaderboard}
+                hideCheckbox={true}
+                hideToolbar={true}
+              />
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h5" sx={{ mb: 2 }}>Tournaments</Typography>

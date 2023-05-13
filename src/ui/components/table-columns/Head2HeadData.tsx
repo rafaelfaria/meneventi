@@ -10,8 +10,17 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
   return [
     {
       header: {
+        id: 'totalPrizeUser',
+        label: ''
+      },
+      render: (rowData:any) => {
+        return `$${rowData.totalPrizeUser}`
+      },
+    },
+    {
+      header: {
         id: 'player1Name',
-        label: 'Player 1'
+        label: ''
       },
       render: (rowData:any) => {
         return (
@@ -29,7 +38,7 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
     {
       header: {
         id: 'player1Wins',
-        label: 'Wins',
+        label: '',
         align: 'center'
       },
       render: (rowData:any) => {
@@ -38,8 +47,28 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
     },
     {
       header: {
+        id: 'vs',
+        label: '',
+        align: 'center'
+      },
+      render: () => {
+        return 'vs';
+      },
+    },
+    {
+      header: {
+        id: 'player2Wins',
+        label: '',
+        align: 'center'
+      },
+      render: (rowData:any) => {
+        return <Box textAlign="center">{rowData.player2Wins}</Box>;
+      },
+    },
+    {
+      header: {
         id: 'player2Name',
-        label: 'Player 2'
+        label: ''
       },
       render: (rowData:any) => {
         return (
@@ -52,28 +81,17 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
             </Stack>
           </ProfileWrapper>
         )
-      },
+      }
     },
     {
       header: {
-        id: 'player2Wins',
-        label: 'Wins',
-        align: 'center'
+        id: 'totalPrizeOpponent',
+        label: ''
       },
       render: (rowData:any) => {
-        return <Box textAlign="center">{rowData.player2Wins}</Box>;
+        return `$${rowData.totalPrizeOpponent}`
       },
     },
-    {
-      header: {
-        id: 'total',
-        label: 'Total',
-        align: 'center'
-      },
-      render: (rowData:any) => {
-        return <Box textAlign="center">{rowData.total}</Box>
-      },
-    }
   ]
 };
 

@@ -15,6 +15,7 @@ import Dropdown from "../components/forms/Dropdown";
 import DataList from "../components/table/DataList";
 import statsData from "../components/table-columns/StatsData";
 import finalTableData from "../components/table-columns/FinalTableData";
+import useProfile from "../../hooks/useProfile";
 
 const DEFAULT_YEAR_FILTER = (new Date()).getFullYear();
 
@@ -74,7 +75,6 @@ export default function Stats() {
 
       const s = meneventiStats.getStats(items);
       setStats(s);
-
     })();
 
 
@@ -146,7 +146,6 @@ export default function Stats() {
   );
 }
 
-
 type ListProps = {
   title: string,
   stats: StatsProps[],
@@ -154,10 +153,18 @@ type ListProps = {
 }
 
 const TableList = ({ title, stats, dataRender }: ListProps) => {
+  const { openProfile } = useProfile();
   return (
     <Box>
       <Typography variant="h5" sx={{ mb: 2 }}>{title}</Typography>
-      <DataList title={title} columnData={dataRender} items={stats}  hideCheckbox={true} hideToolbar={true} />
+      <DataList
+        title={title}
+        columnData={dataRender}
+        columnDataParams={{ openProfile }}
+        items={stats}
+        hideCheckbox={true}
+        hideToolbar={true}
+      />
     </Box>
   )
 }

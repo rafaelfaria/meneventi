@@ -12,6 +12,7 @@ import themes from './ui/themes';
 import useColorMode from "./hooks/useColorMode";
 import AuthProvider from "./context/AuthProvider";
 import ConfirmProvider from './context/ConfirmProvider';
+import ProfileProvider from "./context/ProfileProvider";
 
 // notifications
 import { ToastContainer } from 'react-toastify';
@@ -27,11 +28,13 @@ export default function App() {
       <ConfirmProvider>
         <AuthProvider>
           <AppProvider>
-            <ThemeProvider theme={themes({ mode: mode as PaletteMode })}>
-              <CssBaseline />
-              <Routes />
-              <ToastContainer />
-            </ThemeProvider>
+              <ThemeProvider theme={themes({ mode: mode as PaletteMode })}>
+                <ProfileProvider>
+                  <CssBaseline />
+                  <Routes />
+                  <ToastContainer />
+                </ProfileProvider>
+              </ThemeProvider>
           </AppProvider>
         </AuthProvider>
       </ConfirmProvider>

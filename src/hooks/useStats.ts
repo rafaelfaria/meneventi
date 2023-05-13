@@ -1,7 +1,9 @@
 import { Tournament } from '../lib/amplify/API';
 import orderBy from 'lodash/orderBy';
+import useUser from './useUsers';
 
 export type StatsProps = {
+  username: string;
   place: number;
   name: string;
   photo: string;
@@ -10,6 +12,9 @@ export type StatsProps = {
 }
 
 const useStats = () => {
+
+  const [ _, userActions ] = useUser();
+
   const getStats = (list: Tournament[]) => {
     let players:any = {};
     let finalTable:any = {};
@@ -22,9 +27,12 @@ const useStats = () => {
         if (!players[player.username]) {
             players[player.username] = {}
         }
-        players[player.username].name = player?.name;
-        players[player.username].photo = player?.photo;
-        players[player.username].initials = player?.initials;
+        players[player.username].user = {
+          username: player?.username,
+          name: player?.name,
+          photo: player?.photo,
+          initials: player?.initials,
+        };
         players[player.username].p1 = (players[player.username]?.p1 || 0) + ((player.place === 1) ? 1 : 0);
         players[player.username].p2 = (players[player.username]?.p2 || 0) + ((player.place === 2) ? 1 : 0);
         players[player.username].p3 = (players[player.username]?.p3 || 0) + ((player.place === 3) ? 1 : 0);
@@ -73,11 +81,87 @@ const useStats = () => {
     return response
   }
 
-  return { getStats }
+  const getProfile = async (list: Tournament[], playerUsername: string) => {
+    const { createdAt, updatedAt, ...playerDetails } = await userActions.getByUsername(playerUsername);
+    let user = playerDetails;
+    let head2Head: any = {};
+    let played = 0;
+    let playerWins = 0;
+    let biggestPrize = 0;
+
+    for (let tournament of list) {
+      const leaderboard = orderBy(tournament.leaderboard || [], ['place'], ['asc']); // make sure its ordered by place
+
+      const hasPlayed = leaderboard.filter((player: any) => player.username === playerUsername).length > 0;
+      played += hasPlayed ? 1 : 0;
+
+
+      // Get the first and second so we can define if there was a final table
+      const player1 = leaderboard[0];
+      const player2 = leaderboard[1];
+
+      // This means a headto head with the user
+      if (player1.username === playerUsername || player2.username === playerUsername) {
+        const isPlayerFirst = player1.username === playerUsername;
+        playerWins += isPlayerFirst ? 1 : 0;
+        const opponentPlayer = (isPlayerFirst) ? player2 : player1;
+        const userPlayer = (isPlayerFirst) ? player1 : player2;
+
+        biggestPrize = Math.max(biggestPrize, (opponentPlayer?.prize || 0));
+
+        // wins and loss of the oponent player
+        const wins = (isPlayerFirst) ? 0 : 1;
+        const loss = (isPlayerFirst) ? 1 : 0;
+
+        let opponentWins = (head2Head[opponentPlayer.username]?.wins || 0) + wins;
+        let opponentLoss = (head2Head[opponentPlayer.username]?.loss || 0) + loss;
+
+        head2Head[opponentPlayer.username] = {
+          ...head2Head[opponentPlayer.username],
+          user: {
+            initials: opponentPlayer.initials,
+            name: opponentPlayer.name,
+            photo: opponentPlayer.photo,
+            username: opponentPlayer.username,
+          },
+          wins: opponentWins,
+          loss: opponentLoss,
+          played: opponentWins + opponentLoss,
+          totalPrizeOpponent: (head2Head[opponentPlayer.username]?.totalPrizeOpponent || 0) + opponentPlayer.prize,
+          totalPrizeUser: (head2Head[opponentPlayer.username]?.totalPrizeUser || 0) + userPlayer.prize,
+        }
+      }
+
+    }
+
+    head2Head = orderBy(Object.keys(head2Head).map(key => head2Head[key]), ['wins'], ['desc'])
+
+    let numPlayed = Math.max(...head2Head.map((obj: any) => obj.played));
+    let biggestRivals = head2Head.filter((obj: any) => obj.played === numPlayed);
+
+    const response = {
+      user,
+      wins: playerWins,
+      played,
+      head2Head,
+      biggestRivals,
+      biggestPrize
+    };
+    console.log(response);
+    return response;
+  }
+
+  return { getStats, getProfile }
 };
 
 function orderPlayers(players: any, key: string) {
-  return orderBy(players, [key, 'name'], ['desc', 'asc']).map((player, index) => ({ place: (index+1), photo: player.photo, name: player.name, value: player[key] })).splice(0, 5) as StatsProps[];
+  return orderBy(players, [key, 'name'], ['desc', 'asc']).map((player, index) => ({
+    place: (index+1),
+    username: player.user.username,
+    photo: player.user.photo,
+    name: player.user.name,
+    value: player[key]
+  })).splice(0, 5) as StatsProps[];
 }
 
 export default useStats;

@@ -40,7 +40,7 @@ const Header = () => {
           <Stack sx={{ flexGrow: 0 }} flexDirection="row" alignItems="center">
             <IconButton onClick={() => navigate('/timer')}><AlarmOnIcon /></IconButton>
             <IconButton onClick={() => navigate('/stats')}><QueryStatsIcon /></IconButton>
-            <ColorMode />
+            {/* <ColorMode /> */}
             <AccountPopover />
           </Stack>
         </Toolbar>
