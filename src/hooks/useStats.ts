@@ -88,13 +88,15 @@ const useStats = () => {
     let played = 0;
     let playerWins = 0;
     let biggestPrize = 0;
+    let totalFinals = 0;
+    let totalPrize = 0;
+    let tableCountPlayers = [];
 
     for (let tournament of list) {
       const leaderboard = orderBy(tournament.leaderboard || [], ['place'], ['asc']); // make sure its ordered by place
-
+      tableCountPlayers.push(leaderboard.length);
       const hasPlayed = leaderboard.filter((player: any) => player.username === playerUsername).length > 0;
       played += hasPlayed ? 1 : 0;
-
 
       // Get the first and second so we can define if there was a final table
       const player1 = leaderboard[0];
@@ -102,6 +104,7 @@ const useStats = () => {
 
       // This means a headto head with the user
       if (player1.username === playerUsername || player2.username === playerUsername) {
+        totalFinals += 1;
         const isPlayerFirst = player1.username === playerUsername;
         playerWins += isPlayerFirst ? 1 : 0;
         const opponentPlayer = (isPlayerFirst) ? player2 : player1;
@@ -115,6 +118,8 @@ const useStats = () => {
 
         let opponentWins = (head2Head[opponentPlayer.username]?.wins || 0) + wins;
         let opponentLoss = (head2Head[opponentPlayer.username]?.loss || 0) + loss;
+
+        totalPrize += userPlayer.prize || 0;
 
         head2Head[opponentPlayer.username] = {
           ...head2Head[opponentPlayer.username],
@@ -134,7 +139,7 @@ const useStats = () => {
 
     }
 
-    head2Head = orderBy(Object.keys(head2Head).map(key => head2Head[key]), ['wins'], ['desc'])
+    head2Head = orderBy(Object.keys(head2Head).map(key => head2Head[key]), ['loss'], ['desc'])
 
     let numPlayed = Math.max(...head2Head.map((obj: any) => obj.played));
     let biggestRivals = head2Head.filter((obj: any) => obj.played === numPlayed);
@@ -145,7 +150,10 @@ const useStats = () => {
       played,
       head2Head,
       biggestRivals,
-      biggestPrize
+      biggestPrize,
+      totalFinals,
+      totalPrize,
+      tableCountPlayers: findBetterTableCountPerformance(tableCountPlayers),
     };
     console.log(response);
     return response;
@@ -162,6 +170,23 @@ function orderPlayers(players: any, key: string) {
     name: player.user.name,
     value: player[key]
   })).splice(0, 5) as StatsProps[];
+}
+
+function findBetterTableCountPerformance(arr: any) {
+  // create a frequency map
+  let frequencyMap = arr.reduce((map: any, num: number) => {
+    map[num] = (map[num] || 0) + 1;
+    return map;
+  }, {});
+
+  // find the highest frequency
+  let highestFrequency = Math.max(...Object.values(frequencyMap) as number[]);
+
+  // filter the frequency map to only include numbers with the highest frequency
+  let mostFrequentNumbers = Object.keys(frequencyMap).filter(num => frequencyMap[num] === highestFrequency);
+
+  // convert string numbers back to actual numbers
+  return mostFrequentNumbers.map(Number);
 }
 
 export default useStats;

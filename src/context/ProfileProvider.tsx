@@ -27,13 +27,13 @@ const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
 
   const { tournamentsRepository } = useApp();
   const [ _, { list: listTournaments } ] = useRepository<Tournament>(tournamentsRepository, { listOptions: { fetch: false } });
-  const { openDialog, toggleDialog } = useDialog();
+  const { openDialog, toggleDialog, setIsDialogOpen } = useDialog();
   const [ profile, setProfile ] = useState<any>({});
   const [ tournaments, setTournaments ] = useState<Tournament[]>([]);
 
   const openProfile = useCallback((title: string, username: string) => {
     setProfile({ title, username });
-    toggleDialog();
+    setIsDialogOpen(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,7 +57,7 @@ const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
           open={openDialog}
           toggle={toggleDialog}
         >
-          <Profile tournaments={tournaments} username={profile.username} />
+          <Profile tournaments={tournaments} username={profile.username} openProfile={openProfile} />
         </DialogPopup>
         : null }
     </Fragment>

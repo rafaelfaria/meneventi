@@ -38,6 +38,7 @@ type Tournament @model
   id: ID!
   name: String
   date: AWSDateTime
+  buyIn: Float
   totalPrize: Float
   leaderboard: [TournamentLeaderboard!]
 }
