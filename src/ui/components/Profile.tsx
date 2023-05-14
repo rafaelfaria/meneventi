@@ -52,8 +52,26 @@ const Profile = ({ tournaments, username, openProfile }: Props) => {
 
       {(profile && !isLoading) &&
         <Box>
+          <Stack flexDirection="row" columnGap={3} sx={{ mb: 2, alignItems: 'center' }}>
+            <Box sx={{ width: 80, height: 80, borderRadius: 2, overflow: 'hidden', display: { xs: 'flex', md: 'none' }, justifyContent: 'center', alignItems: 'center', background: '#252d33' }}>
+              {profile.user.photo ?
+                <img
+                  src={profile?.user.photo}
+                  alt={profile?.user.name}
+                  style={{ width: 80, height: 80, borderRadius: 10 }}
+                />
+              : <Typography variant="h3">{profile.user.initials}</Typography>
+              }
+            </Box>
+
+            <Box>
+              <Typography variant="h4">{profile?.user.name}</Typography>
+              <Typography variant="body2">Playing Since: 22 Jun 2022</Typography>
+            </Box>
+          </Stack>
+
           <Stack flexDirection="row" columnGap={3}>
-            <Box sx={{ width: 280, height: 280, borderRadius: 2, overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#252d33' }}>
+            <Box sx={{ width: 280, height: 280, borderRadius: 2, overflow: 'hidden', display: { xs: 'none', md: 'flex' }, justifyContent: 'center', alignItems: 'center', background: '#252d33' }}>
               {profile.user.photo ?
                 <img
                   src={profile?.user.photo}
@@ -64,12 +82,9 @@ const Profile = ({ tournaments, username, openProfile }: Props) => {
               }
             </Box>
             <Box flexBasis="100%">
-              <Typography variant="h4">{profile?.user.name}</Typography>
-              <Typography variant="body2">Playing Since: 22 Jun 2022</Typography>
-              <br />
               <Table width="100%" size="small">
                 <TableRow>
-                  <TableCell>Played</TableCell>
+                  <TableCell sx={{ minWidth: 150 }}>Played</TableCell>
                   <TableCell>{profile.played} tournaments</TableCell>
                 </TableRow>
                 <TableRow>
@@ -81,8 +96,16 @@ const Profile = ({ tournaments, username, openProfile }: Props) => {
                   <TableCell>{profile.totalFinals} tournaments</TableCell>
                 </TableRow>
                 <TableRow>
+                  <TableCell>Win Rate</TableCell>
+                  <TableCell>{profile.winRate}%</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>ROI</TableCell>
+                  <TableCell>{profile.roi}%</TableCell>
+                </TableRow>
+                <TableRow>
                   <TableCell>Total Prize</TableCell>
-                  <TableCell>${profile.totalPrize}</TableCell>
+                  <TableCell>${profile.totalPrize} <span style={{ color: '#b06d6d' }}>(-${profile.totalInvestment})</span></TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Biggest Pot Won</TableCell>

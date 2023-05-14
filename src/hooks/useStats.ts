@@ -1,6 +1,7 @@
 import { Tournament } from '../lib/amplify/API';
 import orderBy from 'lodash/orderBy';
 import useUser from './useUsers';
+import { formatPercentage } from '../lib/helpers';
 
 export type StatsProps = {
   username: string;
@@ -91,12 +92,17 @@ const useStats = () => {
     let totalFinals = 0;
     let totalPrize = 0;
     let tableCountPlayers = [];
+    let totalInvestment = 0;
 
     for (let tournament of list) {
       const leaderboard = orderBy(tournament.leaderboard || [], ['place'], ['asc']); // make sure its ordered by place
       tableCountPlayers.push(leaderboard.length);
-      const hasPlayed = leaderboard.filter((player: any) => player.username === playerUsername).length > 0;
+
+      // Check if has played
+      const playedTournament = leaderboard.filter((player: any) => player.username === playerUsername)
+      const hasPlayed = playedTournament.length > 0;
       played += hasPlayed ? 1 : 0;
+      totalInvestment += (hasPlayed ? (playedTournament[0]?.buyIn || 0) : 0);
 
       // Get the first and second so we can define if there was a final table
       const player1 = leaderboard[0];
@@ -136,13 +142,16 @@ const useStats = () => {
           totalPrizeUser: (head2Head[opponentPlayer.username]?.totalPrizeUser || 0) + userPlayer.prize,
         }
       }
-
     }
 
     head2Head = orderBy(Object.keys(head2Head).map(key => head2Head[key]), ['played', 'loss'], ['desc', 'desc'])
 
     let numPlayed = Math.max(...head2Head.map((obj: any) => obj.played));
     let biggestRivals = head2Head.filter((obj: any) => obj.played === numPlayed);
+
+    // calculate the roi
+    const netProfit = totalPrize - totalInvestment;
+    const roi = formatPercentage((netProfit / totalInvestment) * 100);
 
     const response = {
       user,
@@ -153,6 +162,9 @@ const useStats = () => {
       biggestPrize,
       totalFinals,
       totalPrize,
+      totalInvestment,
+      roi,
+      winRate: formatPercentage((playerWins / played) * 100),
       tableCountPlayers: findBetterTableCountPerformance(tableCountPlayers),
     };
     console.log(response);

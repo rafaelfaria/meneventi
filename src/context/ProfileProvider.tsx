@@ -53,7 +53,7 @@ const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
 
       {openDialog ?
         <DialogPopup
-          title={profile.title}
+          title="Profile"
           open={openDialog}
           toggle={toggleDialog}
         >

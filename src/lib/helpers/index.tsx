@@ -32,3 +32,10 @@ export const slugify = (text: string, separator = "-") => {
 
 
 export const zeroPad = (num: number, places: number = 2) => String(num).padStart(places, '0')
+
+/**
+ * Format the number like: 39.1298381 to 39.12 or 45.00 to 45.
+ ************************************************************************/
+export const formatPercentage = (num: string | number) => {
+  return Number(Number(num).toFixed(2).replace(/(\.00|0$)/gi,''));
+}
