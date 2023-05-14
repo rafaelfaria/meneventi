@@ -116,7 +116,7 @@ const useStats = () => {
         const opponentPlayer = (isPlayerFirst) ? player2 : player1;
         const userPlayer = (isPlayerFirst) ? player1 : player2;
 
-        biggestPrize = Math.max(biggestPrize, (opponentPlayer?.prize || 0));
+        biggestPrize = Math.max(biggestPrize, (userPlayer?.prize || 0));
 
         // wins and loss of the oponent player
         const wins = (isPlayerFirst) ? 0 : 1;
