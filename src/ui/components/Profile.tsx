@@ -90,24 +90,26 @@ const Profile = ({ tournaments, username, openProfile }: Props) => {
                 </TableRow>
                 <TableRow>
                   <TableCell>Biggest Rival</TableCell>
-                  <TableCell>{profile.biggestRivals.map((player: any) => player.user.name).join(', ')}</TableCell>
+                  <TableCell>{profile.biggestRivals.map((player: any) => player.user.name).join(', ') || '-'}</TableCell>
                 </TableRow>
               </Table>
             </Box>
           </Stack>
-          <Box>
-            <Typography variant="h5" sx={{ my: 3 }}>Head to Head ({profile.totalFinals})</Typography>
-            <DataList
-              title="Head to Head"
-              columnData={head2HeadData}
-              columnDataParams={{ openProfile }}
-              items={head2Head}
-              hideCheckbox={true}
-              hideToolbar={true}
-              hideHeading={true}
-            />
+          {profile.totalFinals > 0 &&
+            <Box>
+              <Typography variant="h5" sx={{ my: 3 }}>Head to Head ({profile.totalFinals})</Typography>
+              <DataList
+                title="Head to Head"
+                columnData={head2HeadData}
+                columnDataParams={{ openProfile }}
+                items={head2Head}
+                hideCheckbox={true}
+                hideToolbar={true}
+                hideHeading={true}
+              />
 
-          </Box>
+            </Box>
+          }
         </Box>
       }
 

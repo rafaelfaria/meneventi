@@ -139,7 +139,7 @@ const useStats = () => {
 
     }
 
-    head2Head = orderBy(Object.keys(head2Head).map(key => head2Head[key]), ['loss'], ['desc'])
+    head2Head = orderBy(Object.keys(head2Head).map(key => head2Head[key]), ['played', 'loss'], ['desc', 'desc'])
 
     let numPlayed = Math.max(...head2Head.map((obj: any) => obj.played));
     let biggestRivals = head2Head.filter((obj: any) => obj.played === numPlayed);
