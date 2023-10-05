@@ -2,141 +2,102 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTournamentPublic = /* GraphQL */ `
-  subscription OnCreateTournamentPublic {
-    onCreateTournamentPublic {
-      id
+import * as APITypes from "../API";
+type GeneratedSubscription<InputType, OutputType> = string & {
+  __generatedSubscriptionInput: InputType;
+  __generatedSubscriptionOutput: OutputType;
+};
+
+export const onCreateTournament = /* GraphQL */ `subscription OnCreateTournament(
+  $filter: ModelSubscriptionTournamentFilterInput
+) {
+  onCreateTournament(filter: $filter) {
+    id
+    name
+    date
+    buyIn
+    totalPrize
+    leaderboard {
+      place
+      username
+      email
       name
-      date
-      totalPrize
-      leaderboard {
-        place
-        username
-        email
-        name
-        initials
-        photo
-        buyIn
-        prize
-      }
-      createdAt
-      updatedAt
-      owner
+      initials
+      photo
+      status
+      buyIn
+      prize
+      __typename
     }
+    createdAt
+    updatedAt
+    owner
+    __typename
   }
-`;
-export const onUpdateTournamentPublic = /* GraphQL */ `
-  subscription OnUpdateTournamentPublic {
-    onUpdateTournamentPublic {
-      id
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateTournamentSubscriptionVariables,
+  APITypes.OnCreateTournamentSubscription
+>;
+export const onUpdateTournament = /* GraphQL */ `subscription OnUpdateTournament(
+  $filter: ModelSubscriptionTournamentFilterInput
+) {
+  onUpdateTournament(filter: $filter) {
+    id
+    name
+    date
+    buyIn
+    totalPrize
+    leaderboard {
+      place
+      username
+      email
       name
-      date
-      totalPrize
-      leaderboard {
-        place
-        username
-        email
-        name
-        initials
-        photo
-        buyIn
-        prize
-      }
-      createdAt
-      updatedAt
-      owner
+      initials
+      photo
+      status
+      buyIn
+      prize
+      __typename
     }
+    createdAt
+    updatedAt
+    owner
+    __typename
   }
-`;
-export const onDeleteTournamentPublic = /* GraphQL */ `
-  subscription OnDeleteTournamentPublic {
-    onDeleteTournamentPublic {
-      id
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateTournamentSubscriptionVariables,
+  APITypes.OnUpdateTournamentSubscription
+>;
+export const onDeleteTournament = /* GraphQL */ `subscription OnDeleteTournament(
+  $filter: ModelSubscriptionTournamentFilterInput
+) {
+  onDeleteTournament(filter: $filter) {
+    id
+    name
+    date
+    buyIn
+    totalPrize
+    leaderboard {
+      place
+      username
+      email
       name
-      date
-      totalPrize
-      leaderboard {
-        place
-        username
-        email
-        name
-        initials
-        photo
-        buyIn
-        prize
-      }
-      createdAt
-      updatedAt
-      owner
+      initials
+      photo
+      status
+      buyIn
+      prize
+      __typename
     }
+    createdAt
+    updatedAt
+    owner
+    __typename
   }
-`;
-export const onCreateTournament = /* GraphQL */ `
-  subscription OnCreateTournament($owner: String) {
-    onCreateTournament(owner: $owner) {
-      id
-      name
-      date
-      totalPrize
-      leaderboard {
-        place
-        username
-        email
-        name
-        initials
-        photo
-        buyIn
-        prize
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateTournament = /* GraphQL */ `
-  subscription OnUpdateTournament($owner: String) {
-    onUpdateTournament(owner: $owner) {
-      id
-      name
-      date
-      totalPrize
-      leaderboard {
-        place
-        username
-        email
-        name
-        initials
-        photo
-        buyIn
-        prize
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteTournament = /* GraphQL */ `
-  subscription OnDeleteTournament($owner: String) {
-    onDeleteTournament(owner: $owner) {
-      id
-      name
-      date
-      totalPrize
-      leaderboard {
-        place
-        username
-        email
-        name
-        initials
-        photo
-        buyIn
-        prize
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteTournamentSubscriptionVariables,
+  APITypes.OnDeleteTournamentSubscription
+>;

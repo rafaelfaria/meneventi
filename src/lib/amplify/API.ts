@@ -107,6 +107,7 @@ export type CreateTournamentInput = {
   id?: string | null,
   name?: string | null,
   date?: string | null,
+  buyIn?: number | null,
   totalPrize?: number | null,
   leaderboard?: Array< TournamentLeaderboardInput > | null,
 };
@@ -118,6 +119,7 @@ export type TournamentLeaderboardInput = {
   name: string,
   initials?: string | null,
   photo?: string | null,
+  status?: string | null,
   buyIn?: number | null,
   prize?: number | null,
 };
@@ -125,6 +127,7 @@ export type TournamentLeaderboardInput = {
 export type ModelTournamentConditionInput = {
   name?: ModelStringInput | null,
   date?: ModelStringInput | null,
+  buyIn?: ModelFloatInput | null,
   totalPrize?: ModelFloatInput | null,
   and?: Array< ModelTournamentConditionInput | null > | null,
   or?: Array< ModelTournamentConditionInput | null > | null,
@@ -148,6 +151,7 @@ export type Tournament = {
   id: string,
   name?: string | null,
   date?: string | null,
+  buyIn?: number | null,
   totalPrize?: number | null,
   leaderboard?:  Array<TournamentLeaderboard > | null,
   createdAt: string,
@@ -163,6 +167,7 @@ export type TournamentLeaderboard = {
   name: string,
   initials?: string | null,
   photo?: string | null,
+  status?: string | null,
   buyIn?: number | null,
   prize?: number | null,
 };
@@ -185,6 +190,7 @@ export type UpdateTournamentInput = {
   id: string,
   name?: string | null,
   date?: string | null,
+  buyIn?: number | null,
   totalPrize?: number | null,
   leaderboard?: Array< TournamentLeaderboardInput > | null,
 };
@@ -218,6 +224,7 @@ export type ModelTournamentFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   date?: ModelStringInput | null,
+  buyIn?: ModelFloatInput | null,
   totalPrize?: ModelFloatInput | null,
   and?: Array< ModelTournamentFilterInput | null > | null,
   or?: Array< ModelTournamentFilterInput | null > | null,
@@ -244,6 +251,58 @@ export type ModelTournamentConnection = {
   __typename: "ModelTournamentConnection",
   items:  Array<Tournament | null >,
   nextToken?: string | null,
+};
+
+export type ModelSubscriptionTournamentFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  buyIn?: ModelSubscriptionFloatInput | null,
+  totalPrize?: ModelSubscriptionFloatInput | null,
+  and?: Array< ModelSubscriptionTournamentFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTournamentFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -297,6 +356,7 @@ export type CreateTournamentMutation = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -306,6 +366,7 @@ export type CreateTournamentMutation = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,
@@ -326,6 +387,7 @@ export type DeleteTournamentMutation = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -335,6 +397,7 @@ export type DeleteTournamentMutation = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,
@@ -375,6 +438,7 @@ export type UpdateTournamentMutation = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -384,6 +448,7 @@ export type UpdateTournamentMutation = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,
@@ -449,6 +514,7 @@ export type GetTournamentQuery = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -458,6 +524,7 @@ export type GetTournamentQuery = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,
@@ -481,6 +548,7 @@ export type ListTournamentsQuery = {
       id: string,
       name?: string | null,
       date?: string | null,
+      buyIn?: number | null,
       totalPrize?: number | null,
       leaderboard?:  Array< {
         __typename: "TournamentLeaderboard",
@@ -490,6 +558,7 @@ export type ListTournamentsQuery = {
         name: string,
         initials?: string | null,
         photo?: string | null,
+        status?: string | null,
         buyIn?: number | null,
         prize?: number | null,
       } > | null,
@@ -501,80 +570,8 @@ export type ListTournamentsQuery = {
   } | null,
 };
 
-export type OnCreateTournamentPublicSubscription = {
-  onCreateTournamentPublic?:  {
-    __typename: "Tournament",
-    id: string,
-    name?: string | null,
-    date?: string | null,
-    totalPrize?: number | null,
-    leaderboard?:  Array< {
-      __typename: "TournamentLeaderboard",
-      place: number,
-      username: string,
-      email: string,
-      name: string,
-      initials?: string | null,
-      photo?: string | null,
-      buyIn?: number | null,
-      prize?: number | null,
-    } > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateTournamentPublicSubscription = {
-  onUpdateTournamentPublic?:  {
-    __typename: "Tournament",
-    id: string,
-    name?: string | null,
-    date?: string | null,
-    totalPrize?: number | null,
-    leaderboard?:  Array< {
-      __typename: "TournamentLeaderboard",
-      place: number,
-      username: string,
-      email: string,
-      name: string,
-      initials?: string | null,
-      photo?: string | null,
-      buyIn?: number | null,
-      prize?: number | null,
-    } > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteTournamentPublicSubscription = {
-  onDeleteTournamentPublic?:  {
-    __typename: "Tournament",
-    id: string,
-    name?: string | null,
-    date?: string | null,
-    totalPrize?: number | null,
-    leaderboard?:  Array< {
-      __typename: "TournamentLeaderboard",
-      place: number,
-      username: string,
-      email: string,
-      name: string,
-      initials?: string | null,
-      photo?: string | null,
-      buyIn?: number | null,
-      prize?: number | null,
-    } > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
 export type OnCreateTournamentSubscriptionVariables = {
-  owner?: string | null,
+  filter?: ModelSubscriptionTournamentFilterInput | null,
 };
 
 export type OnCreateTournamentSubscription = {
@@ -583,6 +580,7 @@ export type OnCreateTournamentSubscription = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -592,6 +590,7 @@ export type OnCreateTournamentSubscription = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,
@@ -602,7 +601,7 @@ export type OnCreateTournamentSubscription = {
 };
 
 export type OnUpdateTournamentSubscriptionVariables = {
-  owner?: string | null,
+  filter?: ModelSubscriptionTournamentFilterInput | null,
 };
 
 export type OnUpdateTournamentSubscription = {
@@ -611,6 +610,7 @@ export type OnUpdateTournamentSubscription = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -620,6 +620,7 @@ export type OnUpdateTournamentSubscription = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,
@@ -630,7 +631,7 @@ export type OnUpdateTournamentSubscription = {
 };
 
 export type OnDeleteTournamentSubscriptionVariables = {
-  owner?: string | null,
+  filter?: ModelSubscriptionTournamentFilterInput | null,
 };
 
 export type OnDeleteTournamentSubscription = {
@@ -639,6 +640,7 @@ export type OnDeleteTournamentSubscription = {
     id: string,
     name?: string | null,
     date?: string | null,
+    buyIn?: number | null,
     totalPrize?: number | null,
     leaderboard?:  Array< {
       __typename: "TournamentLeaderboard",
@@ -648,6 +650,7 @@ export type OnDeleteTournamentSubscription = {
       name: string,
       initials?: string | null,
       photo?: string | null,
+      status?: string | null,
       buyIn?: number | null,
       prize?: number | null,
     } > | null,

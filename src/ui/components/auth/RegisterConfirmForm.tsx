@@ -28,6 +28,7 @@ export default function RegisterConfirmForm({ userEmail, obfuscatedEmail, onSubm
       await authRepository.confirmRegistration(userEmail, code);
       onSuccess();
     } catch(err: any) {
+      console.error('RegisterConfirmForm: handleSubmitForm', err);
       onError(err.message);
     }
 	}
@@ -36,7 +37,7 @@ export default function RegisterConfirmForm({ userEmail, obfuscatedEmail, onSubm
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)}>
       <Typography variant="subtitle2" sx={{ mb: 1 }}>We sent you a verification code to your email {obfuscatedEmail} </Typography>
 
-      <TextField type="text" label="Código de verificação"
+      <TextField type="text" label="Verification Code"
         {...formActions.register("code", { required: true })}
         fullWidth
         sx={{ mb: 2 }}

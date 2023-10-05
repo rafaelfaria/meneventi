@@ -5,7 +5,7 @@ import { Tournament } from "../../lib/amplify/API";
 import Page from "./Page";
 import Title from "../components/Title";
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import { onCreateTournamentPublic, onDeleteTournamentPublic, onUpdateTournamentPublic } from "../../lib/amplify/graphql/subscriptions";
+import { onCreateTournament, onDeleteTournament, onUpdateTournament } from "../../lib/amplify/graphql/subscriptions";
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 import useStats, { StatsProps } from "../../hooks/useStats";
 import { useForm, useWatch } from "react-hook-form";
@@ -37,13 +37,13 @@ export default function Stats() {
       },
     },
     subscribeOnCreate: {
-      config: { key: 'onCreateTournamentPublic', query: onCreateTournamentPublic, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
+      config: { key: 'onCreateTournament', query: onCreateTournament, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
     },
     subscribeOnUpdate: {
-      config: { key: 'onUpdateTournamentPublic', query: onUpdateTournamentPublic, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
+      config: { key: 'onUpdateTournament', query: onUpdateTournament, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
     },
     subscribeOnDelete: {
-      config: { key: 'onDeleteTournamentPublic', query: onDeleteTournamentPublic, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
+      config: { key: 'onDeleteTournament', query: onDeleteTournament, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
     }
   });
 

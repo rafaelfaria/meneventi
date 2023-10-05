@@ -26,7 +26,7 @@ enum UserType {
   USER
 }
 
-type Tournament @model
+type Tournament @model(subscriptions: { level: public })
   @auth(
     rules: [
       { allow: owner },
@@ -55,18 +55,17 @@ type TournamentLeaderboard {
 }
 
 
-type Subscription {
-  onCreateTournamentPublic: Tournament
-      @aws_subscribe(mutations: ["createTournament"])
-      @aws_iam
-      @aws_cognito_user_pools
-  onUpdateTournamentPublic: Tournament
-      @aws_subscribe(mutations: ["updateTournament"])
-      @aws_iam
-      @aws_cognito_user_pools
-  onDeleteTournamentPublic: Tournament
-      @aws_subscribe(mutations: ["deleteTournament"])
-      @aws_iam
-      @aws_cognito_user_pools
-
-}
+# type Subscription {
+#   onCreateTournamentPublic: Tournament
+#       @aws_subscribe(mutations: ["createTournament"])
+#       @aws_iam
+#       @aws_cognito_user_pools
+#   onUpdateTournamentPublic: Tournament
+#       @aws_subscribe(mutations: ["updateTournament"])
+#       @aws_iam
+#       @aws_cognito_user_pools
+#   onDeleteTournamentPublic: Tournament
+#       @aws_subscribe(mutations: ["deleteTournament"])
+#       @aws_iam
+#       @aws_cognito_user_pools
+# }

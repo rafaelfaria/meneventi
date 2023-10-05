@@ -17,7 +17,8 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
         width: 10
       },
       render: (rowData:Leaderboard) => {
-        return rowData.place === 1 ? '🥇' : rowData.place === 2 ? '🥈' : rowData.place === 3 ? '🥉' : ''
+        return rowData.place;
+        // return rowData.place === 1 ? '🥇' : rowData.place === 2 ? '🥈' : rowData.place === 3 ? '🥉' : ''
       },
     },
     {
@@ -37,6 +38,15 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
         )
       },
     },
+    // {
+    //   header: {
+    //     id: 'points',
+    //     label: 'Points'
+    //   },
+    //   render: (rowData:Leaderboard) => {
+    //     return rowData.points;
+    //   },
+    // },
     {
       header: {
         id: 'wins',

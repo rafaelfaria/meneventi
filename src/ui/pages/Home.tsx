@@ -6,7 +6,7 @@ import Page from "./Page";
 import ReactLoading from 'react-loading';
 import TournamentCard from "../components/TournamentCard";
 import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
-import { onCreateTournamentPublic, onUpdateTournamentPublic, onDeleteTournamentPublic } from "../../lib/amplify/graphql/subscriptions";
+import { onCreateTournament, onUpdateTournament, onDeleteTournament } from "../../lib/amplify/graphql/subscriptions";
 import useLeaderboard from "../../hooks/useLeaderboard";
 import DataList from "../components/table/DataList";
 import LeaderboardData from "../components/table-columns/LeaderboardData";
@@ -34,13 +34,13 @@ export default function Home() {
       },
     },
     subscribeOnCreate: {
-      config: { key: 'onCreateTournamentPublic', query: onCreateTournamentPublic, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
+      config: { key: 'onCreateTournament', query: onCreateTournament, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
     },
     subscribeOnUpdate: {
-      config: { key: 'onUpdateTournamentPublic', query: onUpdateTournamentPublic, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
+      config: { key: 'onUpdateTournament', query: onUpdateTournament, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
     },
     subscribeOnDelete: {
-      config: { key: 'onDeleteTournamentPublic', query: onDeleteTournamentPublic, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
+      config: { key: 'onDeleteTournament', query: onDeleteTournament, authMode: GRAPHQL_AUTH_MODE.AWS_IAM }
     }
   });
 

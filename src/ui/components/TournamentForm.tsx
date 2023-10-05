@@ -191,7 +191,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
               <Typography variant="h6" sx={{ mb: 2 }}>Details</Typography>
             </Grid>
 
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12} md={6}>
               <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
                 label="Tournament Name"
                 name="name"
@@ -202,6 +202,16 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
               />
             </Grid>
 
+            <Grid item xs={12} md={3}>
+              <TextField variant="filled" type="text" fullWidth sx={{ mb: 2 }}
+                label="Buy In $"
+                name="buyIn"
+                rules={{ required: true }}
+                control={formActions.control}
+                disabled={isSaving}
+                size="small"
+              />
+            </Grid>
             <Grid item xs={12} md={3}>
               <DatePicker
                 name="date"
