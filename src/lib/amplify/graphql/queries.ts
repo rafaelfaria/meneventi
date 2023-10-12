@@ -68,7 +68,6 @@ export const getTournament = /* GraphQL */ `query GetTournament($id: ID!) {
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename
@@ -102,7 +101,6 @@ export const listTournaments = /* GraphQL */ `query ListTournaments(
         name
         initials
         photo
-        status
         buyIn
         prize
         __typename

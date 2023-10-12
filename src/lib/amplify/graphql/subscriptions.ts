@@ -24,7 +24,6 @@ export const onCreateTournament = /* GraphQL */ `subscription OnCreateTournament
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename
@@ -55,7 +54,6 @@ export const onUpdateTournament = /* GraphQL */ `subscription OnUpdateTournament
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename
@@ -86,7 +84,6 @@ export const onDeleteTournament = /* GraphQL */ `subscription OnDeleteTournament
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename

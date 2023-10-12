@@ -38,7 +38,7 @@ const useLeaderboard = ({ list }: Props) => {
       const roi = (netProfit / totalInvestment) * 100;
       // const points = Number(((leaderboard[player?.username]?.points || 0) + (Math.sqrt(numPlayers+1) / player.place * 10)).toFixed(1).replace('.0',''));
       // const points = Number(((leaderboard[player?.username]?.points || 0) + (Math.log(numPlayers+1) / player.place * 10)).toFixed(1).replace('.0',''));
-      const points = Number((leaderboard[player?.username]?.points || 0) + (player.place <10 ? [25,18,13,9,6,4,3,2,1][player.place-1] : 0));
+      const points = Number((leaderboard[player?.username]?.points || 0) + (player.place <10 ? [43,19,13,7,5,3,2,1][player.place-1] : 0));
       const places = [...(leaderboard[player?.username]?.places || []), player.place]
 
       leaderboard[player?.username] = {
@@ -84,7 +84,6 @@ const useLeaderboard = ({ list }: Props) => {
                       ...item,
                       place: index + 1
                     }));
-
   console.log({ leaderboard })
 
   return [ leaderboard ];

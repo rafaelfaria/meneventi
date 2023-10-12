@@ -67,7 +67,6 @@ export const createTournament = /* GraphQL */ `mutation CreateTournament(
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename
@@ -99,7 +98,6 @@ export const deleteTournament = /* GraphQL */ `mutation DeleteTournament(
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename
@@ -152,7 +150,6 @@ export const updateTournament = /* GraphQL */ `mutation UpdateTournament(
       name
       initials
       photo
-      status
       buyIn
       prize
       __typename
