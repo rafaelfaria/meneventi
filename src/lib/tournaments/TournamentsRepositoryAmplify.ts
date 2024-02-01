@@ -43,6 +43,7 @@ export default class TournamentsRepositoryAmplify implements TournamentsReposito
    * Update the alert details
    */
   async save(tournamentId: string, input: Partial<UpdateTournamentInput>) {
+    console.log({ input })
     const { data } = await API.graphql(
       graphqlOperation(updateTournament, { input: { ...input, id: tournamentId } })
     ) as UpdateTournamentResult;

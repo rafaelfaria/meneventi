@@ -128,11 +128,14 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
         date: (new Date(data.date || new Date())).toISOString(),
         totalPrize: leaderboard?.reduce((acc, item) => acc + Number(item?.prize || 0), 0),
         leaderboard: leaderboard?.filter(item => item).map((item, index) => {
+          delete (item as any).__typename;
           if (!item) return item;
           item.place = index + 1;
           return item;
         })
       }
+
+      console.log({ formattedData });
 
       if (tournament) {
         await saveTournament(tournament.id, formattedData as Tournament);
