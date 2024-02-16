@@ -32,7 +32,8 @@ const defaultInitial = {
   leaderboard: [
     {
       place: 1,
-      buyIn: 15
+      buyIn: 15,
+      prize: 0
     }
   ]
 }
@@ -47,6 +48,9 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
   const [ error, setError ] = useState<string | null>();
   const navigate = useNavigate();
   const { showSuccessNotification, showErrorNotification } = useToastNotification();
+
+  const [ totalBuyIn, setTotalBuyIn ] = useState<number>(0);
+  const [ totalPrize, setTotalPrize ] = useState<number>(0);
 
   /**
    * Listen to any errors coming from the state of the repository, and set the local message
@@ -94,6 +98,26 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
     }
   }, [tournament]);
 
+  /**
+   * Listen to any changes in the controlled forms
+   */
+  useEffect(() => {
+    const subscription = formActions.watch((value: any, { name }) => {
+
+      let tBuyIn = 0; // total buyin
+      let tPrize = 0; // total prize
+      for (let i = 0; i < value.leaderboard?.length; i++) {
+        tBuyIn += Number(value.leaderboard[i]?.buyIn || 0);
+        tPrize += Number(value.leaderboard[i]?.prize || 0);
+      }
+
+      setTotalBuyIn(tBuyIn);
+      setTotalPrize(tPrize);
+    });
+    return () => subscription.unsubscribe();
+
+    // eslint-disable-next-line
+  }, [formActions.watch]);
 
   /**
    * Handle the deletion of an item
@@ -176,6 +200,32 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
     }
   }
 
+  const handleSetPrize = () => {
+    const prizeSplit = prompt('Enter the prize(%) split by position(comma separated)', '70,30');
+    if (prizeSplit) {
+      const prizes = prizeSplit.split(',').map(Number);
+      const totalPrize = prizes.reduce((acc, item) => acc + item, 0);
+      if (totalPrize !== 100) {
+        alert('The total prize split must be 100%');
+        return;
+      }
+
+      for (let i = 0; i < prizes.length; i++) {
+        formActions.setValue(`leaderboard.${i}.prize`, (prizes[i] * totalBuyIn) / 100);
+      }
+
+      // const newLeaderboard = leaderboard?.map((item, index) => {
+      //   return {
+      //     ...item,
+      //     prize: (prizes[index] * totalBuyIn) / 100
+      //   }
+      // });
+
+      // console.log({ newLeaderboard });
+      // formActions.setValue('leaderboard', newLeaderboard);
+    }
+  }
+
   return (
     <form onSubmit={formActions.handleSubmit(handleSubmitForm)} style={{ display: "block", padding: "10px" }}>
       <Grid container columnSpacing={1}>
@@ -233,7 +283,12 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
             </Grid>
 
             <Grid item xs={12}>
-              <Typography variant="h6" sx={{ mt: 2 }}>Players</Typography>
+              <Stack direction="row" alignItems="center"  sx={{ mt: 2 }}>
+                <Typography variant="h6">Players</Typography>
+                <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
+                  <Button onClick={handleSetPrize}>Set the Prize</Button>
+                </Box>
+              </Stack>
             </Grid>
 
 
@@ -292,6 +347,57 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                     </ListItem>
                   )
                 })}
+
+                 <ListItem
+                  sx={{ padding: 0, mb: 1 }}
+                  >
+                    <Box sx={{ display: 'flex', flexGrow: 1 }}></Box>
+
+                    <TextField variant="filled" type="text"
+                      label="Total Buy-In"
+                      size="small"
+                      value={totalBuyIn}
+                      sx={{
+                        ml: 1,
+                        '.MuiInputLabel-root': {
+                          color:'rgba(255, 255, 255, 0.7) !important',
+                        },
+                        '.MuiFilledInput-root': {
+                          background: 'transparent',
+                          '&:before': {
+                            display: 'none'
+                          },
+                          '&:after': {
+                             display: 'none'
+                          }
+                        }
+                      }}
+                      InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment>, readOnly: true }}
+                    />
+
+                    <TextField variant="filled" type="text"
+                      label="Total Prize"
+                      size="small"
+                      value={totalPrize}
+                      sx={{
+                        ml: 1,
+                        '.MuiInputLabel-root': {
+                          color:'rgba(255, 255, 255, 0.7) !important',
+                        },
+                        '.MuiFilledInput-root': {
+                          background: 'transparent',
+                          '&:before': {
+                            display: 'none'
+                          },
+                          '&:after': {
+                             display: 'none'
+                          }
+                        }
+                      }}
+                      InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment>, readOnly: true }}
+                    />
+
+                  </ListItem>
               </List>
             </Grid>
             <Grid item xs={12} display="flex" justifyContent="right">
