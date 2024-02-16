@@ -31,7 +31,7 @@ const useLeaderboard = ({ list }: Props) => {
     const numPlayers = tournament.leaderboard.length;
     for (let player of tournament.leaderboard) {
 
-      const current = { ...(leaderboard[player?.username] || { wins: 0, played: 0, totalInvestment: 0, totalPrize: 0 }) };
+      const current = { ...(leaderboard[player?.username] || { wins: 0, secondPlace: 0, thirdPlace: 0, played: 0, totalInvestment: 0, totalPrize: 0 }) };
       const totalInvestment = current.totalInvestment + (player?.buyIn || 0);
       const totalPrize = current.totalPrize + (player?.prize || 0);
       const netProfit = totalPrize - totalInvestment;
@@ -45,6 +45,8 @@ const useLeaderboard = ({ list }: Props) => {
         player,
         points,
         wins: current.wins + ((player?.place === 1) ? 1 : 0),
+        secondPlace: current.secondPlace + ((player?.place === 2) ? 1 : 0),
+        thirdPlace: current.thirdPlace + ((player?.place === 2) ? 1 : 0),
         played: current.played + 1,
         totalPrize,
         totalProfit: netProfit,
@@ -56,7 +58,7 @@ const useLeaderboard = ({ list }: Props) => {
   }
 
   leaderboard = Object.keys(leaderboard).map(key => leaderboard[key]) as Leaderboard[];
-  leaderboard = orderBy(leaderboard, [/*'points', */'wins', 'roi', 'totalProfit', 'totalPrize', 'totalInvestment', 'played'], ['desc', 'desc',  'desc', 'desc', 'desc', 'desc']);
+  leaderboard = orderBy(leaderboard, [/*'points', */'wins', 'roi', 'secondPlace', 'thirdPlace', 'totalProfit', 'totalPrize', 'totalInvestment', 'played'], ['desc', 'desc',  'desc', 'desc', 'desc', 'desc', 'desc', 'desc']);
 
   leaderboard = leaderboard.reduce((acc: Leaderboard[], item: Leaderboard, index: number) => {
 

@@ -138,6 +138,15 @@ export default function Stats() {
             <Grid item xs={12} md={4}>
               <TableList title="Top 5 - Tournament Played" stats={stats.played} dataRender={statsData} />
             </Grid>
+            <Grid item xs={12} md={4}>
+              <TableList title="Top 5 - Total Spent" stats={stats.totalInvested} dataRender={statsData} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <TableList title="Top 5 - Total Prize" stats={stats.totalPrize} dataRender={statsData} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <TableList title="Top 5 - ROI" stats={stats.roi} dataRender={statsData} />
+            </Grid>
             <Grid item xs={12} md={12}>
               <TableList title="Top 5 - Final Table" stats={stats.finalTable} dataRender={finalTableData} />
             </Grid>

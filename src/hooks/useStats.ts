@@ -1,4 +1,4 @@
-import { Tournament } from '../lib/amplify/API';
+import { Tournament, UserStatus } from '../lib/amplify/API';
 import orderBy from 'lodash/orderBy';
 import useUser from './useUsers';
 import { formatPercentage } from '../lib/helpers';
@@ -14,17 +14,25 @@ export type StatsProps = {
 
 const useStats = () => {
 
-  const [ _, userActions ] = useUser();
+  const [ { users }, userActions ] = useUser();
+  const usersById = users.reduce((map: any, user: any) => {
+    map[user.username] = user;
+    return map;
+  }, {});
+  console.log({ usersById })
 
   const getStats = (list: Tournament[]) => {
     let players:any = {};
     let finalTable:any = {};
 
     for (let tournament of list) {
+      console.log({ tournament });
       const leaderboard = orderBy(tournament.leaderboard || [], ['place'], ['asc']); // make sure its ordered by place
 
       for (let i = 0; i < leaderboard.length; i++) {
         const player = leaderboard[i];
+        if (usersById[player.username]?.status !== UserStatus.ACTIVE) continue;
+
         if (!players[player.username]) {
             players[player.username] = {}
         }
@@ -38,8 +46,16 @@ const useStats = () => {
         players[player.username].p2 = (players[player.username]?.p2 || 0) + ((player.place === 2) ? 1 : 0);
         players[player.username].p3 = (players[player.username]?.p3 || 0) + ((player.place === 3) ? 1 : 0);
         players[player.username].final = (players[player.username]?.final || 0) + ((player.place === 1 || player.place === 2) ? 1 : 0);
-        players[player.username].buyIn = (players[player.username].buyIn || 0) + Math.round(player?.buyIn ? player.buyIn / 15 : 0);
+        players[player.username].buyIn = (players[player.username].buyIn || 0) + Math.round(player?.buyIn ? player.buyIn / (tournament?.buyIn || 15) : 0);
+        players[player.username].totalInvested = (players[player.username].totalInvested || 0) + player.buyIn;
+        players[player.username].totalPrize = (players[player.username].totalPrize || 0) + player.prize;
         players[player.username].played = (players[player.username].played || 0) + 1;
+
+
+        const netProfit = players[player.username].totalPrize - players[player.username].totalInvested;
+        const roi = (netProfit / players[player.username].totalInvested) * 100;
+
+        players[player.username].roi = formatPercentage(roi);
 
         if (player.place === 1) {
           let finalPlayers = orderBy([player, leaderboard[i+1]], ['name'], ['asc']);
@@ -75,8 +91,14 @@ const useStats = () => {
     const final = orderPlayers(players, 'final');
     const buyIn = orderPlayers(players, 'buyIn');
     const played = orderPlayers(players, 'played');
+    const totalPrize = orderPlayers(players, 'totalPrize');
+    const totalInvested = orderPlayers(players, 'totalInvested');
+    let roi = orderPlayers(players, 'roi');
+    roi = roi.map((player: any) => ({ ...player, value: `${player.value}%` }));
 
-    const response = { p1, p2, p3, final, buyIn, played, finalTable };
+
+
+    const response = { p1, p2, p3, final, buyIn, played, finalTable, roi, totalInvested, totalPrize };
 
     console.log(response);
     return response

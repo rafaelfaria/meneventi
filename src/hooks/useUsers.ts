@@ -51,7 +51,7 @@ const useUser = (initialUsername?: string | null, options?: Options): [State, Ac
   const loadUsers = useCallback(async (isRefreshing?: boolean) => {
     try {
       setState({ isLoadingList: isRefreshing ? false : true, isError: false, isSaving: false })
-      const users = await usersRepository.list();
+      let users = await usersRepository.list();
       setState({ users, isLoadingList: false });
     } catch (err: any) {
       console.log(err);

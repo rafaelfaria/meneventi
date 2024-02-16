@@ -4,7 +4,7 @@ import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import ReactLoading from 'react-loading';
 import { Box, Button, Grid, Stack, Typography, IconButton, List, ListItem, InputAdornment, Divider } from '@mui/material';
 import ButtonWithSpinner from './ButtonWithSpinner';
-import { Tournament, User } from '../../lib/amplify/API';
+import { Tournament, User, UserStatus } from '../../lib/amplify/API';
 import TextField from './forms/TextField';
 import { State, Actions } from '../../hooks/useRepository';
 import useToastNotification from "../../hooks/useToastNotification";
@@ -311,7 +311,7 @@ export default function TournamentForm({ state, actions, tournament, isLoading, 
                       <UserSearch
                         label="Player"
                         isLoading={isLoadingUsers}
-                        options={users}
+                        options={users.filter(user => user.status === UserStatus.ACTIVE)}
                         selectedItems={leaderboard}
                         onChange={(user: User) => handleSelectUser(index, user)}
                         selectedValue={(leaderboard && leaderboard[index]?.username) ? {

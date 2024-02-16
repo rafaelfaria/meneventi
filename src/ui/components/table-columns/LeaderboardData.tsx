@@ -38,15 +38,15 @@ const columnData = (params: ColumnParams & ProfileProviderInterface) => {
         )
       },
     },
-    // {
-    //   header: {
-    //     id: 'points',
-    //     label: 'Points'
-    //   },
-    //   render: (rowData:Leaderboard) => {
-    //     return rowData.points;
-    //   },
-    // },
+    {
+      header: {
+        id: 'points',
+        label: 'Points'
+      },
+      render: (rowData:Leaderboard) => {
+        return rowData.points;
+      },
+    },
     {
       header: {
         id: 'wins',
